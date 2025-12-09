@@ -205,7 +205,7 @@
       text-decoration: underline;
     }
 
-    /* HERO — sağ tarafta kutu + buton */
+    /* HERO */
     .hero {
       position: relative;
       height: 500px;
@@ -394,7 +394,7 @@
       right: 10px;
     }
 
-    /* Referans kartları - yatay slider */
+    /* Referans kartları */
     .referans-wrapper {
       position: relative;
       max-width: 1000px;
@@ -472,30 +472,6 @@
       line-height: 1.5;
     }
 
-    .referans-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .referans-nav-left {
-      left: -10px;
-    }
-
-    .referans-nav-right {
-      right: -10px;
-    }
-
     /* FAQ */
     .faq-wrapper {
       max-width: 900px;
@@ -555,6 +531,27 @@
       font-size: 13px;
     }
 
+    .bolge-list li {
+      break-inside: avoid;
+      margin-bottom: 2px;
+    }
+
+    .bolge-link {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      color: #222;
+      text-align: left;
+    }
+
+    .bolge-link:hover {
+      text-decoration: underline;
+      color: #0077ff;
+    }
+
     .bolge-toggle-btn {
       margin-top: 8px;
       padding: 6px 12px;
@@ -563,6 +560,26 @@
       background: #f5f5f5;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    /* İlçe detay SEO kutusu */
+    .bolge-detay-kutu {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #fff9e0;
+      border: 1px solid #f0d66a;
+      font-size: 13px;
+      display: none;
+    }
+
+    .bolge-detay-kutu h4 {
+      margin: 0 0 6px 0;
+      font-size: 14px;
+    }
+
+    .bolge-detay-kutu p {
+      margin: 0;
     }
 
     /* Teklif formu */
@@ -713,19 +730,6 @@
       filter: brightness(0.95);
     }
 
-    .contact-box {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-      max-width: 550px;
-      margin: 0 auto 30px auto;
-    }
-
-    .contact-box p {
-      margin: 6px 0;
-    }
-
     footer {
       background: var(--dark);
       color: #ccc;
@@ -793,7 +797,7 @@
         width: 100%;
       }
 
-      /* Tüm nav elemanlarını 2'li grid yap */
+      /* tüm nav elemanlarını 2'li grid yap */
       nav a {
         margin: 4px 4px 4px 0;
         flex: 1 1 calc(50% - 8px);
@@ -810,12 +814,11 @@
         justify-content: center;
       }
 
-      /* Mobilde dropdown menüyü tamamen gizle (beyaz blok kalksın) */
+      /* Mobilde dropdown menüyü gizle (beyaz blok kalksın) */
       .nav-dropdown-menu {
         display: none !important;
       }
 
-      /* kaydırınca header biraz incelsin ve logo yumuşak kaybolsun */
       .main-header.shrink {
         padding: 6px 10px;
       }
@@ -888,7 +891,8 @@
       }
 
       const navLinks = document.querySelectorAll('nav a[href^="#"]');
-      const scrollLinks = document.querySelectorAll('a[href^="#"]');
+      // bolge-shortcut'lar için özel işlem yapacağımızdan smooth scroll'dan hariç tuttuk
+      const scrollLinks = document.querySelectorAll('a[href^="#"]:not(.bolge-shortcut)');
 
       scrollLinks.forEach((link) => {
         link.addEventListener('click', (e) => {
@@ -999,7 +1003,7 @@
         });
       }
 
-      // Referans yatay scroll butonları
+      // Referans yatay scroll butonları (masaüstü için)
       const refRow = document.querySelector('.referans-row');
       const refLeft = document.querySelector('.referans-nav-left');
       const refRight = document.querySelector('.referans-nav-right');
@@ -1034,15 +1038,112 @@
         });
       });
 
-      // Hizmet bölgeleri "daha fazla göster" butonu (SSS içi)
+      // Hizmet bölgeleri "daha fazla göster" butonu SSS içinde
       const bolgelerToggle = document.getElementById('bolgeler-toggle');
       const bolgelerExtra = document.getElementById('bolgeler-extra');
+
+      // SSS içindeki "Nerelere hizmet veriyorsunuz?" kutusunu ve tüm ilçeleri açan fonksiyon
+      function openBolgelerFaq() {
+        const faqItem = document.getElementById('faq-bolgeler');
+        if (!faqItem) return;
+
+        // Diğer FAQ'ları kapat
+        document.querySelectorAll('.faq-item').forEach((i) => {
+          i.classList.remove('active');
+          const t = i.querySelector('.faq-header .toggle');
+          if (t) t.textContent = '+';
+        });
+
+        // Bu kutuyu aç
+        faqItem.classList.add('active');
+        const toggleEl = faqItem.querySelector('.faq-header .toggle');
+        if (toggleEl) toggleEl.textContent = '-';
+
+        // Ek ilçeleri aç ve buton yazısını güncelle
+        if (bolgelerExtra) bolgelerExtra.style.display = 'block';
+        if (bolgelerToggle) bolgelerToggle.textContent = 'Kapat';
+      }
+
       if (bolgelerToggle && bolgelerExtra) {
         let open = false;
         bolgelerToggle.addEventListener('click', () => {
           open = !open;
-          bolgelerExtra.style.display = open ? 'block' : 'none';
-          bolgelerToggle.textContent = open ? 'Kapat' : 'Tüm ilçeleri göster';
+          if (open) {
+            openBolgelerFaq();
+          } else {
+            bolgelerExtra.style.display = 'none';
+            bolgelerToggle.textContent = 'Tüm ilçeleri göster';
+          }
+        });
+      }
+
+      // === İLÇE DETAY METİNLERİ (SEO) ===
+      const bolgeDetayMetinleri = {
+        avcilar: "Avcılar evden eve nakliyat hizmetimizle daire, villa ve ofis taşımalarınızı sigortalı ve profesyonel ekip ile gerçekleştiriyoruz. Asansörlü ev taşıma, şehir içi nakliyat ve parça eşya taşımada Avcılar bölgesinde hızlı çözüm sunuyoruz.",
+        beylikduzu: "Beylikdüzü evden eve nakliyat ve ofis taşıma işlerinizde modern araçlarımız ve uzman ekibimizle güvenli nakliyat sağlıyoruz. Beylikdüzü’nden İstanbul’un tüm ilçelerine şehir içi nakliye ve şehirler arası taşımacılık yapıyoruz.",
+        esenyurt: "Esenyurt ev taşıma ve evden eve nakliyat talepleriniz için ekonomik ve sigortalı çözümler sunuyoruz. Esenyurt bölgesinde asansörlü nakliyat, ofis taşımacılığı ve parça eşya nakliyesi hizmeti veriyoruz.",
+        bagcilar: "Bağcılar evden eve nakliyat ve işyeri taşıma hizmetlerinde paketleme, sökme–takma ve yerleştirme dahil anahtar teslim nakliye sunuyoruz. Bağcılar’dan İstanbul geneline güvenli ev taşıma yapmaktayız.",
+        bahcelievler: "Bahçelievler evden eve nakliyat, ofis taşıma ve parça eşya nakliyesinde deneyimli ekibimizle yanınızdayız. Bahçelievler bölgesinde asansörlü ev taşıma ve şehir içi nakliyat hizmeti veriyoruz.",
+        bakirkoy: "Bakırköy evden eve nakliyat ve ofis taşımacılığı için profesyonel paketleme, sigortalı taşıma ve montaj desteği sağlıyoruz. Bakırköy’den Türkiye’nin pek çok iline şehirler arası nakliyat yapıyoruz.",
+        kucukcekmece: "Küçükçekmece ev taşıma, evden eve nakliyat ve ofis taşıma işlerinizde uzman kadromuzla hizmet veriyoruz. Asansörlü taşımacılık ve sigortalı nakliyat çözümlerimizle Küçükçekmece’de güvenle taşının.",
+        basaksehir: "Başakşehir evden eve nakliyat, site ve rezidans taşımalarında profesyonel ekip ve kapalı kasa araçlarımızla hizmet veriyoruz. Başakşehir’de ev taşıma, ofis nakliyatı ve şehirler arası nakliyat çözümleri sunuyoruz.",
+        besiktas: "Beşiktaş evden eve nakliyat ve ofis taşıma hizmetlerimizle dar sokaklar ve yüksek katlarda asansörlü nakliyat çözümleri üretiyoruz. Beşiktaş bölgesinde hızlı ve güvenilir ev taşıma yapıyoruz.",
+        sisli: "Şişli evden eve nakliyat, işyeri ve plaza taşımalarında planlı ve zamanında nakliyat sağlıyoruz. Şişli’de ev taşıma, ofis nakliyatı ve parça eşya taşıma hizmeti sunmaktayız.",
+        kagithane: "Kağıthane evden eve nakliyat ve ofis taşımacılığında paketleme, montaj ve yerleştirme dahil tam kapsamlı nakliye hizmeti sunuyoruz. Kağıthane’de şehir içi nakliyat ve asansörlü ev taşıma yapıyoruz.",
+        sariyer: "Sarıyer ev taşıma, villa taşımacılığı ve evden eve nakliyat taleplerinizde deneyimli ekibimizle yanınızdayız. Sarıyer’de şehir içi nakliyat ve şehirler arası evden eve nakliyat hizmeti veriyoruz.",
+        fatih: "Fatih evden eve nakliyat, tarihi bölgelerde hassas ev taşıma ve ofis nakliyatı için profesyonel çözümler sunuyoruz. Fatih’te dar sokaklara uygun araç ve ekipmanlarla güvenli nakliyat yapıyoruz.",
+        beyoglu: "Beyoğlu evden eve nakliyat ve ofis taşımacılığında, apartman ve iş hanı taşımalarında planlı ve titiz nakliye hizmeti veriyoruz. Beyoğlu’ndan İstanbul’un her yerine ev taşıma yapıyoruz.",
+        uskudar: "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında güvenli ev taşıma sağlıyoruz. Üsküdar’da ofis taşımacılığı, parça eşya nakliyesi ve asansörlü nakliyat çözümleri sunuyoruz.",
+        kadikoy: "Kadıköy evden eve nakliyat, ofis taşıma ve parça eşya nakliyatında modern araçlarımızla hizmet veriyoruz. Kadıköy’den Türkiye’nin birçok şehrine şehirler arası nakliyat yapıyoruz.",
+        maltepe: "Maltepe evden eve nakliyat ve ev taşıma işlerinizde sigortalı ve asansörlü taşımacılık sağlıyoruz. Maltepe bölgesinde ofis taşıma ve parça eşya nakliyatı da yapmaktayız.",
+        kartal: "Kartal evden eve nakliyat, site ve rezidans taşımalarında uzman ekibimizle yanınızdayız. Kartal’da ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz.",
+        pendik: "Pendik evden eve nakliyat ve ofis taşıma hizmetlerimizle paketleme, yükleme ve montajı tek elden gerçekleştiriyoruz. Pendik’ten İstanbul geneline şehir içi nakliyat yapıyoruz.",
+        tuzla: "Tuzla evden eve nakliyat, fabrika ve depo taşımalarında deneyimli personelimizle profesyonel nakliye çözümleri sunuyoruz. Tuzla bölgesinde şehir içi ve şehirler arası nakliyat yapıyoruz.",
+        umraniye: "Ümraniye evden eve nakliyat ve ofis taşımacılığında zamanında ve güvenli ev taşıma hizmeti veriyoruz. Ümraniye’de asansörlü taşımacılık ve sigortalı nakliyat seçenekleri sunuyoruz.",
+        cekmekoy: "Çekmeköy ev taşıma, evden eve nakliyat ve villa taşımalarında deneyimli ekibimizle hizmetteyiz. Çekmeköy’de şehir içi nakliyat ve parça eşya taşıma çözümleri sunuyoruz.",
+        sancaktepe: "Sancaktepe evden eve nakliyat ve ofis taşıma hizmetleriyle eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Sancaktepe’de asansörlü ev taşıma ve sigortalı nakliyat yapıyoruz.",
+        sultanbeyli: "Sultanbeyli evden eve nakliyat, apartman ve site taşımalarında ekonomik ve güvenilir çözümler sunuyoruz. Sultanbeyli bölgesinde şehir içi nakliyat ve ev taşıma hizmeti veriyoruz.",
+        gaziosmanpasa: "Gaziosmanpaşa evden eve nakliyat hizmetimizle ev, ofis ve parça eşyalarınızı profesyonel ekiplerle taşıyoruz. Gaziosmanpaşa’da şehir içi nakliyat ve asansörlü taşımacılık sağlıyoruz.",
+        sultangazi: "Sultangazi evden eve nakliyat ve ofis taşıma işlerinizde uygun fiyatlı ve sigortalı nakliyat hizmeti sunuyoruz. Sultangazi’de şehir içi ev taşıma yapıyoruz.",
+        esenler: "Esenler evden eve nakliyat, ofis ve mağaza taşımalarında planlı ve güvenli çözümler üretiyoruz. Esenler bölgesinde şehir içi nakliyat ve parça eşya taşıma hizmeti veriyoruz.",
+        bayrampasa: "Bayrampaşa evden eve nakliyat ve işyeri taşımacılığında profesyonel paketleme ve montaj desteği sağlıyoruz. Bayrampaşa’dan İstanbul geneline ev taşıma yapıyoruz.",
+        zeytinburnu: "Zeytinburnu evden eve nakliyat, tekstil ve depo taşımalarında deneyimli ekibimizle yanınızdayız. Zeytinburnu’nda şehir içi nakliyat ve ev taşıma hizmeti sunuyoruz.",
+        eyupsultan: "Eyüpsultan evden eve nakliyat ve ofis taşımacılığında bölgeyi iyi tanıyan ekibimizle güvenli nakliye gerçekleştiriyoruz. Eyüpsultan’da ev taşıma ve parça eşya nakliyatı yapıyoruz.",
+        arnavutkoy: "Arnavutköy evden eve nakliyat, köy ve ilçe merkezinde ev taşıma hizmeti veriyoruz. Arnavutköy’den İstanbul’a ve şehirler arası nakliyat çözümleri sunuyoruz.",
+        silivri: "Silivri evden eve nakliyat ve yazlık taşımalarında sigortalı ve planlı ev taşıma hizmeti sağlıyoruz. Silivri’den İstanbul geneline ve farklı illere şehirler arası nakliyat yapıyoruz.",
+        catalca: "Çatalca evden eve nakliyat, köy ve merkez taşımalarında deneyimli ekibimizle hizmetteyiz. Çatalca bölgesinde ev taşıma ve şehir içi nakliyat çözümleri sunuyoruz.",
+        buyukcekmece: "Büyükçekmece evden eve nakliyat ve villa taşımacılığında modern araçlarımız ve uzman kadromuzla güvenli nakliyat sağlıyoruz. Büyükçekmece’de şehir içi nakliyat ve ev taşıma yapıyoruz.",
+        sile: "Şile evden eve nakliyat, yazlık ve müstakil ev taşımalarında eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Şile’den İstanbul geneline şehir içi ve şehirler arası nakliyat hizmeti veriyoruz.",
+        adalar: "Adalar evden eve nakliyat ve yazlık taşımalarında, deniz yolu organizasyonu dahil planlı ve güvenli nakliyat çözümleri sunuyoruz. Adalar bölgesinde ev taşıma ve parça eşya nakliyatı yapıyoruz."
+      };
+
+      const bolgeLinks = document.querySelectorAll('.bolge-link');
+      const bolgeDetayKutu = document.getElementById('bolge-detay-kutu');
+      const bolgeDetayBaslik = document.getElementById('bolge-detay-baslik');
+      const bolgeDetayMetin = document.getElementById('bolge-detay-metin');
+
+      if (bolgeLinks.length && bolgeDetayKutu && bolgeDetayBaslik && bolgeDetayMetin) {
+        bolgeLinks.forEach((btn) => {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // faq header tetiklenmesin
+
+            const key = this.dataset.bolge;
+            const ad = this.textContent.trim();
+
+            // (İstersen yine ana sayfa içinde kutuyu da güncelleyelim)
+            bolgeDetayBaslik.textContent = ad + " Evden Eve Nakliyat ve Ev Taşıma";
+            bolgeDetayMetin.textContent =
+              bolgeDetayMetinleri[key] ||
+              (ad + " bölgesinde evden eve nakliyat, ofis taşıma ve şehir içi nakliyat hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle güvenli taşınma sunuyoruz.");
+            bolgeDetayKutu.style.display = 'block';
+
+            // 🔴 ASIL ÖNEMLİ KISIM:
+            // İlgili ilçe için hizmet-bolgeleri.html sayfasına git
+            if (key) {
+              window.location.href = "hizmet-bolgeleri.html?ilce=" + key;
+            }
+          });
         });
       }
 
@@ -1140,11 +1241,12 @@
             // Mobil: küçük kutucuk overlay aç
             if (bolgeOverlay) bolgeOverlay.style.display = 'flex';
           } else {
-            // Masaüstü: sadece dropdown aç/kapa
+            // Masaüstü: dropdown aç/kapa
             navDropdown.classList.toggle('open');
           }
         });
 
+        // Masaüstünde dışarı tıklayınca dropdown kapansın
         document.addEventListener('click', function (e) {
           if (window.innerWidth > 768) {
             if (!navDropdown.contains(e.target)) {
@@ -1167,7 +1269,29 @@
         });
       }
 
-      // Escape ile tüm overlayleri kapat
+      // Header + overlay içindeki "Tüm ilçeleri gör" kısayolları
+      const bolgeShortcuts = document.querySelectorAll('.bolge-shortcut');
+      if (bolgeShortcuts.length) {
+        bolgeShortcuts.forEach((link) => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.getElementById('faq-bolgeler');
+            if (target) {
+              // aşağı kaydır
+              slowScrollTo(target, 400);
+
+              // header dropdown ve mobil overlay'i kapat
+              if (bolgeOverlay) bolgeOverlay.style.display = 'none';
+              if (navDropdown) navDropdown.classList.remove('open');
+
+              // kaydırma bittikten hemen sonra SSS kutusunu ve tüm ilçeleri aç
+              setTimeout(openBolgelerFaq, 450);
+            }
+          });
+        });
+      }
+
+      // Escape ile overlayleri kapat
       window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           if (galeriOverlay && galeriOverlay.style.display === 'flex') {
@@ -1206,21 +1330,21 @@
           <div class="nav-dropdown-menu">
             <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
             <ul class="nav-bolge-list">
-              <li>Avcılar</li>
-              <li>Beylikdüzü</li>
-              <li>Esenyurt</li>
-              <li>Küçükçekmece</li>
-              <li>Bahçelievler</li>
-              <li>Bakırköy</li>
-              <li>Başakşehir</li>
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
             </ul>
-            <a href="#sss" class="nav-bolge-more">Tüm ilçeleri gör</a>
+            <a href="#faq-bolgeler" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
           </div>
         </div>
       </nav>
     </header>
 
-    <!-- HERO BÖLÜMÜ -->
+    <!-- HERO -->
     <section class="hero" id="ust">
       <div class="hero-inner">
         <div class="hero-content">
@@ -1289,7 +1413,7 @@
       </div>
     </section>
 
-    <!-- GALERİ (Flickr + Tam ekran) -->
+    <!-- GALERİ -->
     <section class="section" id="galeri">
       <h3>Galeri</h3>
 
@@ -1323,6 +1447,7 @@
       <h3>Referanslar</h3>
       <div class="referans-wrapper">
         <div class="referans-row">
+          <!-- kartlar aynı -->
           <div class="referans-card">
             <div class="referans-top">
               <div class="referans-avatar">
@@ -1595,7 +1720,7 @@
         </div>
 
         <!-- HİZMET BÖLGELERİ SORUSU -->
-        <div class="faq-item">
+        <div class="faq-item" id="faq-bolgeler">
           <div class="faq-header">
             <span class="q">Nerelere hizmet veriyorsunuz?</span>
             <span class="toggle">+</span>
@@ -1604,50 +1729,60 @@
             Yıldırım Nakliyat olarak İstanbul’un tüm ilçelerine evden eve, ofis ve parça eşya taşımacılığı hizmeti veriyoruz.
             Aşağıda en çok çalıştığımız bölgelerin bir kısmını görebilirsiniz:
             <ul class="bolge-list">
-              <li>Avcılar</li>
-              <li>Beylikdüzü</li>
-              <li>Esenyurt</li>
-              <li>Bağcılar</li>
-              <li>Bahçelievler</li>
-              <li>Bakırköy</li>
-              <li>Küçükçekmece</li>
-              <li>Başakşehir</li>
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bagcilar">Bağcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
             </ul>
 
             <div id="bolgeler-extra" style="display:none;">
               <ul class="bolge-list">
-                <li>Beşiktaş</li>
-                <li>Şişli</li>
-                <li>Kağıthane</li>
-                <li>Sarıyer</li>
-                <li>Fatih</li>
-                <li>Beyoğlu</li>
-                <li>Üsküdar</li>
-                <li>Kadıköy</li>
-                <li>Maltepe</li>
-                <li>Kartal</li>
-                <li>Pendik</li>
-                <li>Tuzla</li>
-                <li>Ümraniye</li>
-                <li>Çekmeköy</li>
-                <li>Sancaktepe</li>
-                <li>Sultanbeyli</li>
-                <li>Gaziosmanpaşa</li>
-                <li>Sultangazi</li>
-                <li>Esenler</li>
-                <li>Bayrampaşa</li>
-                <li>Zeytinburnu</li>
-                <li>Eyüpsultan</li>
-                <li>Arnavutköy</li>
-                <li>Silivri</li>
-                <li>Çatalca</li>
-                <li>Büyükçekmece</li>
-                <li>Şile</li>
-                <li>Adalar</li>
+                <li><button type="button" class="bolge-link" data-bolge="besiktas">Beşiktaş</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sisli">Şişli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kagithane">Kağıthane</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sariyer">Sarıyer</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="fatih">Fatih</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="beyoglu">Beyoğlu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="uskudar">Üsküdar</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kadikoy">Kadıköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="maltepe">Maltepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kartal">Kartal</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="pendik">Pendik</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="tuzla">Tuzla</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="umraniye">Ümraniye</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="cekmekoy">Çekmeköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sancaktepe">Sancaktepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultanbeyli">Sultanbeyli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="gaziosmanpasa">Gaziosmanpaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultangazi">Sultangazi</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="esenler">Esenler</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="bayrampasa">Bayrampaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="zeytinburnu">Zeytinburnu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="eyupsultan">Eyüpsultan</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="arnavutkoy">Arnavutköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="silivri">Silivri</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="catalca">Çatalca</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="buyukcekmece">Büyükçekmece</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sile">Şile</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="adalar">Adalar</button></li>
               </ul>
             </div>
 
             <button type="button" id="bolgeler-toggle" class="bolge-toggle-btn">Tüm ilçeleri göster</button>
+
+            <!-- İlçe detay kutusu -->
+            <div id="bolge-detay-kutu" class="bolge-detay-kutu">
+              <h4 id="bolge-detay-baslik">İstanbul Evden Eve Nakliyat ve Ev Taşıma</h4>
+              <p id="bolge-detay-metin">
+                İstanbul’un tüm ilçelerinde evden eve nakliyat, ofis taşıma, parça eşya ve şehirler arası nakliyat
+                hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliye seçenekleriyle taşınma sürecinizi güvenli ve
+                konforlu hale getiriyoruz.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1670,21 +1805,24 @@
     </div>
   </div>
 
-  <!-- HİZMET BÖLGELERİ OVERLAY (mobil için küçük kutu) -->
+  <!-- HİZMET BÖLGELERİ OVERLAY (mobil) -->
   <div id="bolge-overlay"
        style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9998;">
     <div style="background:#ffffff;padding:16px 20px;border-radius:12px;max-width:280px;width:80%;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-size:14px;">
       <div style="font-weight:600;margin-bottom:6px;">İstanbul Hizmet Bölgeleri</div>
       <ul style="margin:0 0 8px 18px;padding:0;list-style:disc;font-size:13px;">
-        <li>Avcılar</li>
-        <li>Beylikdüzü</li>
-        <li>Esenyurt</li>
-        <li>Küçükçekmece</li>
-        <li>Bahçelievler</li>
-        <li>Bakırköy</li>
-        <li>Başakşehir</li>
+        <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
       </ul>
-      <a href="#sss" style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">Tüm ilçeleri gör</a>
+      <a href="#faq-bolgeler" class="bolge-shortcut"
+         style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
+        Tüm ilçeleri gör
+      </a>
       <button type="button" id="bolge-overlay-close"
               style="margin-top:4px;padding:6px 12px;border-radius:999px;border:none;background:#eeeeee;font-size:12px;cursor:pointer;width:100%;">Kapat</button>
     </div>

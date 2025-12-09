@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- JS ile ilçeye göre dinamik olarak değişecek -->
+  <title>İlçe Bazlı Evden Eve Nakliyat | Yıldırım Nakliyat</title>
+  <meta name="description" content="İstanbul'un tüm ilçelerinde evden eve nakliyat, asansörlü taşıma ve sigortalı nakliyat hizmeti sunan Yıldırım Nakliyat. İlçenize özel ev taşıma çözümleri için hemen teklif alın.">
+
+  <style>
+    :root {
+      --primary: #f5b301;
+      --accent:  #c89b4a;
+      --dark:    #111111;
+      --light:   #f7f7f7;
+      --muted:   #f2f2f2;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:var(--light);
+      color:#222;
+    }
+    .page-wrapper {
+      max-width:1100px;
+      margin:0 auto;
+      background:#fff;
+      min-height:100vh;
+      box-shadow:0 0 20px rgba(0,0,0,0.06);
+    }
+    header {
+      padding:12px 24px;
+      border-bottom:2px solid #000;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#fff;
+    }
+    header img {
+      height:70px;
+      display:block;
+    }
+    header .slogan {
+      font-size:13px;
+      color:var(--accent);
+      font-weight:bold;
+      margin-top:2px;
+    }
+    .logo-wrap { display:flex; flex-direction:column; }
+    nav a {
+      font-size:14px;
+      text-decoration:none;
+      color:#000;
+      margin-left:10px;
+      padding:6px 10px;
+      border-radius:6px;
+      background:var(--muted);
+      font-weight:bold;
+    }
+    nav a:hover {
+      background:#dedede;
+    }
+    .content {
+      padding:26px 22px 40px 22px;
+    }
+    .breadcrumb {
+      font-size:13px;
+      margin-bottom:10px;
+      color:#777;
+    }
+    .breadcrumb a {
+      color:#777;
+      text-decoration:none;
+    }
+    h1 {
+      font-size:26px;
+      margin:4px 0 12px 0;
+    }
+    h2 {
+      font-size:20px;
+      margin-top:24px;
+      margin-bottom:10px;
+    }
+    p {
+      line-height:1.6;
+      font-size:15px;
+      margin:0 0 12px 0;
+    }
+    ul {
+      font-size:15px;
+      line-height:1.5;
+      margin:0 0 12px 18px;
+    }
+    .cta-box {
+      background:#fff9d7;
+      border:1px solid #f0d66a;
+      padding:14px 16px;
+      border-radius:10px;
+      margin:22px 0;
+      font-size:14px;
+    }
+    .cta-box strong {
+      display:block;
+      margin-bottom:4px;
+    }
+    .btn-row {
+      margin-top:10px;
+    }
+    .btn {
+      display:inline-block;
+      padding:8px 16px;
+      border-radius:20px;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:bold;
+      margin-right:8px;
+    }
+    .btn-call {
+      background:#007bff;
+      color:#fff;
+    }
+    .btn-wa {
+      background:#25d366;
+      color:#fff;
+    }
+    .ilce-list-mini {
+      font-size:13px;
+      margin-top:26px;
+      padding-top:12px;
+      border-top:1px solid #eee;
+    }
+    .ilce-list-mini a {
+      text-decoration:none;
+      color:#0077ff;
+      margin-right:8px;
+      font-size:13px;
+      display:inline-block;
+      margin-bottom:4px;
+    }
+    .ilce-list-mini span {
+      font-weight:bold;
+      display:block;
+      margin-bottom:4px;
+    }
+    footer {
+      text-align:center;
+      padding:14px;
+      font-size:13px;
+      color:#777;
+      border-top:1px solid #eee;
+      margin-top:10px;
+      background:#fafafa;
+    }
+    footer a {
+      color:#777;
+      text-decoration:none;
+    }
+    @media(max-width:768px){
+      header {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+      }
+      nav {
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+      }
+      nav a {
+        flex:1 1 calc(50% - 8px);
+        margin:4px 4px 0 0;
+        text-align:center;
+      }
+      .content {
+        padding:20px 16px 30px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <div class="logo-wrap">
+        <a href="index.html">
+          <img src="https://i.hizliresim.com/h50zh5q.png" alt="Yıldırım Nakliyat Logo">
+        </a>
+        <div class="slogan">Bir kamyon dolusu deneyimimiz var.</div>
+      </div>
+      <nav>
+        <a href="index.html#hizmetler">Hizmetler</a>
+        <a href="index.html#galeri">Galeri</a>
+        <a href="index.html#teklif">Teklif Al</a>
+        <a href="index.html#iletisim">İletişim</a>
+      </nav>
+    </header>
+
+    <main class="content">
+      <div class="breadcrumb" id="breadcrumb">
+        <a href="index.html">Ana Sayfa</a> › İstanbul Evden Eve Nakliyat
+      </div>
+
+      <h1 id="page-h1">İstanbul Evden Eve Nakliyat</h1>
+
+      <div id="ilce-paragraphs">
+        <!-- JS ile doldurulacak -->
+      </div>
+
+      <h2>Verdiğimiz Evden Eve Nakliyat Hizmetleri</h2>
+      <ul>
+        <li>Evden eve nakliyat (anahtar teslim ev taşıma)</li>
+        <li>Asansörlü taşımacılık ve yüksek katlarda taşıma</li>
+        <li>Ofis ve işyeri taşımacılığı</li>
+        <li>Parça eşya ve öğrenci evi taşımacılığı</li>
+        <li>Şehir içi ve şehirler arası nakliyat</li>
+        <li>Sigortalı taşıma ve profesyonel paketleme hizmeti</li>
+      </ul>
+
+      <div class="cta-box">
+        <strong id="cta-baslik">Evden eve nakliyat fiyatı almak ister misiniz?</strong>
+        <span id="cta-metin">
+          Kısa sürede net fiyat verebilmemiz için taşınacağınız adresleri, kat bilgisini ve eşya durumunu
+          paylaşmanız yeterli. WhatsApp üzerinden fotoğraf göndererek de pratik şekilde teklif alabilirsiniz.
+        </span>
+        <div class="btn-row">
+          <a class="btn btn-call" href="tel:05424887651">📞 Hemen Ara</a>
+          <a class="btn btn-wa" href="https://wa.me/905424887651" target="_blank" rel="noopener">💬 WhatsApp Teklif</a>
+        </div>
+      </div>
+
+      <div class="ilce-list-mini">
+        <span>Diğer hizmet bölgelerimizden bazıları:</span>
+        <a href="hizmet-bolgeleri.html?ilce=avcilar">Avcılar</a>
+        <a href="hizmet-bolgeleri.html?ilce=beylikduzu">Beylikdüzü</a>
+        <a href="hizmet-bolgeleri.html?ilce=esenyurt">Esenyurt</a>
+        <a href="hizmet-bolgeleri.html?ilce=bagcilar">Bağcılar</a>
+        <a href="hizmet-bolgeleri.html?ilce=bahcelievler">Bahçelievler</a>
+        <a href="hizmet-bolgeleri.html?ilce=bakirkoy">Bakırköy</a>
+        <a href="hizmet-bolgeleri.html?ilce=kucukcekmece">Küçükçekmece</a>
+        <a href="hizmet-bolgeleri.html?ilce=basaksehir">Başakşehir</a>
+        <a href="hizmet-bolgeleri.html?ilce=besiktas">Beşiktaş</a>
+        <a href="hizmet-bolgeleri.html?ilce=sisli">Şişli</a>
+        <a href="hizmet-bolgeleri.html?ilce=kadikoy">Kadıköy</a>
+        <a href="hizmet-bolgeleri.html?ilce=umraniye">Ümraniye</a>
+        <a href="hizmet-bolgeleri.html?ilce=pendik">Pendik</a>
+        <a href="hizmet-bolgeleri.html?ilce=buyukcekmece">Büyükçekmece</a>
+      </div>
+    </main>
+
+    <footer>
+      © 2025 Yıldırım Nakliyat - İstanbul Evden Eve Nakliyat |
+      <a href="index.html#kvkk">KVKK ve Gizlilik</a>
+    </footer>
+  </div>
+
+  <script>
+    // Tüm ilçe verileri burada
+    const districtData = {
+      avcilar: {
+        title: "Avcılar Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Avcılar evden eve nakliyat hizmeti arıyorsanız, Yıldırım Nakliyat olarak sigortalı, asansörlü ve profesyonel ev taşıma çözümleri sunuyoruz. Avcılar içi ve şehirler arası ev taşıma için hemen teklif alın.",
+        h1: "Avcılar Evden Eve Nakliyat",
+        cta: "Avcılar evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Avcılar evden eve nakliyat hizmeti arayanlar için Yıldırım Nakliyat, daire, villa ve ofis taşımalarında profesyonel çözümler sunar. Sigortalı taşıma, asansörlü nakliyat ve uzman paketleme ekibimizle Avcılar’ın her mahallesinde güvenli ev taşıma hizmeti veriyoruz.",
+          "Cihangir, Denizköşkler, Gümüşpala, Üniversite, Firuzköy ve tüm Avcılar bölgesinde şehir içi nakliyat, parça eşya taşıma ve şehirler arası evden eve nakliyat yapıyoruz. Ücretsiz keşif ile kat durumu, eşya miktarı ve asansör durumuna göre net fiyatlandırma sağlıyor, sürpriz masraf çıkarmadan taşınmanızı planlıyoruz."
+        ]
+      },
+      beylikduzu: {
+        title: "Beylikdüzü Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Beylikdüzü evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat olarak asansörlü, sigortalı ve profesyonel nakliyat çözümleri sunuyoruz. Beylikdüzü’nden İstanbul geneline ve şehirler arası nakliyat hizmeti veriyoruz.",
+        h1: "Beylikdüzü Evden Eve Nakliyat",
+        cta: "Beylikdüzü evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Beylikdüzü evden eve nakliyat hizmetimizle site, rezidans ve apartman taşımalarında modern araçlar ve deneyimli ekiplerle çalışıyoruz. Asansörlü taşımacılık sayesinde yüksek katlarda bile eşyalarınız kısa sürede, hasarsız ve düzenli şekilde yeni adresinize ulaştırılır.",
+          "Yakuplu, Kavaklı, Adnan Kahveci, Barış, Cumhuriyet ve tüm Beylikdüzü mahallelerinde ev taşıma, ofis nakliyatı, parça eşya taşıma ve şehirler arası nakliyat hizmeti sunuyoruz. Detaylı paketleme, mobilya sökme–takma ve sigortalı nakliyat seçeneklerimizle taşınma sürecinizi konforlu hale getiriyoruz."
+        ]
+      },
+      esenyurt: {
+        title: "Esenyurt Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Esenyurt evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve asansörlü nakliyat çözümleri sunar. Esenyurt içi ve şehirler arası ev taşıma için hızlı ve ekonomik fiyat teklifleri alabilirsiniz.",
+        h1: "Esenyurt Evden Eve Nakliyat",
+        cta: "Esenyurt evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Esenyurt evden eve nakliyat ihtiyaçlarınızda Yıldırım Nakliyat olarak ekonomik, güvenli ve planlı çözümler üretiyoruz. Deneyimli nakliye ekibimiz, paketleme, yükleme, taşıma ve yerleştirme süreçlerini profesyonel şekilde yönetir.",
+          "Bağlarçeşme, Mehterçeşme, Pınar, Yeşilkent, Saadetdere ve tüm Esenyurt bölgesinde ev taşıma, ofis nakliyatı, parça eşya taşıma ve şehirler arası nakliyat hizmeti sunuyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle eşyalarınızı güvenle yeni adresinize ulaştırıyoruz."
+        ]
+      },
+      bagcilar: {
+        title: "Bağcılar Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Bağcılar evden eve nakliyat, ofis taşıma ve parça eşya nakliyesinde Yıldırım Nakliyat profesyonel paketleme, sigortalı ev taşıma ve asansörlü nakliyat hizmeti sunar.",
+        h1: "Bağcılar Evden Eve Nakliyat",
+        cta: "Bağcılar evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Bağcılar evden eve nakliyat hizmetlerimizle daire, rezidans ve işyeri taşımalarında anahtar teslim çözümler sağlıyoruz. Eşyalarınız sökme–takma, paketleme ve yerleştirme dahil olmak üzere tek elden, profesyonel ekip tarafından taşınır.",
+          "Güneşli, Kirazlı, Yüzyıl, Mahmutbey ve tüm Bağcılar genelinde ev taşıma, ofis nakliyatı, parça eşya taşıma ve şehir içi nakliyat yapıyoruz. Sigortalı taşıma ve asansörlü evden eve nakliyat seçenekleriyle riskleri en aza indiriyoruz."
+        ]
+      },
+      bahcelievler: {
+        title: "Bahçelievler Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Bahçelievler evden eve nakliyat ve ofis taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel ev taşıma çözümleri sunar. Bahçelievler içi ve şehirler arası nakliyat için güvenle bizi tercih edebilirsiniz.",
+        h1: "Bahçelievler Evden Eve Nakliyat",
+        cta: "Bahçelievler evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Bahçelievler evden eve nakliyat hizmetimiz, apartman ve site taşımalarında pratik ve güvenli çözümler sunar. Deneyimli ekibimiz, kırılacak eşyalarınızdan beyaz eşyaya kadar her parçayı özenle paketleyip taşır.",
+          "Kocasinan, Şirinevler, Soğanlı, Çobançeşme ve tüm Bahçelievler bölgesinde şehir içi nakliyat, ofis taşıma, parça eşya nakliyesi ve şehirler arası evden eve nakliyat yapıyoruz. Asansörlü taşıma seçeneklerimizle yüksek katlarda taşınmayı kolaylaştırıyoruz."
+        ]
+      },
+      bakirkoy: {
+        title: "Bakırköy Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Bakırköy evden eve nakliyat, ofis ve işyeri taşımalarında Yıldırım Nakliyat profesyonel paketleme, sigortalı taşıma ve asansörlü evden eve nakliyat hizmeti sunar.",
+        h1: "Bakırköy Evden Eve Nakliyat",
+        cta: "Bakırköy evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Bakırköy evden eve nakliyat hizmetimizle apartman, site ve müstakil ev taşımalarında özenli ve planlı nakliye sağlıyoruz. Eşyalarınız profesyonel ambalaj malzemeleriyle paketlenir, araç içinde sabitlenir ve hasarsız şekilde yeni adresinize ulaştırılır.",
+          "Ataköy, Yeşilköy, Yeşilyurt, Osmaniye ve tüm Bakırköy ilçesinde ev taşıma, ofis nakliyatı, parça eşya ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma seçenekleriyle Bakırköy’den farklı illere güvenle taşınabilirsiniz."
+        ]
+      },
+      kucukcekmece: {
+        title: "Küçükçekmece Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Küçükçekmece evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, asansörlü, sigortalı ve profesyonel nakliyat çözümleri sunar. Küçükçekmece içi ve şehirler arası evden eve nakliyat için bize ulaşın.",
+        h1: "Küçükçekmece Evden Eve Nakliyat",
+        cta: "Küçükçekmece evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Küçükçekmece evden eve nakliyat talepleriniz için Yıldırım Nakliyat, tecrübeli ekibi ve kapalı kasa araçlarıyla hizmet verir. Evinizdeki tüm mobilya, beyaz eşya ve kırılacak eşyalar özenle paketlenerek güvenli şekilde taşınır.",
+          "Halkalı, İnönü, Kartaltepe, Sefaköy ve tüm Küçükçekmece bölgesinde ev taşıma, ofis nakliyatı, parça eşya taşıma ve şehirler arası nakliyat hizmeti sunuyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle taşınma sürecinizi kolaylaştırıyoruz."
+        ]
+      },
+      basaksehir: {
+        title: "Başakşehir Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Başakşehir evden eve nakliyat, site ve rezidans taşımalarında Yıldırım Nakliyat profesyonel, sigortalı ve asansörlü evden eve nakliyat hizmeti sunar.",
+        h1: "Başakşehir Evden Eve Nakliyat",
+        cta: "Başakşehir evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Başakşehir evden eve nakliyat hizmetlerimizle modern site ve rezidans taşımalarında uzmanlaşmış durumdayız. Eşyalarınız, kat ve asansör durumuna göre planlanan ekiple hızlı ve güvenli şekilde taşınır.",
+          "Başakşehir merkez, Kayaşehir, Bahçeşehir ve çevresindeki tüm sitelerde ev taşıma, ofis nakliyatı, parça eşya taşıma ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı nakliyat ve asansörlü taşıma seçenekleriyle, Başakşehir’de taşınırken konforu ön planda tutuyoruz."
+        ]
+      },
+      besiktas: {
+        title: "Beşiktaş Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Beşiktaş evden eve nakliyat ve eşya taşıma hizmetlerinde Yıldırım Nakliyat, profesyonel ekip ve sigortalı nakliyat çözümleri sunar.",
+        h1: "Beşiktaş Evden Eve Nakliyat",
+        cta: "Beşiktaş evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Beşiktaş evden eve nakliyat hizmetimizle dar sokaklı bölgelerde ve yoğun trafikte dahi planlı şekilde çalışıyoruz. Profesyonel paketleme ekibimiz, kırılacak eşyalarınızı ve mobilyalarınızı güvenle taşır.",
+          "Levent, Etiler, Akatlar, Ortaköy ve tüm Beşiktaş genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı yapıyoruz. Şehir içi ve şehirler arası nakliyat talepleriniz için esnek tarih ve saat seçenekleri sunuyoruz."
+        ]
+      },
+      sisli: {
+        title: "Şişli Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Şişli evden eve nakliyat ve ofis taşıma hizmetlerinde Yıldırım Nakliyat, asansörlü, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Şişli Evden Eve Nakliyat",
+        cta: "Şişli evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Şişli evden eve nakliyat hizmetinde apartman, rezidans ve ofis taşımalarında deneyimli kadromuzla çalışıyoruz. Yoğun iş temposuna uygun olarak taşınma planını sizinle birlikte netleştiriyoruz.",
+          "Mecidiyeköy, Bomonti, Kurtuluş, Okmeydanı ve tüm Şişli ilçesinde ev taşıma, ofis nakliyatı ve parça eşya taşıma hizmeti sunuyoruz. Sigortalı ve sözleşmeli nakliyat ile süreci güvence altına alıyoruz."
+        ]
+      },
+      kagithane: {
+        title: "Kağıthane Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Kağıthane evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı, asansörlü ve profesyonel nakliyat çözümleri sağlar.",
+        h1: "Kağıthane Evden Eve Nakliyat",
+        cta: "Kağıthane evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Kağıthane evden eve nakliyat ihtiyaçlarınızda Yıldırım Nakliyat, hem konut hem de ofis taşımalarında pratik çözümler sunar. Eşyalarınız sökülüp paketlenir, yeni adresinizde tekrar kurulumu yapılır.",
+          "Çağlayan, Gültepe, Seyrantepe ve tüm Kağıthane mahallelerinde şehir içi nakliyat, ofis taşıma ve parça eşya taşımacılığı yapıyoruz. Asansörlü taşıma imkânı ile yüksek katlarda da güvenli nakliyat sağlıyoruz."
+        ]
+      },
+      sariyer: {
+        title: "Sarıyer Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Sarıyer evden eve nakliyat ve villa taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel ev taşıma çözümleri sunar.",
+        h1: "Sarıyer Evden Eve Nakliyat",
+        cta: "Sarıyer evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Sarıyer evden eve nakliyat hizmetimizle sahil hattındaki daire ve villaların taşınmasını özenle gerçekleştiriyoruz. Büyük metrekareli evlerde mobilya sökme–takma ve detaylı paketleme ile güvenli nakliye sağlıyoruz.",
+          "Maslak, Tarabya, Yeniköy, İstinye ve tüm Sarıyer bölgesinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Esnek randevu saatleri ile iş ve yaşam temponuza uygun taşınma planlıyoruz."
+        ]
+      },
+      fatih: {
+        title: "Fatih Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Fatih evden eve nakliyat ve ofis taşıma hizmetlerinde Yıldırım Nakliyat, tarihi dokuya uygun, dikkatli ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Fatih Evden Eve Nakliyat",
+        cta: "Fatih evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Fatih evden eve nakliyat hizmetimizle tarihi yapıya sahip binalarda dikkatli ve kontrollü taşıma yapıyoruz. Dar sokaklara ve park alanlarına uygun araç planlamasıyla süreci sorunsuz yönetiyoruz.",
+          "Fındıkzade, Aksaray, Vatan, Hırka-i Şerif ve tüm Fatih genelinde ev taşıma, büro nakliyatı ve parça eşya taşımacılığı hizmeti sunuyoruz. Sigortalı nakliyat seçenekleriyle eşyalarınızı olası risklere karşı güvence altına alıyoruz."
+        ]
+      },
+      beyoglu: {
+        title: "Beyoğlu Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Beyoğlu evden eve nakliyat ve ofis taşımacılığında Yıldırım Nakliyat, dar sokaklara uygun profesyonel nakliye çözümleri sunar.",
+        h1: "Beyoğlu Evden Eve Nakliyat",
+        cta: "Beyoğlu evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Beyoğlu evden eve nakliyat hizmetimizle Taksim ve çevresindeki yoğun bölgelerde dahi planlı ve disiplinli şekilde çalışıyoruz. Dar sokaklı bölgelerde uygun araç ve ekip sayısı ile taşınma sürecini güvenle yönetiyoruz.",
+          "Taksim, Cihangir, Kasımpaşa, Piyalepaşa ve tüm Beyoğlu genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı hizmeti sunuyoruz. Profesyonel paketleme ve sigortalı nakliye ile eşyalarınızı koruma altına alıyoruz."
+        ]
+      },
+      uskudar: {
+        title: "Üsküdar Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Üsküdar evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, Anadolu yakasında sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Üsküdar Evden Eve Nakliyat",
+        cta: "Üsküdar evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında daire, apartman ve müstakil ev taşımalarında profesyonel çözümler sunuyoruz. Deneyimli ekibimiz, eşyalarınızı planlı şekilde paketleyerek taşıma sürecini hızlandırır.",
+          "Ünalan, Bulgurlu, Çengelköy, Beylerbeyi ve tüm Üsküdar mahallelerinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz. Asansörlü taşıma ve sigortalı nakliyat seçeneklerimizle Üsküdar’da güvenle taşınabilirsiniz."
+        ]
+      },
+      kadikoy: {
+        title: "Kadıköy Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Kadıköy evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, profesyonel paketleme, sigortalı ve asansörlü nakliyat çözümleri sunar.",
+        h1: "Kadıköy Evden Eve Nakliyat",
+        cta: "Kadıköy evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Kadıköy evden eve nakliyat hizmetimizle apartman, rezidans ve öğrenci evlerinin taşınmasını özenle gerçekleştiriyoruz. Yoğun cadde ve sokaklarda zamanlamayı size göre ayarlayarak pratik çözümler sunuyoruz.",
+          "Fenerbahçe, Kozyatağı, Bostancı, Göztepe ve tüm Kadıköy genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı yapıyoruz. Profesyonel paketleme ve sigortalı nakliye ile eşyalarınızı güvenle yeni adresinize ulaştırıyoruz."
+        ]
+      },
+      maltepe: {
+        title: "Maltepe Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Maltepe evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı, asansörlü ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Maltepe Evden Eve Nakliyat",
+        cta: "Maltepe evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Maltepe evden eve nakliyat hizmetimizle sahil hattı ve iç bölgelerdeki dairelerin taşınmasını güvenle gerçekleştiriyoruz. Paketleme ekibimiz, eşyalarınızı çizilmelere ve darbelere karşı koruyacak şekilde ambalajlar.",
+          "İdealtepe, Küçükyalı, Zümrütevler, Cevizli ve tüm Maltepe çevresinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı hizmeti sunuyoruz. Asansörlü nakliyat ve sigortalı taşıma seçenekleriyle yüksek katlarda da konforlu taşınma sağlıyoruz."
+        ]
+      },
+      kartal: {
+        title: "Kartal Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Kartal evden eve nakliyat ve eşya taşıma hizmetlerinde Yıldırım Nakliyat, profesyonel ekip ve sigortalı nakliyat çözümleri sunar.",
+        h1: "Kartal Evden Eve Nakliyat",
+        cta: "Kartal evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Kartal evden eve nakliyat hizmetimizle konut ve ofis taşımalarında tecrübeli ekibimizle hizmet veriyoruz. Eşyalarınız özenle paketlenip araca yüklenir, yeni adresinizde düzenli şekilde yerleştirilir.",
+          "Soğanlık, Yakacık, Uğur Mumcu, Esentepe ve tüm Kartal genelinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Asansörlü taşıma olanaklarımızla yüksek katlı binalarda da hızlı nakliye sağlıyoruz."
+        ]
+      },
+      pendik: {
+        title: "Pendik Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Pendik evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı, asansörlü ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Pendik Evden Eve Nakliyat",
+        cta: "Pendik evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Pendik evden eve nakliyat hizmetimizle sahil ve yukarı bölgedeki dairelerin taşınmasını planlı şekilde gerçekleştiriyoruz. Deneyimli ekibimiz, paketleme ve taşıma süreçlerinde sizinle sürekli iletişim halinde çalışır.",
+          "Kaynarca, Esenyalı, Yenişehir, Kurtköy ve tüm Pendik çevresinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı nakliyat ve asansörlü taşıma seçenekleriyle Pendik’te güvenli taşınma sağlıyoruz."
+        ]
+      },
+      tuzla: {
+        title: "Tuzla Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Tuzla evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Tuzla Evden Eve Nakliyat",
+        cta: "Tuzla evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Tuzla evden eve nakliyat hizmetimizle sahil ve iç bölgelerdeki konutların taşınmasını özenle gerçekleştiriyoruz. Eşyalarınız profesyonel ambalaj malzemeleriyle sarılarak araç içinde sabitlenir.",
+          "Aydınlı, İçmeler, Postane, Orhanlı ve tüm Tuzla ilçesinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma seçeneklerimizle Tuzla’dan farklı illere güvenli taşınma imkanı sağlıyoruz."
+        ]
+      },
+      umraniye: {
+        title: "Ümraniye Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Ümraniye evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, Anadolu yakasında sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Ümraniye Evden Eve Nakliyat",
+        cta: "Ümraniye evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Ümraniye evden eve nakliyat hizmetimizle aileler ve çalışanlar için konforlu taşınma çözümleri sunuyoruz. Paketleme, taşıma ve yerleştirme sürecinde eşyalarınızın güvenliğini ön planda tutuyoruz.",
+          "Atakent, İnkılap, Armağanevler, Çakmak ve tüm Ümraniye genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı yapıyoruz. Asansörlü taşıma ve sigortalı nakliyat ile yüksek katlarda da rahatlıkla taşınabilirsiniz."
+        ]
+      },
+      cekmekoy: {
+        title: "Çekmeköy Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Çekmeköy evden eve nakliyat ve villa taşımacılığında Yıldırım Nakliyat, sigortalı ve profesyonel ev taşıma çözümleri sunar.",
+        h1: "Çekmeköy Evden Eve Nakliyat",
+        cta: "Çekmeköy evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Çekmeköy evden eve nakliyat hizmetimizle site ve müstakil ev taşımalarında uzman kadromuzla hizmet veriyoruz. Özellikle villa ve dubleks yapılarda detaylı paketleme ve taşıma planlaması yapıyoruz.",
+          "Taşdelen, Alemdağ, Nişantepe ve tüm Çekmeköy bölgesinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma ve profesyonel ekiplerle eşyalarınızı güvenle yeni yaşam alanınıza ulaştırıyoruz."
+        ]
+      },
+      sancaktepe: {
+        title: "Sancaktepe Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Sancaktepe evden eve nakliyat ve eşya taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Sancaktepe Evden Eve Nakliyat",
+        cta: "Sancaktepe evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Sancaktepe evden eve nakliyat hizmetimizle yeni yerleşim bölgelerinde konut taşımalarını güvenle gerçekleştiriyoruz. Paketleme ekibimiz, mobilya ve beyaz eşyaları zarar görmeyecek şekilde ambalajlar.",
+          "Sarıgazi, Yenidoğan, Paşaköy ve tüm Sancaktepe genelinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz. Asansörlü taşıma imkânlarımızla yüksek katlı binalarda da hızlı nakliye sağlıyoruz."
+        ]
+      },
+      sultanbeyli: {
+        title: "Sultanbeyli Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Sultanbeyli evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Sultanbeyli Evden Eve Nakliyat",
+        cta: "Sultanbeyli evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Sultanbeyli evden eve nakliyat hizmetimizle apartman ve sitelerde taşınma sürecinizi planlıyoruz. Eşyalarınızın güvenliği için kaliteli ambalaj malzemeleri ve deneyimli ekip kullanıyoruz.",
+          "Adil, Turgut Reis, Hamidiye ve tüm Sultanbeyli çevresinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Uygun fiyatlı ve sigortalı nakliyat seçeneklerimizle taşınma sürecinizi kolaylaştırıyoruz."
+        ]
+      },
+      gaziosmanpasa: {
+        title: "Gaziosmanpaşa Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Gaziosmanpaşa evden eve nakliyat ve eşya taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliye çözümleri sunar.",
+        h1: "Gaziosmanpaşa Evden Eve Nakliyat",
+        cta: "Gaziosmanpaşa evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Gaziosmanpaşa evden eve nakliyat hizmetimizle gecekondu dönüşümü ve yeni binaların yoğun olduğu bölgelerde planlı nakliye çözümleri sağlıyoruz. Dar sokaklara uygun araç seçimiyle süreci kolaylaştırıyoruz.",
+          "Karadeniz, Yıldıztabya, Küçükköy ve tüm Gaziosmanpaşa genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı hizmeti sunuyoruz. Sigortalı nakliyat ve profesyonel ekiplerimizle güvenli taşınmanız için çalışıyoruz."
+        ]
+      },
+      sultangazi: {
+        title: "Sultangazi Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Sultangazi evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Sultangazi Evden Eve Nakliyat",
+        cta: "Sultangazi evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Sultangazi evden eve nakliyat hizmetimizle yüksek nüfuslu bölgelerde konut taşımalarını titizlikle gerçekleştiriyoruz. Eşyalarınız, profesyonel paketleme ve dikkatli taşıma ile yeni adresinize ulaştırılır.",
+          "Esentepe, 50. Yıl, Cumhuriyet ve tüm Sultangazi genelinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı hizmeti veriyoruz. Asansörlü taşıma ve sigortalı nakliyat ile rahat bir taşınma deneyimi sunuyoruz."
+        ]
+      },
+      esenler: {
+        title: "Esenler Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Esenler evden eve nakliyat ve ofis taşımacılığında Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Esenler Evden Eve Nakliyat",
+        cta: "Esenler evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Esenler evden eve nakliyat hizmetimizle yoğun apartman bölgelerinde konut taşımalarını planlı şekilde gerçekleştiriyoruz. Deneyimli ekibimiz, eşyalarınızı hızlı ve düzenli şekilde taşır.",
+          "Menderes, Fatih, Kemer ve tüm Esenler çevresinde ev taşıma, ofis nakliyatı ve parça eşya taşımacılığı hizmeti sunuyoruz. Uygun fiyatlı ve sigortalı nakliye seçenekleriyle Esenler’de taşınma sürecinizi kolaylaştırıyoruz."
+        ]
+      },
+      bayrampasa: {
+        title: "Bayrampaşa Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Bayrampaşa evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, profesyonel ve sigortalı nakliyat çözümleri sunar.",
+        h1: "Bayrampaşa Evden Eve Nakliyat",
+        cta: "Bayrampaşa evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Bayrampaşa evden eve nakliyat hizmetimizle apartman ve işyerlerinin taşınmasını özenle gerçekleştiriyoruz. Eşyalarınız sökülüp paketlenir, yeni adresinizde tekrar kurulumu yapılır.",
+          "Altıntepsi, Kartaltepe, Yıldırım ve tüm Bayrampaşa genelinde ev taşıma, ofis nakliyatı ve şehir içi nakliyat hizmeti veriyoruz. Sigortalı nakliyat ve profesyonel ekiplerle güvenli taşıma sağlıyoruz."
+        ]
+      },
+      zeytinburnu: {
+        title: "Zeytinburnu Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Zeytinburnu evden eve nakliyat ve ofis taşımacılığında Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Zeytinburnu Evden Eve Nakliyat",
+        cta: "Zeytinburnu evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Zeytinburnu evden eve nakliyat hizmetimizle sahil ve iç bölgelerdeki dairelerin taşınmasını dikkatle gerçekleştiriyoruz. Eşyalarınız, alanında deneyimli ekip tarafından ambalajlanır ve taşınır.",
+          "Merkezefendi, Beştelsiz, Maltepe ve tüm Zeytinburnu genelinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Asansörlü taşıma ve sigortalı nakliyat ile güvenli taşınma sağlıyoruz."
+        ]
+      },
+      eyupsultan: {
+        title: "Eyüpsultan Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Eyüpsultan evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Eyüpsultan Evden Eve Nakliyat",
+        cta: "Eyüpsultan evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Eyüpsultan evden eve nakliyat hizmetimizle hem merkezde hem de yeni yerleşim bölgelerinde taşınma çözümleri sunuyoruz. Paketleme ve taşıma sürecinde eşyalarınızın güvenliğini önceliklendiriyoruz.",
+          "Göktürk, Kemerburgaz, Alibeyköy ve tüm Eyüpsultan genelinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz. Sigortalı nakliyat seçenekleriyle Eyüpsultan’dan farklı bölgelere güvenle taşınabilirsiniz."
+        ]
+      },
+      arnavutkoy: {
+        title: "Arnavutköy Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Arnavutköy evden eve nakliyat ve ev taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Arnavutköy Evden Eve Nakliyat",
+        cta: "Arnavutköy evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Arnavutköy evden eve nakliyat hizmetimizle yeni yerleşim alanları ve müstakil evlerin taşınmasını planlı şekilde gerçekleştiriyoruz. Büyük hacimli eşyalar için uygun araç ve ekipman kullanıyoruz.",
+          "Hadımköy, Boğazköy, Haraççı ve tüm Arnavutköy genelinde ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz. Sigortalı taşıma ile uzun mesafeli nakliyelerde de güvenli çözümler sunuyoruz."
+        ]
+      },
+      silivri: {
+        title: "Silivri Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Silivri evden eve nakliyat ve yazlık taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Silivri Evden Eve Nakliyat",
+        cta: "Silivri evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Silivri evden eve nakliyat hizmetimizle yazlık ve daimi konut taşımalarını özenle gerçekleştiriyoruz. Uzun mesafe taşımalarında eşyalarınızı sağlam şekilde sabitleyerek yola çıkıyoruz.",
+          "Merkez, Selimpaşa, Değirmenköy ve tüm Silivri genelinde ev taşıma, yazlık nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma seçeneklerimizle Silivri’den farklı şehirlere güvenle taşınabilirsiniz."
+        ]
+      },
+      catalca: {
+        title: "Çatalca Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Çatalca evden eve nakliyat ve köy evleri taşımacılığında Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Çatalca Evden Eve Nakliyat",
+        cta: "Çatalca evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Çatalca evden eve nakliyat hizmetimizle ilçe merkezi ve köy evlerinin taşınmasını güvenle gerçekleştiriyoruz. Uzun mesafeli ve arazi yollarına uygun araç planlaması yaparak süreci rahatlatıyoruz.",
+          "Çakıl, İhsaniye, Subaşı ve tüm Çatalca bölgesinde ev taşıma ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı nakliyat seçenekleriyle eşyalarınızı yol koşullarına karşı koruma altına alıyoruz."
+        ]
+      },
+      buyukcekmece: {
+        title: "Büyükçekmece Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Büyükçekmece evden eve nakliyat ve villa taşımacılığında Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Büyükçekmece Evden Eve Nakliyat",
+        cta: "Büyükçekmece evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Büyükçekmece evden eve nakliyat hizmetimizle sahil hattı ve villa bölgelerinde taşınma süreçlerini özenle yürütüyoruz. Geniş metrekareli evlerde detaylı paketleme ve planlı taşıma sağlıyoruz.",
+          "Mimaroba, Kumburgaz, Güzelce ve tüm Büyükçekmece çevresinde ev taşıma, yazlık nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma ve profesyonel ekiplerimizle Büyükçekmece’de güvenli taşınma sağlıyoruz."
+        ]
+      },
+      sile: {
+        title: "Şile Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Şile evden eve nakliyat ve yazlık taşıma hizmetlerinde Yıldırım Nakliyat, sigortalı ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Şile Evden Eve Nakliyat",
+        cta: "Şile evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Şile evden eve nakliyat hizmetimizle sahil ve köy bölgelerindeki yazlık ve ev taşımalarını dikkatle gerçekleştiriyoruz. Uzun yol şartlarına uygun araçlarımızla eşyalarınızı güvenle taşıyoruz.",
+          "Merkez, Ağva ve çevresindeki mahallelerde ev taşıma, yazlık nakliyatı ve şehirler arası nakliyat hizmeti sunuyoruz. Sigortalı taşıma ile Şile’den İstanbul’un diğer ilçelerine ve farklı şehirlere güvenli nakliye sağlıyoruz."
+        ]
+      },
+      adalar: {
+        title: "Adalar Evden Eve Nakliyat | Yıldırım Nakliyat",
+        desc: "Adalar evden eve nakliyat ve eşya taşıma hizmetlerinde Yıldırım Nakliyat, dikkatli ve profesyonel nakliyat çözümleri sunar.",
+        h1: "Adalar Evden Eve Nakliyat",
+        cta: "Adalar evden eve nakliyat fiyatı almak ister misiniz?",
+        paragraphs: [
+          "Adalar evden eve nakliyat hizmetimizle Büyükada, Heybeliada ve diğer adalarda bulunan evlerin taşınmasını özel planlama ile gerçekleştiriyoruz. Deniz ve kara taşımalarını koordine ederek eşyalarınızın güvenliğini sağlıyoruz.",
+          "Adalar bölgesinde yazlık ve daimi konut taşımalarında profesyonel paketleme ve sigortalı taşıma ile hizmet veriyoruz. Adalar’dan İstanbul’un farklı ilçelerine veya şehirler arası nakliyelerde yanınızdayız."
+        ]
+      }
+    };
+
+    function getDistrictKey() {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get("ilce");
+      if (q && districtData[q]) return q;
+      return "avcilar"; // varsayılan
+    }
+
+    (function initPage() {
+      const key = getDistrictKey();
+      const data = districtData[key];
+
+      // Title + meta description
+      document.title = data.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute("content", data.desc);
+
+      // Breadcrumb
+      const bc = document.getElementById("breadcrumb");
+      if (bc) {
+        bc.innerHTML = `<a href="index.html">Ana Sayfa</a> › ${data.h1}`;
+      }
+
+      // H1
+      const h1 = document.getElementById("page-h1");
+      if (h1) h1.textContent = data.h1;
+
+      // CTA başlık
+      const ctaBaslik = document.getElementById("cta-baslik");
+      if (ctaBaslik) ctaBaslik.textContent = data.cta;
+
+      // Paragraflar
+      const container = document.getElementById("ilce-paragraphs");
+      if (container) {
+        container.innerHTML = "";
+        data.paragraphs.forEach(function (pText) {
+          const p = document.createElement("p");
+          p.textContent = pText;
+          container.appendChild(p);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

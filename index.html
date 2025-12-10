@@ -6,7 +6,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-LVYLDE41WS');
 </script>
 
@@ -71,7 +70,6 @@
       align-items: center;
       text-align: center;
       cursor: pointer;
-
       max-height: 140px;
       opacity: 1;
       margin-bottom: 4px;
@@ -336,7 +334,7 @@
       color: #555;
     }
 
-    /* GALERİ SLIDER (eski) */
+    /* GALERİ SLIDER (eski – şimdilik kullanılmıyor ama kalsın) */
     .galeri-slider {
       position: relative;
       max-width: 920px;
@@ -977,7 +975,7 @@
         if (prevBtn) prevBtn.addEventListener('click', goPrev);
       }
 
-      // Galeri tıklama → lightbox
+      // Galeri tıklama → lightbox (şu an sadece referans avatarları için aktif)
       const galeriImages = document.querySelectorAll('.galeri-slider img, .referans-avatar img');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -1014,7 +1012,7 @@
         });
       }
 
-      // Referans yatay scroll butonları (masaüstü için)
+      // Referans yatay scroll butonları (masaüstü için, şu an buton yok ama JS kalabilir)
       const refRow = document.querySelector('.referans-row');
       const refLeft = document.querySelector('.referans-nav-left');
       const refRight = document.querySelector('.referans-nav-right');
@@ -1104,7 +1102,7 @@
         sariyer: "Sarıyer ev taşıma, villa taşımacılığı ve evden eve nakliyat taleplerinizde deneyimli ekibimizle yanınızdayız. Sarıyer’de şehir içi nakliyat ve şehirler arası evden eve nakliyat hizmeti veriyoruz.",
         fatih: "Fatih evden eve nakliyat, tarihi bölgelerde hassas ev taşıma ve ofis nakliyatı için profesyonel çözümler sunuyoruz. Fatih’te dar sokaklara uygun araç ve ekipmanlarla güvenli nakliyat yapıyoruz.",
         beyoglu: "Beyoğlu evden eve nakliyat ve ofis taşımacılığında, apartman ve iş hanı taşımalarında planlı ve titiz nakliye hizmeti veriyoruz. Beyoğlu’ndan İstanbul’un her yerine ev taşıma yapıyoruz.",
-        uskudar: "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında güvenli ev taşıma sağlıyoruz. Üsküdar’da ofis taşımacılığı, parça eşya nakliyesi ve asansörlü nakliyat çözümleri sunuyoruz.",
+        uskudar: "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında güvenli ev taşıma sağlıyoruz. Üsküdar’da ofis taşımacılığı, parça eşya nakliyəsi ve asansörlü nakliyat çözümleri sunuyoruz.",
         kadikoy: "Kadıköy evden eve nakliyat, ofis taşıma ve parça eşya nakliyatında modern araçlarımızla hizmet veriyoruz. Kadıköy’den Türkiye’nin birçok şehrine şehirler arası nakliyat yapıyoruz.",
         maltepe: "Maltepe evden eve nakliyat ve ev taşıma işlerinizde sigortalı ve asansörlü taşımacılık sağlıyoruz. Maltepe bölgesinde ofis taşıma ve parça eşya nakliyatı da yapmaktayız.",
         kartal: "Kartal evden eve nakliyat, site ve rezidans taşımalarında uzman ekibimizle yanınızdayız. Kartal’da ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz.",
@@ -1142,14 +1140,12 @@
             const key = this.dataset.bolge;
             const ad = this.textContent.trim();
 
-            // (İstersen yine ana sayfa içinde kutuyu da güncelleyelim)
             bolgeDetayBaslik.textContent = ad + " Evden Eve Nakliyat ve Ev Taşıma";
             bolgeDetayMetin.textContent =
               bolgeDetayMetinleri[key] ||
               (ad + " bölgesinde evden eve nakliyat, ofis taşıma ve şehir içi nakliyat hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle güvenli taşınma sunuyoruz.");
             bolgeDetayKutu.style.display = 'block';
 
-            // 🔴 ASIL ÖNEMLİ KISIM:
             // İlgili ilçe için hizmet-bolgeleri.html sayfasına git
             if (key) {
               window.location.href = "hizmet-bolgeleri.html?ilce=" + key;
@@ -1196,46 +1192,6 @@
           const text = encodeURIComponent(bodyLines.join('\n'));
           const waUrl = `https://wa.me/905424887651?text=${text}`;
           window.location.href = waUrl;
-        });
-      }
-
-      // FLICKR Galeri Tam Ekran Popup
-      const galeriBox = document.querySelector('.galeri-embed-click');
-      const galeriBtn = document.querySelector('.galeri-fullscreen-btn');
-      const galeriOverlay = document.getElementById('galeri-overlay');
-      const galeriOverlayClose = document.querySelector('.galeri-overlay-close');
-
-      function openGaleriOverlay() {
-        if (galeriOverlay) galeriOverlay.style.display = 'flex';
-      }
-
-      function closeGaleriOverlay() {
-        if (galeriOverlay) galeriOverlay.style.display = 'none';
-      }
-
-      if (galeriBox) {
-        galeriBox.addEventListener('click', function (e) {
-          e.preventDefault();
-          openGaleriOverlay();
-        });
-      }
-
-      if (galeriBtn) {
-        galeriBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          openGaleriOverlay();
-        });
-      }
-
-      if (galeriOverlayClose) {
-        galeriOverlayClose.addEventListener('click', closeGaleriOverlay);
-      }
-
-      if (galeriOverlay) {
-        galeriOverlay.addEventListener('click', function (e) {
-          if (e.target === galeriOverlay) {
-            closeGaleriOverlay();
-          }
         });
       }
 
@@ -1302,12 +1258,9 @@
         });
       }
 
-      // Escape ile overlayleri kapat
+      // Escape ile sadece hizmet bölgeleri overlay'ini kapat
       window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
-          if (galeriOverlay && galeriOverlay.style.display === 'flex') {
-            galeriOverlay.style.display = 'none';
-          }
           if (bolgeOverlay && bolgeOverlay.style.display === 'flex') {
             bolgeOverlay.style.display = 'none';
           }
@@ -1424,32 +1377,22 @@
       </div>
     </section>
 
-    <!-- GALERİ -->
+    <!-- GALERİ (Flickr embed / İLK KOD MANTIĞI) -->
     <section class="section" id="galeri">
       <h3>Galeri</h3>
 
       <div style="max-width:1000px;margin:0 auto;text-align:center;">
-        <div class="galeri-embed-click"
-             style="position:relative;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.22);cursor:pointer;">
-          <a data-flickr-embed="true"
-             href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
-             title="Yıldırım Nakliyat Galeri">
-            <img src="https://live.staticflickr.com/65535/54972518280_59f691e63e_b.jpg"
-                 width="1600" height="1200"
-                 alt="Yıldırım Nakliyat Galeri"
-                 style="width:100%;height:auto;display:block;" />
-          </a>
-
-          <div style="position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.65);color:#fff;font-size:13px;padding:6px 10px;border-radius:999px;">
-            Fotoğrafları tam ekran görmek için tıklayın
-          </div>
-        </div>
-
-        <button type="button"
-                class="galeri-fullscreen-btn"
-                style="margin-top:12px;padding:8px 18px;border-radius:999px;border:none;background:#f5b301;font-weight:700;font-size:14px;cursor:pointer;">
-          🔍 Galeriyi Tam Ekran Aç
-        </button>
+        <a data-flickr-embed="true"
+           href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
+           title="Yıldırım Nakliyat Galeri">
+          <img src="https://live.staticflickr.com/65535/54972518280_59f691e63e_b.jpg"
+               width="1600" height="1200"
+               alt="Yıldırım Nakliyat Galeri"
+               style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.22);" />
+        </a>
+        <p style="font-size:13px;color:#555;margin-top:8px;">
+          Albümdeki tüm fotoğrafları görmek için görsele tıklayabilirsiniz.
+        </p>
       </div>
     </section>
 
@@ -1458,7 +1401,6 @@
       <h3>Referanslar</h3>
       <div class="referans-wrapper">
         <div class="referans-row">
-          <!-- kartlar aynı -->
           <div class="referans-card">
             <div class="referans-top">
               <div class="referans-avatar">
@@ -1839,24 +1781,6 @@
     </div>
   </div>
 
-  <!-- Galeri Tam Ekran FLICKR Popup -->
-  <div id="galeri-overlay"
-       style="position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:9999;">
-    <div style="position:relative;width:95vw;height:90vh;max-width:1200px;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.45);background:#000;">
-      <button class="galeri-overlay-close"
-              style="position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:none;background:#ffffff;color:#000;font-size:20px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.5);">
-        ×
-      </button>
-      <iframe src="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254/player"
-              width="100%" height="100%"
-              frameborder="0"
-              style="border:0;display:block;"
-              loading="lazy"
-              allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
   <!-- Sabit alt butonlar -->
   <div class="floating-cta">
     <a class="floating-call" href="tel:05424887651">📞 Ara</a>
@@ -1867,7 +1791,7 @@
     © 2025 Yıldırım Nakliyat - Tüm Hakları Saklıdır | <a href="#kvkk">KVKK ve Gizlilik</a>
   </footer>
 
-  <!-- Flickr embed script -->
+  <!-- Flickr embed script (ALBÜMÜN TAMAMINI GETİREN İLK KOD) -->
   <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 </body>
 </html>

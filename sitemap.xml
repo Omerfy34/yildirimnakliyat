@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Ana Sayfa -->
   <url>
-   <loc>https://nakliyatyildirim.online/</loc>
+    <loc>https://nakliyatyildirim.online/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
+
+  <!-- Hizmet Bölgeleri Sayfası -->
+  <url>
+    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>

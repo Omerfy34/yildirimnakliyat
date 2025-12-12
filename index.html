@@ -333,7 +333,7 @@
       color: #555;
     }
 
-    /* GALERİ SLIDER (eski – şimdilik kullanılmıyor ama kalsın) */
+    /* GALERİ SLIDER */
     .galeri-slider {
       position: relative;
       max-width: 920px;
@@ -926,7 +926,7 @@
         });
       });
 
-      // Galeri slider (eski)
+      // Galeri slider
       const slider = document.querySelector('.galeri-slider');
       const track = document.querySelector('.galeri-track');
       const slides = document.querySelectorAll('.galeri-slide');
@@ -954,7 +954,7 @@
         if (prevBtn) prevBtn.addEventListener('click', goPrev);
       }
 
-      // Galeri tıklama → lightbox (şu an sadece referans avatarları için aktif)
+      // Galeri tıklama → lightbox
       const galeriImages = document.querySelectorAll('.galeri-slider img, .referans-avatar img');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -991,7 +991,7 @@
         });
       }
 
-      // Referans yatay scroll butonları (masaüstü için, şu an buton yok ama JS kalabilir)
+      // Referans yatay scroll
       const refRow = document.querySelector('.referans-row');
       const refLeft = document.querySelector('.referans-nav-left');
       const refRight = document.querySelector('.referans-nav-right');
@@ -1026,28 +1026,24 @@
         });
       });
 
-      // Hizmet bölgeleri "daha fazla göster" butonu SSS içinde
+      // Hizmet bölgeleri "daha fazla göster" butonu
       const bolgelerToggle = document.getElementById('bolgeler-toggle');
       const bolgelerExtra = document.getElementById('bolgeler-extra');
 
-      // SSS içindeki "Nerelere hizmet veriyorsunuz?" kutusunu ve tüm ilçeleri açan fonksiyon
       function openBolgelerFaq() {
         const faqItem = document.getElementById('faq-bolgeler');
         if (!faqItem) return;
 
-        // Diğer FAQ'ları kapat
         document.querySelectorAll('.faq-item').forEach((i) => {
           i.classList.remove('active');
           const t = i.querySelector('.faq-header .toggle');
           if (t) t.textContent = '+';
         });
 
-        // Bu kutuyu aç
         faqItem.classList.add('active');
         const toggleEl = faqItem.querySelector('.faq-header .toggle');
         if (toggleEl) toggleEl.textContent = '-';
 
-        // Ek ilçeleri aç ve buton yazısını güncelle
         if (bolgelerExtra) bolgelerExtra.style.display = 'block';
         if (bolgelerToggle) bolgelerToggle.textContent = 'Kapat';
       }
@@ -1065,14 +1061,14 @@
         });
       }
 
-      // === İLÇE DETAY VE YÖNLENDİRME (KUTU KALDIRILDI) ===
+      // === İLÇE YÖNLENDİRME (KUTU KALDIRILDI) ===
       const bolgeLinks = document.querySelectorAll('.bolge-link');
 
       if (bolgeLinks.length) {
         bolgeLinks.forEach((btn) => {
           btn.addEventListener('click', function (e) {
             e.preventDefault();
-            e.stopPropagation(); // faq header tetiklenmesin
+            e.stopPropagation();
 
             const key = this.dataset.bolge;
 
@@ -1135,15 +1131,12 @@
         navDropdownToggle.addEventListener('click', function (e) {
           e.preventDefault();
           if (window.innerWidth <= 768) {
-            // Mobil: küçük kutucuk overlay aç
             if (bolgeOverlay) bolgeOverlay.style.display = 'flex';
           } else {
-            // Masaüstü: dropdown aç/kapa
             navDropdown.classList.toggle('open');
           }
         });
 
-        // Masaüstünde dışarı tıklayınca dropdown kapansın
         document.addEventListener('click', function (e) {
           if (window.innerWidth > 768) {
             if (!navDropdown.contains(e.target)) {
@@ -1174,21 +1167,17 @@
             e.preventDefault();
             const target = document.getElementById('faq-bolgeler');
             if (target) {
-              // aşağı kaydır
               slowScrollTo(target, 400);
 
-              // header dropdown ve mobil overlay'i kapat
               if (bolgeOverlay) bolgeOverlay.style.display = 'none';
               if (navDropdown) navDropdown.classList.remove('open');
 
-              // kaydırma bittikten hemen sonra SSS kutusunu ve tüm ilçeleri aç
               setTimeout(openBolgelerFaq, 450);
             }
           });
         });
       }
 
-      // Escape ile sadece hizmet bölgeleri overlay'ini kapat
       window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           if (bolgeOverlay && bolgeOverlay.style.display === 'flex') {
@@ -1305,7 +1294,6 @@
 
     <section class="section" id="galeri">
       <h3>Galeri</h3>
-
       <div style="max-width:1000px;margin:0 auto;text-align:center;">
         <a data-flickr-embed="true"
            href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
@@ -1530,10 +1518,10 @@
           loading="lazy"
           allowfullscreen
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=41.0129217,28.6908625&z=19&hl=tr&output=embed">
+          src="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1r%C4%B1m+Nakliyat/@41.013444,28.6908931,19z/data=!4m14!1m7!3m6!1s0x4656eabd50bce2a3:0xebea89faccaaf3d5!2zWcSxbGTEsXLEsW0gTmFrbGl5YXQ!8m2!3d41.013443!4d28.6915368!16s%2Fg%2F11yr_35h7n!3m5!1s0x4656eabd50bce2a3:0xebea89faccaaf3d5!8m2!3d41.013443!4d28.6915368!16s%2Fg%2F11yr_35h7n?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D">
         </iframe>
 
-        <a class="map-link-btn" href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1r%C4%B1m+Nakliyat/@41.0134003,28.6900833,19z" target="_blank" rel="noopener">
+        <a class="map-link-btn" href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1r%C4%B1m+Nakliyat/@41.013444,28.6908931,19z/data=!4m14!1m7!3m6!1s0x4656eabd50bce2a3:0xebea89faccaaf3d5!2zWcSxbGTEsXLEsW0gTmFrbGl5YXQ!8m2!3d41.013443!4d28.6915368!16s%2Fg%2F11yr_35h7n!3m5!1s0x4656eabd50bce2a3:0xebea89faccaaf3d5!8m2!3d41.013443!4d28.6915368!16s%2Fg%2F11yr_35h7n?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
           <span>🌐</span>
           <span>Google Haritalar'da Aç</span>
         </a>

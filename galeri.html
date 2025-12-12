@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Galeri - Yıldırım Nakliyat | Çalışma Fotoğraflarımız</title>
+  <meta name="description" content="Yıldırım Nakliyat'ın araç filosu, uzman ekibi, paketleme örnekleri ve asansörlü taşıma operasyonlarından kareler." />
+  
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Galeri Grid Düzeni */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+        height: 250px;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+    .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.7);
+        color: #fff;
+        padding: 10px;
+        font-size: 14px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+    }
+    h2.gallery-section-title {
+        margin-top: 50px;
+        color: var(--primary);
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    
+    <header class="main-header">
+      <div class="logo-area" onclick="window.location.href='index.html'">
+        <img src="https://i.hizliresim.com/h50zh5q.png" alt="Yıldırım Nakliyat Logo" />
+        <span>Bir kamyon dolusu deneyimimiz var.</span>
+      </div>
+
+      <nav>
+        <a href="index.html"><span class="icon">🏠</span> <span>Anasayfa</span></a>
+        <a href="hakkimizda.html"><span class="icon">ℹ️</span> <span>Hakkımızda</span></a>
+        <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+        <a href="galeri.html" class="active"><span class="icon">🖼️</span> <span>Galeri</span></a>
+        <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
+        <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
+
+        <div class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle">
+              <span class="icon">📍</span>
+              <span>Hizmet Bölgeleri</span>
+            </button>
+            <div class="nav-dropdown-menu">
+               <div class="nav-bolge-title">Öne Çıkanlar</div>
+               <ul class="nav-bolge-list">
+                 <li><a href="#" class="bolge-link">Avcılar</a></li>
+                 <li><a href="#" class="bolge-link">Beylikdüzü</a></li>
+                 <li><a href="#" class="bolge-link">Esenyurt</a></li>
+                 <li><a href="#" class="bolge-link">Başakşehir</a></li>
+               </ul>
+               <a href="#" class="nav-bolge-more">Tüm ilçeleri gör</a>
+            </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="page-header-banner">
+      <h1>Fotoğraf Galerisi</h1>
+      <p>Sözle Değil, İşimizle Konuşuyoruz. Sahadan Kareler.</p>
+    </div>
+
+    <section class="content-wrapper">
+      
+      <h2 class="gallery-section-title">Araç Filomuz ve Lojistik</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Nakliye Kamyonu">
+            <div class="gallery-caption">Geniş Kapasiteli Nakliye Kamyonumuz</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://lh4.googleusercontent.com/proxy/BQGH-0GtE3cuxjdTd3f9byeXPn-yk_bRykD73IpDItmkOvYmpScN5ddbqybj6BDlI5JySDBHy8CdOMXF9FaTFxTv1AkG1jrUjCZGMT5Qs9VGnA" alt="Şehir İçi Araç">
+            <div class="gallery-caption">Şehir İçi Transfer Aracı</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80" alt="Yolculuk">
+            <div class="gallery-caption">Şehirler Arası Güvenli Yolculuk</div>
+        </div>
+      </div>
+
+      <h2 class="gallery-section-title">Paketleme ve Operasyon</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="https://www.cagdasnakliyat.com.tr/resim/12.jpg" alt="Paketleme">
+            <div class="gallery-caption">Hassas Eşya Paketleme</div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://uzmanlarmutfak.com/resimler/sayfa/sivas-mobilya-montaji-ve-kurulumu.jpg" alt="Ofis Taşıma">
+            <div class="gallery-caption">Ofis Mobilyalarının Kurulumu</div>
+        </div>
+        
+        </div>
+
+    </section>
+
+    <div class="floating-cta">
+        <a class="floating-call" href="tel:05424887651">📞 Ara</a>
+        <a class="floating-wa" href="https://wa.me/905424887651" target="_blank">💬 WhatsApp</a>
+    </div>
+
+    <footer>
+       © 2025 Yıldırım Nakliyat - Tüm Hakları Saklıdır | <a href="hakkimizda.html">KVKK ve Gizlilik</a>
+    </footer>
+
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close">×</button>
+      <img id="lightbox-img" src="" alt="Büyük Görsel" />
+    </div>
+  </div>
+
+  <script>
+    const header = document.querySelector('.main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) header.classList.add('shrink');
+      else header.classList.remove('shrink');
+    });
+
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    if (galleryImages.length && lightbox && lightboxImg) {
+      galleryImages.forEach((img) => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightbox.style.display = 'flex';
+        });
+      });
+    }
+
+    if (lightbox && lightboxClose) {
+      lightboxClose.addEventListener('click', () => { lightbox.style.display = 'none'; });
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.style.display = 'none'; });
+    }
+  </script>
+</body>
+</html>

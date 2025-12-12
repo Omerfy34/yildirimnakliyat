@@ -862,7 +862,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      
+       
       // Header linkleri artık sayfa açacak şekilde düzenlendiği için smooth scroll kodu kaldırıldı.
 
       // Sticky küçülen Header
@@ -1021,7 +1021,8 @@
         });
       }
 
-      // === İLÇE YÖNLENDİRME (Dış sayfa yönlendirmesi eklendi) ===
+      // === İLÇE YÖNLENDİRME (GÜNCELLENDİ) ===
+      // Hizmet bölgeleri sayfasına yönlendirme yapar
       const bolgeLinks = document.querySelectorAll('.bolge-link');
 
       if (bolgeLinks.length) {
@@ -1029,9 +1030,17 @@
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            // Burada hizmet bölgeleri için özel sayfan varsa oraya yönlendirebilirsin.
-            // Şimdilik iletisim.html'e yönlendiriyorum örnek olarak.
-            window.location.href = "iletisim.html"; 
+            
+            // Butondaki data-bolge verisini al (örnek: "avcilar")
+            const ilceAdi = btn.getAttribute('data-bolge');
+
+            // Eğer bir ilçe adı tanımlıysa dinamik sayfaya parametre ile git
+            if (ilceAdi) {
+                // Not: Diğer dosyanın adının "hizmet-bolgeleri.html" olduğunu varsayıyoruz.
+                window.location.href = "hizmet-bolgeleri.html?ilce=" + ilceAdi; 
+            } else {
+                window.location.href = "hizmet-bolgeleri.html";
+            }
           });
         });
       }
@@ -1121,8 +1130,8 @@
         bolgeShortcuts.forEach((link) => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
-            // Bu link de artık aşağı kaydırmasın, ilgili sayfaya gitsin.
-            window.location.href = "iletisim.html"; 
+            // Tüm ilçeleri gör dediğinde de ana listeye gitsin
+            window.location.href = "hizmet-bolgeleri.html"; 
           });
         });
       }
@@ -1147,8 +1156,8 @@
       </div>
 
       <nav>
-        <a href="index.html" class="active"><span class="icon">🏠</span> <span>Hakkımızda</span></a>
-        <a href="hakkimizda.html"><span class="icon">🏠</span> <span>Hakkımızda</span></a>
+        <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
+        <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
         <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
         <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
         <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
@@ -1170,7 +1179,7 @@
               <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
               <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
             </ul>
-            <a href="iletisim.html" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
+            <a href="hizmet-bolgeleri.html" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
           </div>
         </div>
       </nav>
@@ -1616,7 +1625,7 @@
         <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
         <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
       </ul>
-      <a href="#faq-bolgeler" class="bolge-shortcut"
+      <a href="hizmet-bolgeleri.html" class="bolge-shortcut"
          style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
         Tüm ilçeleri gör
       </a>

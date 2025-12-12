@@ -217,7 +217,6 @@
     .hero {
       position: relative;
       height: 500px;
-      /* DÜZELTİLEN KISIM BURASI */
       background: url('https://i.hizliresim.com/j9iwhln.png') center/cover no-repeat;
       display: flex;
       align-items: center;
@@ -569,26 +568,6 @@
       background: #f5f5f5;
       font-size: 12px;
       cursor: pointer;
-    }
-
-    /* İlçe detay SEO kutusu */
-    .bolge-detay-kutu {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: #fff9e0;
-      border: 1px solid #f0d66a;
-      font-size: 13px;
-      display: none;
-    }
-
-    .bolge-detay-kutu h4 {
-      margin: 0 0 6px 0;
-      font-size: 14px;
-    }
-
-    .bolge-detay-kutu p {
-      margin: 0;
     }
 
     /* Teklif formu */
@@ -1086,65 +1065,16 @@
         });
       }
 
-      // === İLÇE DETAY METİNLERİ (SEO) ===
-      const bolgeDetayMetinleri = {
-        avcilar: "Avcılar evden eve nakliyat hizmetimizle daire, villa ve ofis taşımalarınızı sigortalı ve profesyonel ekip ile gerçekleştiriyoruz. Asansörlü ev taşıma, şehir içi nakliyat ve parça eşya taşımada Avcılar bölgesinde hızlı çözüm sunuyoruz.",
-        beylikduzu: "Beylikdüzü evden eve nakliyat ve ofis taşıma işlerinizde modern araçlarımız ve uzman ekibimizle güvenli nakliyat sağlıyoruz. Beylikdüzü’nden İstanbul’un tüm ilçelerine şehir içi nakliye ve şehirler arası taşımacılık yapıyoruz.",
-        esenyurt: "Esenyurt ev taşıma ve evden eve nakliyat talepleriniz için ekonomik ve sigortalı çözümler sunuyoruz. Esenyurt bölgesinde asansörlü nakliyat, ofis taşımacılığı ve parça eşya nakliyesi hizmeti veriyoruz.",
-        bagcilar: "Bağcılar evden eve nakliyat ve işyeri taşıma hizmetlerinde paketleme, sökme–takma ve yerleştirme dahil anahtar teslim nakliye sunuyoruz. Bağcılar’dan İstanbul geneline güvenli ev taşıma yapmaktayız.",
-        bahcelievler: "Bahçelievler evden eve nakliyat, ofis taşıma ve parça eşya nakliyesinde deneyimli ekibimizle yanınızdayız. Bahçelievler bölgesinde asansörlü ev taşıma ve şehir içi nakliyat hizmeti veriyoruz.",
-        bakirkoy: "Bakırköy evden eve nakliyat ve ofis taşımacılığı için profesyonel paketleme, sigortalı taşıma ve montaj desteği sağlıyoruz. Bakırköy’den Türkiye’nin pek çok iline şehirler arası nakliyat yapıyoruz.",
-        kucukcekmece: "Küçükçekmece ev taşıma, evden eve nakliyat ve ofis taşıma işlerinizde uzman kadromuzla hizmet veriyoruz. Asansörlü taşımacılık ve sigortalı nakliyat çözümlerimizle Küçükçekmece’de güvenle taşının.",
-        basaksehir: "Başakşehir evden eve nakliyat, site ve rezidans taşımalarında profesyonel ekip ve kapalı kasa araçlarımızla hizmet veriyoruz. Başakşehir’de ev taşıma, ofis nakliyatı ve şehirler arası nakliyat çözümleri sunuyoruz.",
-        besiktas: "Beşiktaş evden eve nakliyat ve ofis taşıma hizmetlerimizle dar sokaklar ve yüksek katlarda asansörlü nakliyat çözümleri üretiyoruz. Beşiktaş bölgesinde hızlı ve güvenilir ev taşıma yapıyoruz.",
-        sisli: "Şişli evden eve nakliyat, işyeri ve plaza taşımalarında planlı ve zamanında nakliyat sağlıyoruz. Şişli’de ev taşıma, ofis nakliyatı ve parça eşya taşıma hizmeti sunmaktayız.",
-        kagithane: "Kağıthane evden eve nakliyat ve ofis taşımacılığında paketleme, montaj ve yerleştirme dahil tam kapsamlı nakliye hizmeti sunuyoruz. Kağıthane’de şehir içi nakliyat ve asansörlü ev taşıma yapıyoruz.",
-        sariyer: "Sarıyer ev taşıma, villa taşımacılığı ve evden eve nakliyat taleplerinizde deneyimli ekibimizle yanınızdayız. Sarıyer’de şehir içi nakliyat ve şehirler arası evden eve nakliyat hizmeti veriyoruz.",
-        fatih: "Fatih evden eve nakliyat, tarihi bölgelerde hassas ev taşıma ve ofis nakliyatı için profesyonel çözümler sunuyoruz. Fatih’te dar sokaklara uygun araç ve ekipmanlarla güvenli nakliyat yapıyoruz.",
-        beyoglu: "Beyoğlu evden eve nakliyat ve ofis taşımacılığında, apartman ve iş hanı taşımalarında planlı ve titiz nakliye hizmeti veriyoruz. Beyoğlu’ndan İstanbul’un her yerine ev taşıma yapıyoruz.",
-        uskudar: "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında güvenli ev taşıma sağlıyoruz. Üsküdar’da ofis taşımacılığı, parça eşya nakliyəsi ve asansörlü nakliyat çözümleri sunuyoruz.",
-        kadikoy: "Kadıköy evden eve nakliyat, ofis taşıma ve parça eşya nakliyatında modern araçlarımızla hizmet veriyoruz. Kadıköy’den Türkiye’nin birçok şehrine şehirler arası nakliyat yapıyoruz.",
-        maltepe: "Maltepe evden eve nakliyat ve ev taşıma işlerinizde sigortalı ve asansörlü taşımacılık sağlıyoruz. Maltepe bölgesinde ofis taşıma ve parça eşya nakliyatı da yapmaktayız.",
-        kartal: "Kartal evden eve nakliyat, site ve rezidans taşımalarında uzman ekibimizle yanınızdayız. Kartal’da ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz.",
-        pendik: "Pendik evden eve nakliyat ve ofis taşıma hizmetlerimizle paketleme, yükleme ve montajı tek elden gerçekleştiriyoruz. Pendik’ten İstanbul geneline şehir içi nakliyat yapıyoruz.",
-        tuzla: "Tuzla evden eve nakliyat, fabrika ve depo taşımalarında deneyimli personelimizle profesyonel nakliye çözümleri sunuyoruz. Tuzla bölgesinde şehir içi ve şehirler arası nakliyat yapıyoruz.",
-        umraniye: "Ümraniye evden eve nakliyat ve ofis taşımacılığında zamanında ve güvenli ev taşıma hizmeti veriyoruz. Ümraniye’de asansörlü taşımacılık ve sigortalı nakliyat seçenekleri sunuyoruz.",
-        cekmekoy: "Çekmeköy ev taşıma, evden eve nakliyat ve villa taşımalarında deneyimli ekibimizle hizmetteyiz. Çekmeköy’de şehir içi nakliyat ve parça eşya taşıma çözümleri sunuyoruz.",
-        sancaktepe: "Sancaktepe evden eve nakliyat ve ofis taşıma hizmetleriyle eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Sancaktepe’de asansörlü ev taşıma ve sigortalı nakliyat yapıyoruz.",
-        sultanbeyli: "Sultanbeyli evden eve nakliyat, apartman ve site taşımalarında ekonomik ve güvenilir çözümler sunuyoruz. Sultanbeyli bölgesinde şehir içi nakliyat ve ev taşıma hizmeti veriyoruz.",
-        gaziosmanpasa: "Gaziosmanpaşa evden eve nakliyat hizmetimizle ev, ofis ve parça eşyalarınızı profesyonel ekiplerle taşıyoruz. Gaziosmanpaşa’da şehir içi nakliyat ve asansörlü taşımacılık sağlıyoruz.",
-        sultangazi: "Sultangazi evden eve nakliyat ve ofis taşıma işlerinizde uygun fiyatlı ve sigortalı nakliyat hizmeti sunuyoruz. Sultangazi’de şehir içi ev taşıma yapıyoruz.",
-        esenler: "Esenler evden eve nakliyat, ofis ve mağaza taşımalarında planlı ve güvenli çözümler üretiyoruz. Esenler bölgesinde şehir içi nakliyat ve parça eşya taşıma hizmeti veriyoruz.",
-        bayrampasa: "Bayrampaşa evden eve nakliyat ve işyeri taşımacılığında profesyonel paketleme ve montaj desteği sağlıyoruz. Bayrampaşa’dan İstanbul geneline ev taşıma yapıyoruz.",
-        zeytinburnu: "Zeytinburnu evden eve nakliyat, tekstil ve depo taşımalarında deneyimli ekibimizle yanınızdayız. Zeytinburnu’nda şehir içi nakliyat ve ev taşıma hizmeti sunuyoruz.",
-        eyupsultan: "Eyüpsultan evden eve nakliyat ve ofis taşımacılığında bölgeyi iyi tanıyan ekibimizle güvenli nakliye gerçekleştiriyoruz. Eyüpsultan’da ev taşıma ve parça eşya nakliyatı yapıyoruz.",
-        arnavutkoy: "Arnavutköy evden eve nakliyat, köy ve ilçe merkezinde ev taşıma hizmeti veriyoruz. Arnavutköy’den İstanbul’a ve şehirler arası nakliyat çözümleri sunuyoruz.",
-        silivri: "Silivri evden eve nakliyat ve yazlık taşımalarında sigortalı ve planlı ev taşıma hizmeti sağlıyoruz. Silivri’den İstanbul geneline ve farklı illere şehirler arası nakliyat yapıyoruz.",
-        catalca: "Çatalca evden eve nakliyat, köy ve merkez taşımalarında deneyimli ekibimizle hizmetteyiz. Çatalca bölgesinde ev taşıma ve şehir içi nakliyat çözümleri sunuyoruz.",
-        buyukcekmece: "Büyükçekmece evden eve nakliyat ve villa taşımacılığında modern araçlarımız ve uzman kadromuzla güvenli nakliyat sağlıyoruz. Büyükçekmece’de şehir içi nakliyat ve ev taşıma yapıyoruz.",
-        sile: "Şile evden eve nakliyat, yazlık ve müstakil ev taşımalarında eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Şile’den İstanbul geneline şehir içi ve şehirler arası nakliyat hizmeti veriyoruz.",
-        adalar: "Adalar evden eve nakliyat ve yazlık taşımalarında, deniz yolu organizasyonu dahil planlı ve güvenli nakliyat çözümleri sunuyoruz. Adalar bölgesinde ev taşıma ve parça eşya nakliyatı yapıyoruz."
-      };
-
+      // === İLÇE DETAY VE YÖNLENDİRME (KUTU KALDIRILDI) ===
       const bolgeLinks = document.querySelectorAll('.bolge-link');
-      const bolgeDetayKutu = document.getElementById('bolge-detay-kutu');
-      const bolgeDetayBaslik = document.getElementById('bolge-detay-baslik');
-      const bolgeDetayMetin = document.getElementById('bolge-detay-metin');
 
-      if (bolgeLinks.length && bolgeDetayKutu && bolgeDetayBaslik && bolgeDetayMetin) {
+      if (bolgeLinks.length) {
         bolgeLinks.forEach((btn) => {
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation(); // faq header tetiklenmesin
 
             const key = this.dataset.bolge;
-            const ad = this.textContent.trim();
-
-            bolgeDetayBaslik.textContent = ad + " Evden Eve Nakliyat ve Ev Taşıma";
-            bolgeDetayMetin.textContent =
-              bolgeDetayMetinleri[key] ||
-              (ad + " bölgesinde evden eve nakliyat, ofis taşıma ve şehir içi nakliyat hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle güvenli taşınma sunuyoruz.");
-            bolgeDetayKutu.style.display = 'block';
 
             // İlgili ilçe için hizmet-bolgeleri.html sayfasına git
             if (key) {
@@ -1716,15 +1646,6 @@
             </div>
 
             <button type="button" id="bolgeler-toggle" class="bolge-toggle-btn">Tüm ilçeleri göster</button>
-
-            <div id="bolge-detay-kutu" class="bolge-detay-kutu">
-              <h4 id="bolge-detay-baslik">İstanbul Evden Eve Nakliyat ve Ev Taşıma</h4>
-              <p id="bolge-detay-metin">
-                İstanbul’un tüm ilçelerinde evden eve nakliyat, ofis taşıma, parça eşya ve şehirler arası nakliyat
-                hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliye seçenekleriyle taşınma sürecinizi güvenli ve
-                konforlu hale getiriyoruz.
-              </p>
-            </div>
           </div>
         </div>
       </div>

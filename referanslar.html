@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Referanslar - Yıldırım Nakliyat | Müşteri Yorumları</title>
+  <meta name="description" content="Yıldırım Nakliyat ile daha önce çalışmış mutlu müşterilerimizin gerçek yorumları ve değerlendirmeleri. Güvenilir nakliyatın adresi." />
+  
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+      /* Referanslar sayfası için grid düzeni */
+      .testimonials-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-top: 30px;
+      }
+      /* Ana sayfadaki kart stilini burada da kullanıyoruz */
+      .testimonial-card-full {
+          background: #ffffff;
+          border-radius: 14px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+          padding: 25px;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          border: 1px solid #eee;
+      }
+      .quote-icon {
+        font-size: 40px;
+        color: var(--muted);
+        line-height: 1;
+        margin-bottom: -10px;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    
+    <header class="main-header">
+      <div class="logo-area" onclick="window.location.href='index.html'">
+        <img src="https://i.hizliresim.com/h50zh5q.png" alt="Yıldırım Nakliyat Logo" />
+        <span>Bir kamyon dolusu deneyimimiz var.</span>
+      </div>
+
+      <nav>
+        <a href="index.html"><span class="icon">🏠</span> <span>Anasayfa</span></a>
+        <a href="hakkimizda.html"><span class="icon">ℹ️</span> <span>Hakkımızda</span></a>
+        <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+        <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
+        <a href="referanslar.html" class="active"><span class="icon">⭐</span> <span>Referanslar</span></a>
+        <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
+
+        <div class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle">
+              <span class="icon">📍</span>
+              <span>Hizmet Bölgeleri</span>
+            </button>
+            <div class="nav-dropdown-menu">
+               <div class="nav-bolge-title">Öne Çıkanlar</div>
+               <ul class="nav-bolge-list">
+                 <li><a href="#" class="bolge-link">Avcılar</a></li>
+                 <li><a href="#" class="bolge-link">Beylikdüzü</a></li>
+                 <li><a href="#" class="bolge-link">Esenyurt</a></li>
+                 <li><a href="#" class="bolge-link">Başakşehir</a></li>
+               </ul>
+               <a href="#" class="nav-bolge-more">Tüm ilçeleri gör</a>
+            </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="page-header-banner">
+      <h1>Referanslarımız</h1>
+      <p>Bizim En Büyük Sermayemiz, Mutlu Müşterilerimizdir.</p>
+    </div>
+
+    <section class="content-wrapper">
+      
+      <p style="text-align:center; font-size:18px; margin-bottom:40px; color:#555;">
+        Bizi tercih eden ve deneyimlerini paylaşan değerli müşterilerimizin yorumlarından bazılarını aşağıda bulabilirsiniz. Siz de hizmet aldıktan sonra yorumunuzu bize iletebilirsiniz.
+      </p>
+
+      <div class="testimonials-grid">
+          
+          <div class="testimonial-card-full">
+              <div class="quote-icon">❝</div>
+              <div class="referans-top">
+                <div class="referans-avatar">
+                  <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Müşteri" />
+                </div>
+                <div>
+                  <div class="referans-name">Zeynep Y.</div>
+                  <div class="referans-tag">Evden Eve - Avcılar</div>
+                  <div class="referans-stars">★★★★★</div>
+                </div>
+              </div>
+              <div class="referans-text">
+                "Taşınma öncesi çok stresliydim ama Ömer Bey ve ekibi sayesinde süreç inanılmaz kolay geçti. Sabah tam dedikleri saatte geldiler, her şeyi özenle paketlediler. Tek bir bardağım bile kırılmadı. Emeklerine sağlık, kesinlikle tavsiye ediyorum."
+              </div>
+          </div>
+
+          <div class="testimonial-card-full">
+              <div class="quote-icon">❝</div>
+              <div class="referans-top">
+                <div class="referans-avatar">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Müşteri" />
+                </div>
+                <div>
+                  <div class="referans-name">Murat K.</div>
+                  <div class="referans-tag">Şehirler Arası - İst. > İzmir</div>
+                  <div class="referans-stars">★★★★★</div>
+                </div>
+              </div>
+              <div class="referans-text">
+                "İstanbul'dan İzmir'e taşınmamız gerekiyordu. Uzun yol olduğu için endişeliydik. Yıldırım Nakliyat ile anlaştık. Eşyaları çok iyi istiflediler, sigorta yaptılar. Ertesi gün İzmir'de eşyalarımızı sapasağlam teslim aldık. Profesyonel bir firma."
+              </div>
+          </div>
+
+          <div class="testimonial-card-full">
+              <div class="quote-icon">❝</div>
+              <div class="referans-top">
+                <div class="referans-avatar">
+                  <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Müşteri" />
+                </div>
+                <div>
+                  <div class="referans-name">Ahmet B.</div>
+                  <div class="referans-tag">Ofis Taşıma - Şişli</div>
+                  <div class="referans-stars">★★★★☆</div>
+                </div>
+              </div>
+              <div class="referans-text">
+                "Ofisimizi büyüttüğümüz için taşınmamız gerekti. İş kaybı yaşamamak adına hafta sonu taşıma talep ettik. Ekip çok organize çalıştı, tüm dosyalarımız karışmadan yeni ofise yerleştirildi. Pazartesi sorunsuz iş başı yaptık. Teşekkürler."
+              </div>
+          </div>
+
+          <div class="testimonial-card-full">
+              <div class="quote-icon">❝</div>
+              <div class="referans-top">
+                <div class="referans-avatar">
+                  <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Müşteri" />
+                </div>
+                <div>
+                  <div class="referans-name">Esra T.</div>
+                  <div class="referans-tag">Asansörlü Taşıma - Beylikdüzü</div>
+                  <div class="referans-stars">★★★★★</div>
+                </div>
+              </div>
+              <div class="referans-text">
+                "12. katta oturuyoruz ve bina yönetimi asansörü kullanmamıza izin vermedi. Yıldırım Nakliyat dış cephe asansörü kurarak tüm eşyayı balkonumuzdan çok kısa sürede indirdi. Hem hızlı hem de güvenli bir yöntemdi. Çok memnun kaldık."
+              </div>
+          </div>
+          
+          <div class="testimonial-card-full">
+            <div class="quote-icon">❝</div>
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Kemal S.</div>
+                <div class="referans-tag">Parça Eşya - Kadıköy</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">
+              "Sadece bir koltuk takımı ve buzdolabı taşıtmak istedim. Diğer firmalar komple araç parası isterken, Memiş Bey parça eşya hizmetiyle çok uygun bir fiyat verdi. Aynı gün içinde gelip aldılar ve teslim ettiler. Dürüst esnaf."
+            </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="floating-cta">
+        <a class="floating-call" href="tel:05424887651">📞 Ara</a>
+        <a class="floating-wa" href="https://wa.me/905424887651" target="_blank">💬 WhatsApp</a>
+    </div>
+
+    <footer>
+       © 2025 Yıldırım Nakliyat - Tüm Hakları Saklıdır | <a href="hakkimizda.html">KVKK ve Gizlilik</a>
+    </footer>
+
+  </div>
+
+  <script>
+    // Header küçülme efekti
+    const header = document.querySelector('.main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) header.classList.add('shrink');
+      else header.classList.remove('shrink');
+    });
+  </script>
+</body>
+</html>

@@ -9,9 +9,7 @@
   --muted:   #f2f2f2;   /* Menü kutuları */
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -97,9 +95,7 @@ nav a {
   font-size: 14px;
 }
 
-nav a span.icon {
-  font-size: 16px;
-}
+nav a span.icon { font-size: 16px; }
 
 nav a:hover {
   background: #d4d4d4;
@@ -132,9 +128,7 @@ nav a.active {
   color: #000;
 }
 
-.nav-dropdown-toggle .icon {
-  font-size: 16px;
-}
+.nav-dropdown-toggle .icon { font-size: 16px; }
 
 .nav-dropdown-toggle:hover {
   background: #d4d4d4;
@@ -178,23 +172,22 @@ nav a.active {
   font-size: 13px;
 }
 
-.nav-bolge-list li {
-  padding: 2px 0;
-}
+.nav-bolge-list li { padding: 2px 0; }
 
 /* Dropdown içindeki linkler için güncelleme */
 .nav-bolge-list li a {
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    color: #222 !important;
-    display: inline-block !important;
-    font-weight: normal !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #222 !important;
+  display: inline-block !important;
+  font-weight: normal !important;
 }
+
 .nav-bolge-list li a:hover {
-    text-decoration: underline !important;
-    transform: none !important;
-    color: #0077ff !important;
+  text-decoration: underline !important;
+  transform: none !important;
+  color: #0077ff !important;
 }
 
 .nav-bolge-more {
@@ -206,9 +199,7 @@ nav a.active {
   font-weight: 600;
 }
 
-.nav-bolge-more:hover {
-  text-decoration: underline;
-}
+.nav-bolge-more:hover { text-decoration: underline; }
 
 /* =========================================
    3. HERO (ANA SAYFA KAPAK)
@@ -277,56 +268,56 @@ nav a.active {
    (Hakkımızda, Hizmetler vb. sayfalar için)
    ========================================= */
 .page-header-banner {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png');
-    background-position: center;
-    background-size: cover;
-    padding: 80px 20px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 40px;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png');
+  background-position: center;
+  background-size: cover;
+  padding: 80px 20px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 40px;
 }
 
 .page-header-banner h1 {
-    font-size: 36px;
-    font-weight: 800;
-    margin: 0;
-    color: var(--primary);
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--primary);
 }
 
 .page-header-banner p {
-    font-size: 16px;
-    opacity: 0.9;
-    margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.9;
+  margin-top: 10px;
 }
 
 /* Alt Sayfa İçerik Kutusu */
 .content-wrapper {
-    max-width: 1000px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-    line-height: 1.8;
-    font-size: 16px;
-    color: #333;
+  max-width: 1000px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #333;
 }
+
 .content-wrapper h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--primary);
-    display: inline-block;
-    padding-bottom: 5px;
+  font-size: 28px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 5px;
 }
+
 .content-wrapper h3 {
-    font-size: 22px;
-    margin-top: 25px;
-    margin-bottom: 10px;
+  font-size: 22px;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 /* =========================================
    5. GENEL BÖLÜM STİLLERİ
    ========================================= */
-.section {
-  padding: 50px 40px;
-}
+.section { padding: 50px 40px; }
 
 .section h3 {
   font-size: 26px;
@@ -366,20 +357,9 @@ nav a.active {
   gap: 6px;
 }
 
-.hizmet-ikon {
-  font-size: 26px;
-  margin-bottom: 4px;
-}
-
-.hizmet-baslik {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.hizmet-aciklama {
-  font-size: 14px;
-  color: #555;
-}
+.hizmet-ikon { font-size: 26px; margin-bottom: 4px; }
+.hizmet-baslik { font-weight: 700; margin-bottom: 4px; }
+.hizmet-aciklama { font-size: 14px; color: #555; }
 
 /* =========================================
    7. GALERİ & SLIDER
@@ -500,26 +480,10 @@ nav a.active {
   object-fit: cover;
 }
 
-.referans-name {
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.referans-tag {
-  font-size: 12px;
-  color: #777;
-}
-
-.referans-stars {
-  color: var(--primary);
-  font-size: 13px;
-}
-
-.referans-text {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-}
+.referans-name { font-weight: 600; font-size: 14px; }
+.referans-tag { font-size: 12px; color: #777; }
+.referans-stars { color: var(--primary); font-size: 13px; }
+.referans-text { font-size: 14px; color: #333; line-height: 1.5; }
 
 /* =========================================
    9. SIK SORULAN SORULAR (SSS)
@@ -563,9 +527,7 @@ nav a.active {
   padding-bottom: 12px;
 }
 
-.faq-item.active .faq-header {
-  background: var(--muted);
-}
+.faq-item.active .faq-header { background: var(--muted); }
 
 .bolge-list {
   columns: 2;
@@ -575,10 +537,7 @@ nav a.active {
   font-size: 13px;
 }
 
-.bolge-list li {
-  break-inside: avoid;
-  margin-bottom: 2px;
-}
+.bolge-list li { break-inside: avoid; margin-bottom: 2px; }
 
 .bolge-link {
   border: none;
@@ -623,10 +582,7 @@ nav a.active {
   font-size: 14px;
 }
 
-.form-row label {
-  margin-bottom: 4px;
-  font-weight: 600;
-}
+.form-row label { margin-bottom: 4px; font-weight: 600; }
 
 .form-row input,
 .form-row select,
@@ -644,10 +600,7 @@ nav a.active {
   grid-column: 1 / -1;
 }
 
-.form-actions {
-  margin-top: 15px;
-  text-align: center;
-}
+.form-actions { margin-top: 15px; text-align: center; }
 
 .form-actions button {
   background: var(--primary);
@@ -688,10 +641,7 @@ nav a.active {
   gap: 6px;
 }
 
-.map-desc {
-  font-size: 13px;
-  color: #555;
-}
+.map-desc { font-size: 13px; color: #555; }
 
 .map-iframe {
   width: 100%;
@@ -732,15 +682,9 @@ nav a.active {
   padding: 18px 20px;
 }
 
-.iletisim-card h4 {
-  margin: 0 0 4px 0;
-  font-size: 16px;
-}
+.iletisim-card h4 { margin: 0 0 4px 0; font-size: 16px; }
 
-.iletisim-card p {
-  margin: 2px 0;
-  font-size: 14px;
-}
+.iletisim-card p { margin: 2px 0; font-size: 14px; }
 
 .iletisim-card a.whatsapp-contact-btn {
   display: inline-block;
@@ -753,9 +697,7 @@ nav a.active {
   text-decoration: none;
 }
 
-.iletisim-card a.whatsapp-contact-btn:hover {
-  filter: brightness(0.95);
-}
+.iletisim-card a.whatsapp-contact-btn:hover { filter: brightness(0.95); }
 
 /* =========================================
    12. FOOTER & SABİT BUTONLAR
@@ -769,10 +711,7 @@ footer {
   font-size: 13px;
 }
 
-footer a {
-  color: #ccc;
-  text-decoration: none;
-}
+footer a { color: #ccc; text-decoration: none; }
 
 .floating-cta {
   position: fixed;
@@ -802,38 +741,37 @@ footer a {
 
 /* Lightbox stilleri */
 .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
-.lightbox-inner {
-    position: relative;
-    max-width: 95vw;
-    max-height: 95vh;
-}
+
+.lightbox-inner { position: relative; max-width: 95vw; max-height: 95vh; }
+
 .lightbox-close {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: none;
-    background: #ffffff;
-    color: #000;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #ffffff;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
+
 #lightbox-img {
-    max-width: 95vw;
-    max-height: 95vh;
-    display: block;
-    border-radius: 10px;
+  max-width: 95vw;
+  max-height: 95vh;
+  display: block;
+  border-radius: 10px;
 }
 
 /* =========================================
@@ -846,13 +784,9 @@ footer a {
     align-items: flex-start;
   }
 
-  .logo-area img {
-    height: 80px;
-  }
+  .logo-area img { height: 80px; }
 
-  .logo-area span {
-    font-size: 12px;
-  }
+  .logo-area span { font-size: 12px; }
 
   nav {
     margin-top: 8px;
@@ -877,24 +811,45 @@ footer a {
   }
 
   /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
-  .nav-dropdown-menu {
+  .nav-dropdown-menu { display: none !important; }
+
+  .main-header.shrink { padding: 6px 10px; }
+
+  /* =====================================================
+     MOBİLDE SHRINK OLUNCA: SADECE LOGO + SLOGAN KALSIN
+     MENÜ TAMAMEN GİTSİN (PC'YE DOKUNMAZ)
+     ===================================================== */
+  .main-header.shrink {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .main-header.shrink nav {
     display: none !important;
   }
 
-  .main-header.shrink {
-    padding: 6px 10px;
-  }
-
+  /* LOGO SAKIN KAYBOLMASIN */
   .main-header.shrink .logo-area {
-    max-height: 0;
-    opacity: 0;
-    margin-bottom: 0;
-    pointer-events: none;
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-bottom: 4px !important;
+    pointer-events: auto !important;
+    align-items: center !important;
+    text-align: center !important;
   }
 
-  .hero {
-    height: 380px;
+  .main-header.shrink .logo-area img {
+    height: 78px !important;
   }
+
+  .main-header.shrink .logo-area span {
+    font-size: 12px !important;
+    display: block !important;
+  }
+
+  /* ===================================================== */
+
+  .hero { height: 380px; }
 
   .hero-inner {
     padding: 0 20px;
@@ -907,13 +862,9 @@ footer a {
     max-width: 100%;
   }
 
-  .section {
-    padding: 40px 20px;
-  }
+  .section { padding: 40px 20px; }
 
-  .bolge-list {
-    columns: 1;
-  }
+  .bolge-list { columns: 1; }
 
   .galeri-slider {
     max-width: 100%;
@@ -926,7 +877,5 @@ footer a {
   }
 
   .referans-nav-left,
-  .referans-nav-right {
-    display: none;
-  }
+  .referans-nav-right { display: none; }
 }

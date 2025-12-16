@@ -1,932 +1,1797 @@
-/* =========================================
-   1. GENEL AYARLAR VE DEĞİŞKENLER
-   ========================================= */
-:root {
-  --primary: #f5b301;   /* Ana sarı */
-  --accent:  #c89b4a;   /* Logo ile uyumlu altın ton */
-  --dark:    #111111;   /* Koyu arka plan / footer */
-  --light:   #f7f7f7;   /* Sayfa zemini */
-  --muted:   #f2f2f2;   /* Menü kutuları */
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: var(--light);
-  scroll-behavior: auto; /* JS ile kontrol edildiği için auto */
-  color: #222;
-}
-
-.page-wrapper {
-  max-width: 1300px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  min-height: 100vh;
-}
-
-/* =========================================
-   2. HEADER (ÜST MENÜ)
-   ========================================= */
-.main-header {
-  background: #ffffff;
-  color: #000;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #000;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
-}
-
-.main-header.shrink {
-  padding: 8px 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-}
-
-.logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  max-height: 140px;
-  opacity: 1;
-  margin-bottom: 4px;
-  transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
-}
-
-.logo-area img {
-  height: 110px;
-  object-fit: contain;
-  display: block;
-}
-
-.logo-area span {
-  font-size: 14px;
-  margin-top: 1px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  color: var(--accent);
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-nav a {
-  color: #000;
-  margin-left: 18px;
-  text-decoration: none;
-  font-weight: bold;
-  background: var(--muted);
-  padding: 10px 16px;
-  border-radius: 6px;
-  transition: 0.35s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-}
-
-nav a span.icon {
-  font-size: 16px;
-}
-
-nav a:hover {
-  background: #d4d4d4;
-  transform: scale(1.08);
-}
-
-nav a.active {
-  background: var(--primary);
-  color: #fff;
-}
-
-/* Dropdown Menü */
-.nav-dropdown {
-  position: relative;
-  margin-left: 18px;
-}
-
-.nav-dropdown-toggle {
-  background: var(--muted);
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.35s ease;
-  color: #000;
-}
-
-.nav-dropdown-toggle .icon {
-  font-size: 16px;
-}
-
-.nav-dropdown-toggle:hover {
-  background: #d4d4d4;
-  transform: scale(1.08);
-}
-
-.nav-dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 6px);
-  background: #ffffff;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  border-radius: 10px;
-  padding: 10px 14px;
-  min-width: 220px;
-  max-width: 280px;
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 200;
-}
-
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown.open .nav-dropdown-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.nav-bolge-title {
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-.nav-bolge-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 6px 0;
-  font-size: 13px;
-}
-
-.nav-bolge-list li {
-  padding: 2px 0;
-}
-
-/* Dropdown içindeki linkler için güncelleme */
-.nav-bolge-list li a {
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    color: #222 !important;
-    display: inline-block !important;
-    font-weight: normal !important;
-}
-.nav-bolge-list li a:hover {
-    text-decoration: underline !important;
-    transform: none !important;
-    color: #0077ff !important;
-}
-
-.nav-bolge-more {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 12px;
-  text-decoration: none;
-  color: #0077ff;
-  font-weight: 600;
-}
-
-.nav-bolge-more:hover {
-  text-decoration: underline;
-}
-
-/* =========================================
-   3. HERO (ANA SAYFA KAPAK)
-   ========================================= */
-.hero {
-  position: relative;
-  height: 500px;
-  background: url('https://i.hizliresim.com/j9iwhln.png') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to left, rgba(0,0,0,0.85), rgba(0,0,0,0.45), rgba(0,0,0,0.05));
-}
-
-.hero-inner {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 40px;
-}
-
-.hero-content {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 34px 40px;
-  border-radius: 10px;
-  color: #fff;
-  max-width: 420px;
-}
-
-.hero-content h2 {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  line-height: 1.25;
-}
-
-.hero-content p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0 0 18px 0;
-}
-
-.hero-content a.hero-btn {
-  display: inline-block;
-  background: var(--primary);
-  padding: 12px 26px;
-  border-radius: 999px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-/* =========================================
-   4. YENİ EKLENEN: ALT SAYFA BAŞLIKLARI
-   (Hakkımızda, Hizmetler vb. sayfalar için)
-   ========================================= */
-.page-header-banner {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.hizliresim.com/j9iwhln.png');
-    background-position: center;
-    background-size: cover;
-    padding: 80px 20px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 40px;
-}
-
-.page-header-banner h1 {
-    font-size: 36px;
-    font-weight: 800;
-    margin: 0;
-    color: var(--primary);
-}
-
-.page-header-banner p {
-    font-size: 16px;
-    opacity: 0.9;
-    margin-top: 10px;
-}
-
-/* Alt Sayfa İçerik Kutusu */
-.content-wrapper {
-    max-width: 1000px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-    line-height: 1.8;
-    font-size: 16px;
-    color: #333;
-}
-.content-wrapper h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--primary);
-    display: inline-block;
-    padding-bottom: 5px;
-}
-.content-wrapper h3 {
-    font-size: 22px;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-/* =========================================
-   5. GENEL BÖLÜM STİLLERİ
-   ========================================= */
-.section {
-  padding: 50px 40px;
-}
-
-.section h3 {
-  font-size: 26px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.section p,
-.section ul {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.section ul {
-  list-style: disc;
-  padding-left: 20px;
-}
-
-/* =========================================
-   6. HİZMETLER KARTLARI
-   ========================================= */
-.hizmetler-grid {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 20px;
-}
-
-.hizmet-kart {
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px 16px 20px 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.hizmet-ikon {
-  font-size: 26px;
-  margin-bottom: 4px;
-}
-
-.hizmet-baslik {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.hizmet-aciklama {
-  font-size: 14px;
-  color: #555;
-}
-
-/* =========================================
-   7. GALERİ & SLIDER
-   ========================================= */
-.galeri-slider {
-  position: relative;
-  max-width: 920px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  background: #ffffff;
-}
-
-.galeri-track {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.galeri-slide {
-  min-width: 100%;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-}
-
-.galeri-slider img {
-  width: 100%;
-  height: auto;
-  max-height: 460px;
-  display: block;
-  border-radius: 14px;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  object-fit: cover;
-}
-
-.galeri-slider img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
-}
-
-.galeri-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 2;
-}
-
-.galeri-prev { left: 10px; }
-.galeri-next { right: 10px; }
-
-/* =========================================
-   8. REFERANSLAR
-   ========================================= */
-.referans-wrapper {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.referans-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 4px;
-}
-
-.referans-row::-webkit-scrollbar { height: 6px; }
-.referans-row::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
-
-.referans-card {
-  min-width: 260px;
-  max-width: 300px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  padding: 18px 18px 20px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.referans-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.referans-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.referans-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.referans-name {
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.referans-tag {
-  font-size: 12px;
-  color: #777;
-}
-
-.referans-stars {
-  color: var(--primary);
-  font-size: 13px;
-}
-
-.referans-text {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-}
-
-/* =========================================
-   9. SIK SORULAN SORULAR (SSS)
-   ========================================= */
-.faq-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.faq-item {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.faq-header {
-  padding: 12px 16px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-}
-
-.faq-header span.q { flex: 1; padding-right: 10px; }
-.faq-header span.toggle { font-size: 20px; }
-
-.faq-content {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 16px;
-  font-size: 14px;
-  color: #444;
-  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
-}
-
-.faq-item.active .faq-content {
-  max-height: 400px;
-  padding-bottom: 12px;
-}
-
-.faq-item.active .faq-header {
-  background: var(--muted);
-}
-
-.bolge-list {
-  columns: 2;
-  column-gap: 20px;
-  padding-left: 18px;
-  margin-top: 6px;
-  font-size: 13px;
-}
-
-.bolge-list li {
-  break-inside: avoid;
-  margin-bottom: 2px;
-}
-
-.bolge-link {
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  cursor: pointer;
-  color: #222;
-  text-align: left;
-}
-
-.bolge-link:hover {
-  text-decoration: underline;
-  color: #0077ff;
-}
-
-.bolge-toggle-btn {
-  margin-top: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-/* =========================================
-   10. FORMLAR
-   ========================================= */
-.form-grid {
-  max-width: 700px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px 20px;
-}
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-}
-
-.form-row label {
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-
-.form-row input,
-.form-row select,
-.form-row textarea {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: 14px;
-}
-
-.form-row textarea {
-  min-height: 80px;
-  resize: vertical;
-  grid-column: 1 / -1;
-}
-
-.form-actions {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.form-actions button {
-  background: var(--primary);
-  border: none;
-  padding: 10px 26px;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.form-note {
-  font-size: 12px;
-  color: #666;
-  max-width: 700px;
-  margin: 10px auto 0 auto;
-}
-
-/* =========================================
-   11. İLETİŞİM & MAPS
-   ========================================= */
-.map-card {
-  max-width: 700px;
-  margin: 0 auto 30px auto;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.map-title {
-  font-weight: 600;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.map-desc {
-  font-size: 13px;
-  color: #555;
-}
-
-.map-iframe {
-  width: 100%;
-  height: 320px;
-  border: 0;
-  border-radius: 10px;
-}
-
-.map-link-btn {
-  align-self: flex-start;
-  margin-top: 6px;
-  background: #0077ff;
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.iletisim-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto 20px auto;
-  justify-content: center;
-}
-
-.iletisim-card {
-  flex: 1 1 260px;
-  max-width: 360px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
-}
-
-.iletisim-card h4 {
-  margin: 0 0 4px 0;
-  font-size: 16px;
-}
-
-.iletisim-card p {
-  margin: 2px 0;
-  font-size: 14px;
-}
-
-.iletisim-card a.whatsapp-contact-btn {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 14px;
-  background: #25d366;
-  color: #fff;
-  border-radius: 999px;
-  font-size: 13px;
-  text-decoration: none;
-}
-
-.iletisim-card a.whatsapp-contact-btn:hover {
-  filter: brightness(0.95);
-}
-
-/* =========================================
-   12. FOOTER & SABİT BUTONLAR
-   ========================================= */
-footer {
-  background: var(--dark);
-  color: #ccc;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 13px;
-}
-
-footer a {
-  color: #ccc;
-  text-decoration: none;
-}
-
-.floating-cta {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 250;
-}
-
-.floating-cta a {
-  text-decoration: none;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.floating-call { background: #007bff; }
-.floating-wa { background: #25d366; }
-
-/* Lightbox stilleri */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-.lightbox-inner {
-    position: relative;
-    max-width: 95vw;
-    max-height: 95vh;
-}
-.lightbox-close {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: none;
-    background: #ffffff;
-    color: #000;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-}
-#lightbox-img {
-    max-width: 95vw;
-    max-height: 95vh;
-    display: block;
-    border-radius: 10px;
-}
-
-/* =========================================
-   13. MOBİL DÜZENLEMELER (Responsive)
-   ========================================= */
-@media (max-width: 768px) {
-  .main-header {
-    padding: 10px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .logo-area img {
-    height: 80px;
-  }
-
-  .logo-area span {
-    font-size: 12px;
-  }
-
-  nav {
-    margin-top: 8px;
-    width: 100%;
-  }
-
-  /* tüm nav elemanlarını 2'li grid yap */
-  nav a {
-    margin: 4px 4px 4px 0;
-    flex: 1 1 calc(50% - 8px);
-    justify-content: center;
-  }
-
-  .nav-dropdown {
-    flex: 1 1 calc(50% - 8px);
-    margin: 4px 4px 4px 0;
-  }
-
-  .nav-dropdown-toggle {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
-  .nav-dropdown-menu {
-    display: none !important;
-  }
-
-  .main-header.shrink {
-    padding: 6px 10px;
-  }
-
-  .main-header.shrink .logo-area {
-    max-height: 0;
-    opacity: 0;
-    margin-bottom: 0;
-    pointer-events: none;
-  }
-
-  .hero {
-    height: 380px;
-  }
-
-  .hero-inner {
-    padding: 0 20px;
-    justify-content: center;
-  }
-
-  .hero-content {
-    margin: 0;
-    padding: 24px 22px;
-    max-width: 100%;
-  }
-
-  .section {
-    padding: 40px 20px;
-  }
-
-  .bolge-list {
-    columns: 1;
-  }
-
-  .galeri-slider {
-    max-width: 100%;
-    border-radius: 10px;
-  }
-
-  .galeri-slider img {
-    max-height: 260px;
-    border-radius: 10px;
-  }
-
-  .referans-nav-left,
-  .referans-nav-right {
-    display: none;
-  }
-}
+<!DOCTYPE html>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVYLDE41WS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVYLDE41WS');
+</script>
+
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yıldırım Nakliyat | Ömer Yıldırım</title>
+  <meta name="description" content="Yıldırım Nakliyat, Ömer Yıldırım liderliğinde şehir içi ve şehirler arası ev, ofis ve parça eşya taşımacılığı sunar. Asansörlü, sigortalı ve profesyonel nakliye hizmetleri için hemen teklif alın." />
+  <meta name="keywords" content="yıldırım nakliyat, ömer yıldırım, evden eve nakliyat, şehirler arası nakliyat, asansörlü taşıma, istanbul nakliye" />
+
+  <style>
+    :root {
+      --primary: #f5b301;   /* ana sarı */
+      --accent:  #c89b4a;   /* logo ile uyumlu altın ton */
+      --dark:    #111111;   /* koyu arka plan / footer */
+      --light:   #f7f7f7;   /* sayfa zemini */
+      --muted:   #f2f2f2;   /* menü kutuları, arka planlar */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--light);
+      scroll-behavior: auto;
+      color: #222;
+    }
+
+    .page-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+
+    /* HEADER */
+    .main-header {
+      background: #ffffff;
+      color: #000;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #000;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .main-header.shrink {
+      padding: 8px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      max-height: 140px;
+      opacity: 1;
+      margin-bottom: 4px;
+      transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
+    }
+
+    .logo-area img {
+      height: 110px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-area span {
+      font-size: 14px;
+      margin-top: 1px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: #000;
+      margin-left: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      background: var(--muted);
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: 0.35s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    nav a span.icon {
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      background: #d4d4d4;
+      transform: scale(1.08);
+    }
+
+    nav a.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* HİZMET BÖLGELERİ DROPDOWN (HEADER) */
+    .nav-dropdown {
+      position: relative;
+      margin-left: 18px;
+    }
+
+    .nav-dropdown-toggle {
+      background: var(--muted);
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.35s ease;
+      color: #000;
+    }
+
+    .nav-dropdown-toggle .icon {
+      font-size: 16px;
+    }
+
+    .nav-dropdown-toggle:hover {
+      background: #d4d4d4;
+      transform: scale(1.08);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      background: #ffffff;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      border-radius: 10px;
+      padding: 10px 14px;
+      min-width: 220px;
+      max-width: 280px;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-bolge-title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .nav-bolge-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 6px 0;
+      font-size: 13px;
+    }
+
+    .nav-bolge-list li {
+      padding: 2px 0;
+    }
+
+    .nav-bolge-more {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 12px;
+      text-decoration: none;
+      color: #0077ff;
+      font-weight: 600;
+    }
+
+    .nav-bolge-more:hover {
+      text-decoration: underline;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 500px;
+      background: url('https://lh3.googleusercontent.com/p/AF1QipOTZzvhn058gdtVZIo42o_OacSvRVud88Hy5gXo=w1024-h585') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to left,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.05)
+      );
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 40px;
+    }
+
+    .hero-content {
+      background: rgba(0, 0, 0, 0.55);
+      padding: 34px 40px;
+      border-radius: 10px;
+      color: #fff;
+      max-width: 420px;
+    }
+
+    .hero-content h2 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 0 18px 0;
+    }
+
+    .hero-content a.hero-btn {
+      display: inline-block;
+      background: var(--primary);
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 50px 40px;
+    }
+
+    .section h3 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section p,
+    .section ul {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    /* HİZMETLER KARTLARI */
+    .hizmetler-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .hizmet-kart {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 16px 20px 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hizmet-ikon {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    .hizmet-baslik {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hizmet-aciklama {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* GALERİ SLIDER (eski – şimdilik kullanılmıyor ama kalsın) */
+    .galeri-slider {
+      position: relative;
+      max-width: 920px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+    }
+
+    .galeri-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .galeri-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    .galeri-slider img {
+      width: 100%;
+      height: auto;
+      max-height: 460px;
+      display: block;
+      border-radius: 14px;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    .galeri-slider img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+    }
+
+    .galeri-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 2;
+    }
+
+    .galeri-prev {
+      left: 10px;
+    }
+
+    .galeri-next {
+      right: 10px;
+    }
+
+    /* Referans kartları */
+    .referans-wrapper {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .referans-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 4px;
+    }
+
+    .referans-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .referans-row::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .referans-card {
+      min-width: 260px;
+      max-width: 300px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 18px 18px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .referans-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .referans-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .referans-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .referans-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .referans-tag {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .referans-stars {
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .referans-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+    .faq-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-header {
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .faq-header span.q {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .faq-header span.toggle {
+      font-size: 20px;
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      font-size: 14px;
+      color: #444;
+      transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+    }
+
+    .faq-item.active .faq-content {
+      max-height: 400px;
+      padding-bottom: 12px;
+    }
+
+    .faq-item.active .faq-header {
+      background: var(--muted);
+    }
+
+    /* Hizmet bölgeleri listesi (SSS içinde) */
+    .bolge-list {
+      columns: 2;
+      column-gap: 20px;
+      padding-left: 18px;
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .bolge-list li {
+      break-inside: avoid;
+      margin-bottom: 2px;
+    }
+
+    .bolge-link {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      color: #222;
+      text-align: left;
+    }
+
+    .bolge-link:hover {
+      text-decoration: underline;
+      color: #0077ff;
+    }
+
+    .bolge-toggle-btn {
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #f5f5f5;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* İlçe detay SEO kutusu */
+    .bolge-detay-kutu {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #fff9e0;
+      border: 1px solid #f0d66a;
+      font-size: 13px;
+      display: none;
+    }
+
+    .bolge-detay-kutu h4 {
+      margin: 0 0 6px 0;
+      font-size: 14px;
+    }
+
+    .bolge-detay-kutu p {
+      margin: 0;
+    }
+
+    /* Teklif formu */
+    .form-grid {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px 20px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+
+    .form-row label {
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .form-row textarea {
+      min-height: 80px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+
+    .form-actions {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .form-actions button {
+      background: var(--primary);
+      border: none;
+      padding: 10px 26px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: #666;
+      max-width: 700px;
+      margin: 10px auto 0 auto;
+    }
+
+    /* Maps kartı */
+    .map-card {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .map-title {
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-desc {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .map-iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .map-link-btn {
+      align-self: flex-start;
+      margin-top: 6px;
+      background: #0077ff;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* İletişim kartları */
+    .iletisim-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      justify-content: center;
+    }
+
+    .iletisim-card {
+      flex: 1 1 260px;
+      max-width: 360px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 18px 20px;
+    }
+
+    .iletisim-card h4 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+    }
+
+    .iletisim-card p {
+      margin: 2px 0;
+      font-size: 14px;
+    }
+
+    .iletisim-card a.whatsapp-contact-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      background: #25d366;
+      color: #fff;
+      border-radius: 999px;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .iletisim-card a.whatsapp-contact-btn:hover {
+      filter: brightness(0.95);
+    }
+
+    footer {
+      background: var(--dark);
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    /* Sabit alt butonlar */
+    .floating-cta {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 250;
+    }
+
+    .floating-cta a {
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .floating-call {
+      background: #007bff;
+    }
+
+    .floating-wa {
+      background: #25d366;
+    }
+
+    /* MOBİL DÜZENLEMELER */
+    @media (max-width: 768px) {
+      .main-header {
+        padding: 10px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .logo-area img {
+        height: 80px;
+      }
+
+      .logo-area span {
+        font-size: 12px;
+      }
+
+      nav {
+        margin-top: 8px;
+        width: 100%;
+      }
+
+      /* tüm nav elemanlarını 2'li grid yap */
+      nav a {
+        margin: 4px 4px 4px 0;
+        flex: 1 1 calc(50% - 8px);
+        justify-content: center;
+      }
+
+      .nav-dropdown {
+        flex: 1 1 calc(50% - 8px);
+        margin: 4px 4px 4px 0;
+      }
+
+      .nav-dropdown-toggle {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Mobilde dropdown menüyü gizle (beyaz blok kalksın) */
+      .nav-dropdown-menu {
+        display: none !important;
+      }
+
+      .main-header.shrink {
+        padding: 6px 10px;
+      }
+
+      .main-header.shrink .logo-area {
+        max-height: 0;
+        opacity: 0;
+        margin-bottom: 0;
+        pointer-events: none;
+      }
+
+      .hero {
+        height: 380px;
+      }
+
+      .hero-inner {
+        padding: 0 20px;
+        justify-content: center;
+      }
+
+      .hero-content {
+        margin: 0;
+        padding: 24px 22px;
+        max-width: 100%;
+      }
+
+      .section {
+        padding: 40px 20px;
+      }
+
+      .bolge-list {
+        columns: 1;
+      }
+
+      .galeri-slider {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+
+      .galeri-slider img {
+        max-height: 260px;
+        border-radius: 10px;
+      }
+
+      .referans-nav-left,
+      .referans-nav-right {
+        display: none;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // ----- Slow Smooth Scroll -----
+      function slowScrollTo(target, duration = 400) {
+        const start = window.pageYOffset;
+        const end = target.offsetTop - 90;
+        const distance = end - start;
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const time = currentTime - startTime;
+          const progress = Math.min(time / duration, 1);
+          window.scrollTo(0, start + distance * progress);
+          if (time < duration) requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+      }
+
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      // bolge-shortcut'lar için özel işlem yapacağımızdan smooth scroll'dan hariç tuttuk
+      const scrollLinks = document.querySelectorAll('a[href^="#"]:not(.bolge-shortcut)');
+
+      scrollLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            slowScrollTo(target, 400);
+          }
+        });
+      });
+
+      // Sticky küçülen Header
+      const header = document.querySelector('.main-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            header.classList.add('shrink');
+          } else {
+            header.classList.remove('shrink');
+          }
+        });
+      }
+
+      // Logo'ya tıklayınca en üste dön
+      const logoArea = document.querySelector('.logo-area');
+      if (logoArea) {
+        logoArea.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Aktif menü vurgusu
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + 120;
+        sections.forEach((sec) => {
+          if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+            navLinks.forEach((l) => l.classList.remove('active'));
+            const activeLink = document.querySelector('nav a[href="#' + sec.id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      });
+
+      // Galeri slider (eski)
+      const slider = document.querySelector('.galeri-slider');
+      const track = document.querySelector('.galeri-track');
+      const slides = document.querySelectorAll('.galeri-slide');
+      const prevBtn = document.querySelector('.galeri-prev');
+      const nextBtn = document.querySelector('.galeri-next');
+      let currentIndex = 0;
+
+      function updateSlider() {
+        if (!track) return;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      if (slider && track && slides.length) {
+        updateSlider();
+        const goNext = () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateSlider();
+        };
+        const goPrev = () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateSlider();
+        };
+
+        if (nextBtn) nextBtn.addEventListener('click', goNext);
+        if (prevBtn) prevBtn.addEventListener('click', goPrev);
+      }
+
+      // Galeri tıklama → lightbox (şu an sadece referans avatarları için aktif)
+      const galeriImages = document.querySelectorAll('.galeri-slider img, .referans-avatar img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxClose = document.querySelector('.lightbox-close');
+
+      if (galeriImages.length && lightbox && lightboxImg) {
+        galeriImages.forEach((img) => {
+          img.addEventListener('click', () => {
+            const full = img.getAttribute('data-full') || img.src;
+            lightboxImg.src = full;
+            lightbox.style.display = 'flex';
+          });
+        });
+      }
+
+      if (lightbox && lightboxClose) {
+        lightboxClose.addEventListener('click', () => {
+          lightbox.style.display = 'none';
+          lightboxImg.src = '';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+          }
+        });
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+          }
+        });
+      }
+
+      // Referans yatay scroll butonları (masaüstü için, şu an buton yok ama JS kalabilir)
+      const refRow = document.querySelector('.referans-row');
+      const refLeft = document.querySelector('.referans-nav-left');
+      const refRight = document.querySelector('.referans-nav-right');
+      const scrollAmount = 300;
+
+      if (refRow && refLeft && refRight) {
+        refLeft.addEventListener('click', () => {
+          refRow.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        refRight.addEventListener('click', () => {
+          refRow.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+
+      // FAQ akordeon
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach((item) => {
+        const headerEl = item.querySelector('.faq-header');
+        const toggleEl = item.querySelector('.faq-header .toggle');
+        if (!headerEl) return;
+        headerEl.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          faqItems.forEach((i) => {
+            i.classList.remove('active');
+            const t = i.querySelector('.faq-header .toggle');
+            if (t) t.textContent = '+';
+          });
+          if (!isActive) {
+            item.classList.add('active');
+            if (toggleEl) toggleEl.textContent = '-';
+          }
+        });
+      });
+
+      // Hizmet bölgeleri "daha fazla göster" butonu SSS içinde
+      const bolgelerToggle = document.getElementById('bolgeler-toggle');
+      const bolgelerExtra = document.getElementById('bolgeler-extra');
+
+      // SSS içindeki "Nerelere hizmet veriyorsunuz?" kutusunu ve tüm ilçeleri açan fonksiyon
+      function openBolgelerFaq() {
+        const faqItem = document.getElementById('faq-bolgeler');
+        if (!faqItem) return;
+
+        // Diğer FAQ'ları kapat
+        document.querySelectorAll('.faq-item').forEach((i) => {
+          i.classList.remove('active');
+          const t = i.querySelector('.faq-header .toggle');
+          if (t) t.textContent = '+';
+        });
+
+        // Bu kutuyu aç
+        faqItem.classList.add('active');
+        const toggleEl = faqItem.querySelector('.faq-header .toggle');
+        if (toggleEl) toggleEl.textContent = '-';
+
+        // Ek ilçeleri aç ve buton yazısını güncelle
+        if (bolgelerExtra) bolgelerExtra.style.display = 'block';
+        if (bolgelerToggle) bolgelerToggle.textContent = 'Kapat';
+      }
+
+      if (bolgelerToggle && bolgelerExtra) {
+        let open = false;
+        bolgelerToggle.addEventListener('click', () => {
+          open = !open;
+          if (open) {
+            openBolgelerFaq();
+          } else {
+            bolgelerExtra.style.display = 'none';
+            bolgelerToggle.textContent = 'Tüm ilçeleri göster';
+          }
+        });
+      }
+
+      // === İLÇE DETAY METİNLERİ (SEO) ===
+      const bolgeDetayMetinleri = {
+        avcilar: "Avcılar evden eve nakliyat hizmetimizle daire, villa ve ofis taşımalarınızı sigortalı ve profesyonel ekip ile gerçekleştiriyoruz. Asansörlü ev taşıma, şehir içi nakliyat ve parça eşya taşımada Avcılar bölgesinde hızlı çözüm sunuyoruz.",
+        beylikduzu: "Beylikdüzü evden eve nakliyat ve ofis taşıma işlerinizde modern araçlarımız ve uzman ekibimizle güvenli nakliyat sağlıyoruz. Beylikdüzü’nden İstanbul’un tüm ilçelerine şehir içi nakliye ve şehirler arası taşımacılık yapıyoruz.",
+        esenyurt: "Esenyurt ev taşıma ve evden eve nakliyat talepleriniz için ekonomik ve sigortalı çözümler sunuyoruz. Esenyurt bölgesinde asansörlü nakliyat, ofis taşımacılığı ve parça eşya nakliyesi hizmeti veriyoruz.",
+        bagcilar: "Bağcılar evden eve nakliyat ve işyeri taşıma hizmetlerinde paketleme, sökme–takma ve yerleştirme dahil anahtar teslim nakliye sunuyoruz. Bağcılar’dan İstanbul geneline güvenli ev taşıma yapmaktayız.",
+        bahcelievler: "Bahçelievler evden eve nakliyat, ofis taşıma ve parça eşya nakliyesinde deneyimli ekibimizle yanınızdayız. Bahçelievler bölgesinde asansörlü ev taşıma ve şehir içi nakliyat hizmeti veriyoruz.",
+        bakirkoy: "Bakırköy evden eve nakliyat ve ofis taşımacılığı için profesyonel paketleme, sigortalı taşıma ve montaj desteği sağlıyoruz. Bakırköy’den Türkiye’nin pek çok iline şehirler arası nakliyat yapıyoruz.",
+        kucukcekmece: "Küçükçekmece ev taşıma, evden eve nakliyat ve ofis taşıma işlerinizde uzman kadromuzla hizmet veriyoruz. Asansörlü taşımacılık ve sigortalı nakliyat çözümlerimizle Küçükçekmece’de güvenle taşının.",
+        basaksehir: "Başakşehir evden eve nakliyat, site ve rezidans taşımalarında profesyonel ekip ve kapalı kasa araçlarımızla hizmet veriyoruz. Başakşehir’de ev taşıma, ofis nakliyatı ve şehirler arası nakliyat çözümleri sunuyoruz.",
+        besiktas: "Beşiktaş evden eve nakliyat ve ofis taşıma hizmetlerimizle dar sokaklar ve yüksek katlarda asansörlü nakliyat çözümleri üretiyoruz. Beşiktaş bölgesinde hızlı ve güvenilir ev taşıma yapıyoruz.",
+        sisli: "Şişli evden eve nakliyat, işyeri ve plaza taşımalarında planlı ve zamanında nakliyat sağlıyoruz. Şişli’de ev taşıma, ofis nakliyatı ve parça eşya taşıma hizmeti sunmaktayız.",
+        kagithane: "Kağıthane evden eve nakliyat ve ofis taşımacılığında paketleme, montaj ve yerleştirme dahil tam kapsamlı nakliye hizmeti sunuyoruz. Kağıthane’de şehir içi nakliyat ve asansörlü ev taşıma yapıyoruz.",
+        sariyer: "Sarıyer ev taşıma, villa taşımacılığı ve evden eve nakliyat taleplerinizde deneyimli ekibimizle yanınızdayız. Sarıyer’de şehir içi nakliyat ve şehirler arası evden eve nakliyat hizmeti veriyoruz.",
+        fatih: "Fatih evden eve nakliyat, tarihi bölgelerde hassas ev taşıma ve ofis nakliyatı için profesyonel çözümler sunuyoruz. Fatih’te dar sokaklara uygun araç ve ekipmanlarla güvenli nakliyat yapıyoruz.",
+        beyoglu: "Beyoğlu evden eve nakliyat ve ofis taşımacılığında, apartman ve iş hanı taşımalarında planlı ve titiz nakliye hizmeti veriyoruz. Beyoğlu’ndan İstanbul’un her yerine ev taşıma yapıyoruz.",
+        uskudar: "Üsküdar evden eve nakliyat hizmetimizle Anadolu yakasında güvenli ev taşıma sağlıyoruz. Üsküdar’da ofis taşımacılığı, parça eşya nakliyəsi ve asansörlü nakliyat çözümleri sunuyoruz.",
+        kadikoy: "Kadıköy evden eve nakliyat, ofis taşıma ve parça eşya nakliyatında modern araçlarımızla hizmet veriyoruz. Kadıköy’den Türkiye’nin birçok şehrine şehirler arası nakliyat yapıyoruz.",
+        maltepe: "Maltepe evden eve nakliyat ve ev taşıma işlerinizde sigortalı ve asansörlü taşımacılık sağlıyoruz. Maltepe bölgesinde ofis taşıma ve parça eşya nakliyatı da yapmaktayız.",
+        kartal: "Kartal evden eve nakliyat, site ve rezidans taşımalarında uzman ekibimizle yanınızdayız. Kartal’da ev taşıma, ofis nakliyatı ve şehirler arası nakliyat hizmeti veriyoruz.",
+        pendik: "Pendik evden eve nakliyat ve ofis taşıma hizmetlerimizle paketleme, yükleme ve montajı tek elden gerçekleştiriyoruz. Pendik’ten İstanbul geneline şehir içi nakliyat yapıyoruz.",
+        tuzla: "Tuzla evden eve nakliyat, fabrika ve depo taşımalarında deneyimli personelimizle profesyonel nakliye çözümleri sunuyoruz. Tuzla bölgesinde şehir içi ve şehirler arası nakliyat yapıyoruz.",
+        umraniye: "Ümraniye evden eve nakliyat ve ofis taşımacılığında zamanında ve güvenli ev taşıma hizmeti veriyoruz. Ümraniye’de asansörlü taşımacılık ve sigortalı nakliyat seçenekleri sunuyoruz.",
+        cekmekoy: "Çekmeköy ev taşıma, evden eve nakliyat ve villa taşımalarında deneyimli ekibimizle hizmetteyiz. Çekmeköy’de şehir içi nakliyat ve parça eşya taşıma çözümleri sunuyoruz.",
+        sancaktepe: "Sancaktepe evden eve nakliyat ve ofis taşıma hizmetleriyle eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Sancaktepe’de asansörlü ev taşıma ve sigortalı nakliyat yapıyoruz.",
+        sultanbeyli: "Sultanbeyli evden eve nakliyat, apartman ve site taşımalarında ekonomik ve güvenilir çözümler sunuyoruz. Sultanbeyli bölgesinde şehir içi nakliyat ve ev taşıma hizmeti veriyoruz.",
+        gaziosmanpasa: "Gaziosmanpaşa evden eve nakliyat hizmetimizle ev, ofis ve parça eşyalarınızı profesyonel ekiplerle taşıyoruz. Gaziosmanpaşa’da şehir içi nakliyat ve asansörlü taşımacılık sağlıyoruz.",
+        sultangazi: "Sultangazi evden eve nakliyat ve ofis taşıma işlerinizde uygun fiyatlı ve sigortalı nakliyat hizmeti sunuyoruz. Sultangazi’de şehir içi ev taşıma yapıyoruz.",
+        esenler: "Esenler evden eve nakliyat, ofis ve mağaza taşımalarında planlı ve güvenli çözümler üretiyoruz. Esenler bölgesinde şehir içi nakliyat ve parça eşya taşıma hizmeti veriyoruz.",
+        bayrampasa: "Bayrampaşa evden eve nakliyat ve işyeri taşımacılığında profesyonel paketleme ve montaj desteği sağlıyoruz. Bayrampaşa’dan İstanbul geneline ev taşıma yapıyoruz.",
+        zeytinburnu: "Zeytinburnu evden eve nakliyat, tekstil ve depo taşımalarında deneyimli ekibimizle yanınızdayız. Zeytinburnu’nda şehir içi nakliyat ve ev taşıma hizmeti sunuyoruz.",
+        eyupsultan: "Eyüpsultan evden eve nakliyat ve ofis taşımacılığında bölgeyi iyi tanıyan ekibimizle güvenli nakliye gerçekleştiriyoruz. Eyüpsultan’da ev taşıma ve parça eşya nakliyatı yapıyoruz.",
+        arnavutkoy: "Arnavutköy evden eve nakliyat, köy ve ilçe merkezinde ev taşıma hizmeti veriyoruz. Arnavutköy’den İstanbul’a ve şehirler arası nakliyat çözümleri sunuyoruz.",
+        silivri: "Silivri evden eve nakliyat ve yazlık taşımalarında sigortalı ve planlı ev taşıma hizmeti sağlıyoruz. Silivri’den İstanbul geneline ve farklı illere şehirler arası nakliyat yapıyoruz.",
+        catalca: "Çatalca evden eve nakliyat, köy ve merkez taşımalarında deneyimli ekibimizle hizmetteyiz. Çatalca bölgesinde ev taşıma ve şehir içi nakliyat çözümleri sunuyoruz.",
+        buyukcekmece: "Büyükçekmece evden eve nakliyat ve villa taşımacılığında modern araçlarımız ve uzman kadromuzla güvenli nakliyat sağlıyoruz. Büyükçekmece’de şehir içi nakliyat ve ev taşıma yapıyoruz.",
+        sile: "Şile evden eve nakliyat, yazlık ve müstakil ev taşımalarında eşyalarınızı güvenle yeni adresinize ulaştırıyoruz. Şile’den İstanbul geneline şehir içi ve şehirler arası nakliyat hizmeti veriyoruz.",
+        adalar: "Adalar evden eve nakliyat ve yazlık taşımalarında, deniz yolu organizasyonu dahil planlı ve güvenli nakliyat çözümleri sunuyoruz. Adalar bölgesinde ev taşıma ve parça eşya nakliyatı yapıyoruz."
+      };
+
+      const bolgeLinks = document.querySelectorAll('.bolge-link');
+      const bolgeDetayKutu = document.getElementById('bolge-detay-kutu');
+      const bolgeDetayBaslik = document.getElementById('bolge-detay-baslik');
+      const bolgeDetayMetin = document.getElementById('bolge-detay-metin');
+
+      if (bolgeLinks.length && bolgeDetayKutu && bolgeDetayBaslik && bolgeDetayMetin) {
+        bolgeLinks.forEach((btn) => {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // faq header tetiklenmesin
+
+            const key = this.dataset.bolge;
+            const ad = this.textContent.trim();
+
+            bolgeDetayBaslik.textContent = ad + " Evden Eve Nakliyat ve Ev Taşıma";
+            bolgeDetayMetin.textContent =
+              bolgeDetayMetinleri[key] ||
+              (ad + " bölgesinde evden eve nakliyat, ofis taşıma ve şehir içi nakliyat hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliyat seçenekleriyle güvenli taşınma sunuyoruz.");
+            bolgeDetayKutu.style.display = 'block';
+
+            // İlgili ilçe için hizmet-bolgeleri.html sayfasına git
+            if (key) {
+              window.location.href = "hizmet-bolgeleri.html?ilce=" + key;
+            }
+          });
+        });
+      }
+
+      // Fiyat Teklif Formu → WhatsApp
+      const teklifForm = document.getElementById('teklif-form');
+      if (teklifForm) {
+        teklifForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const formData = new FormData(teklifForm);
+
+          const adSoyad = formData.get('adsoyad') || '';
+          const telefon = formData.get('telefon') || '';
+          const email = formData.get('email') || '';
+          const nereden = formData.get('nereden') || '';
+          const nereye = formData.get('nereye') || '';
+          const tarih = formData.get('tarih') || '';
+          const kat = formData.get('kat') || '';
+          const asansor = formData.get('asansor') || '';
+          const esya = formData.get('esya') || '';
+          const mesaj = formData.get('mesaj') || '';
+
+          const bodyLines = [
+            '*Yıldırım Nakliyat Fiyat Teklif Talebi*',
+            '',
+            `Ad Soyad: ${adSoyad}`,
+            `Telefon: ${telefon}`,
+            email ? `E-posta: ${email}` : '',
+            `Nereden: ${nereden}`,
+            `Nereye: ${nereye}`,
+            tarih ? `Tarih: ${tarih}` : '',
+            kat ? `Kat: ${kat}` : '',
+            asansor ? `Asansör Durumu: ${asansor}` : '',
+            esya ? `Eşya Türü: ${esya}` : '',
+            '',
+            'Ek Not / Açıklama:',
+            mesaj
+          ].filter(Boolean);
+
+          const text = encodeURIComponent(bodyLines.join('\n'));
+          const waUrl = `https://wa.me/905424887651?text=${text}`;
+          window.location.href = waUrl;
+        });
+      }
+
+      // HEADER HİZMET BÖLGELERİ DROPDOWN + OVERLAY
+      const navDropdown = document.querySelector('.nav-dropdown');
+      const navDropdownToggle = document.querySelector('.nav-dropdown-toggle');
+      const bolgeOverlay = document.getElementById('bolge-overlay');
+      const bolgeOverlayClose = document.getElementById('bolge-overlay-close');
+
+      if (navDropdown && navDropdownToggle) {
+        navDropdownToggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (window.innerWidth <= 768) {
+            // Mobil: küçük kutucuk overlay aç
+            if (bolgeOverlay) bolgeOverlay.style.display = 'flex';
+          } else {
+            // Masaüstü: dropdown aç/kapa
+            navDropdown.classList.toggle('open');
+          }
+        });
+
+        // Masaüstünde dışarı tıklayınca dropdown kapansın
+        document.addEventListener('click', function (e) {
+          if (window.innerWidth > 768) {
+            if (!navDropdown.contains(e.target)) {
+              navDropdown.classList.remove('open');
+            }
+          }
+        });
+      }
+
+      // Hizmet bölgeleri overlay kapatma
+      if (bolgeOverlay && bolgeOverlayClose) {
+        bolgeOverlayClose.addEventListener('click', function () {
+          bolgeOverlay.style.display = 'none';
+        });
+
+        bolgeOverlay.addEventListener('click', function (e) {
+          if (e.target === bolgeOverlay) {
+            bolgeOverlay.style.display = 'none';
+          }
+        });
+      }
+
+      // Header + overlay içindeki "Tüm ilçeleri gör" kısayolları
+      const bolgeShortcuts = document.querySelectorAll('.bolge-shortcut');
+      if (bolgeShortcuts.length) {
+        bolgeShortcuts.forEach((link) => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.getElementById('faq-bolgeler');
+            if (target) {
+              // aşağı kaydır
+              slowScrollTo(target, 400);
+
+              // header dropdown ve mobil overlay'i kapat
+              if (bolgeOverlay) bolgeOverlay.style.display = 'none';
+              if (navDropdown) navDropdown.classList.remove('open');
+
+              // kaydırma bittikten hemen sonra SSS kutusunu ve tüm ilçeleri aç
+              setTimeout(openBolgelerFaq, 450);
+            }
+          });
+        });
+      }
+
+      // Escape ile sadece hizmet bölgeleri overlay'ini kapat
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (bolgeOverlay && bolgeOverlay.style.display === 'flex') {
+            bolgeOverlay.style.display = 'none';
+          }
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header class="main-header">
+      <div class="logo-area">
+        <img src="https://i.hizliresim.com/h50zh5q.png" alt="Yıldırım Nakliyat Logo" />
+        <span>Bir kamyon dolusu deneyimimiz var.</span>
+      </div>
+
+      <nav>
+        <a href="#hakkimizda"><span class="icon">🏠</span> <span>Hakkımızda</span></a>
+        <a href="#hizmetler"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+        <a href="#galeri"><span class="icon">🖼️</span> <span>Galeri</span></a>
+        <a href="#referanslar"><span class="icon">⭐</span> <span>Referanslar</span></a>
+        <a href="#iletisim"><span class="icon">📞</span> <span>İletişim</span></a>
+
+        <!-- HİZMET BÖLGELERİ -->
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">
+            <span class="icon">📍</span>
+            <span>Hizmet Bölgeleri</span>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
+            <ul class="nav-bolge-list">
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+            </ul>
+            <a href="#faq-bolgeler" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="ust">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h2>Profesyonel Nakliyat — Güvenli ve Hızlı</h2>
+          <p>Şehir içi ve şehirler arası nakliyede uzman kadromuzla güvenilir hizmet sunuyoruz.</p>
+          <a href="#teklif" class="hero-btn">Hemen Teklif Al</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HAKKIMIZDA -->
+    <section class="section" id="hakkimizda">
+      <h3>Hakkımızda</h3>
+      <p>
+        <strong>Yıldırım Nakliyat</strong>, kurucusu <strong>Mehmet Yıldırım</strong> olan, yılların deneyimini modern nakliye
+        anlayışıyla birleştiren bir aile işletmesidir. Şehir içi ve şehirler arası ev, ofis ve parça eşya taşımalarında;
+        planlama, paketleme, taşıma ve yerleştirme süreçlerini tek elden, profesyonel bir ekiple yönetiyoruz.
+      </p>
+      <p>
+        Eşyalarınız bizim için sadece taşınması gereken yükler değil, anılarınızı ve emeğinizi taşıyan değerlerdir. Bu
+        nedenle her işte; zamanında ulaşım, doğru ekipman kullanımı, titiz ambalajlama ve güler yüzlü iletişim
+        standartlarımızdan ödün vermiyoruz. İhtiyaca göre asansörlü taşıma, sigortalı nakliyat ve detaylı paketleme gibi
+        çözümler sunarak taşınma sürecinizi sizin için en az stresli ve en konforlu hale getirmeyi amaçlıyoruz.
+      </p>
+      <p>
+        Yıldırım Nakliyat olarak; şeffaf fiyat politikası, açık bilgilendirme ve iş bitene kadar süren destek
+        anlayışıyla yanınızdayız. "Bir kamyon dolusu deneyimimiz var." diyerek, eşyalarınızı güvenle yeni adresinize
+        ulaştırmak için çalışıyoruz.
+      </p>
+    </section>
+
+    <!-- HİZMETLER -->
+    <section class="section" id="hizmetler">
+      <h3>Hizmetlerimiz</h3>
+      <div class="hizmetler-grid">
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">🏠</div>
+          <div class="hizmet-baslik">Evden Eve Nakliyat</div>
+          <div class="hizmet-aciklama">Paketleme, sökme-takma ve yerleştirme dahil, anahtar teslim ev taşıma hizmeti sunuyoruz.</div>
+        </div>
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">🏢</div>
+          <div class="hizmet-baslik">Ofis Taşıma</div>
+          <div class="hizmet-aciklama">İş akışınızı minimum kesintiyle, planlı ve kontrollü ofis taşımacılığı gerçekleştiriyoruz.</div>
+        </div>
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">🚚</div>
+          <div class="hizmet-baslik">Şehirler Arası Nakliyat</div>
+          <div class="hizmet-aciklama">Türkiye genelinde güvenli ve sigortalı uzun yol taşımacılığı sağlıyoruz.</div>
+        </div>
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">📦</div>
+          <div class="hizmet-baslik">Parça Eşya Taşıma</div>
+          <div class="hizmet-aciklama">Tek parça veya az sayıdaki eşyalarınız için ekonomik taşıma çözümleri sunuyoruz.</div>
+        </div>
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">🪜</div>
+          <div class="hizmet-baslik">Asansörlü Taşımacılık</div>
+          <div class="hizmet-aciklama">Dar sokaklar ve yüksek katlar için dış cephe asansörlü profesyonel hizmet.</div>
+        </div>
+        <div class="hizmet-kart">
+          <div class="hizmet-ikon">🛡️</div>
+          <div class="hizmet-baslik">Sigortalı Taşıma</div>
+          <div class="hizmet-aciklama">Eşyalarınızı olası risklere karşı sigorta kapsamında güvence altına alıyoruz.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERİ (Flickr embed / İLK KOD MANTIĞI) -->
+    <section class="section" id="galeri">
+      <h3>Galeri</h3>
+
+      <div style="max-width:1000px;margin:0 auto;text-align:center;">
+        <a data-flickr-embed="true"
+           href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
+           title="Yıldırım Nakliyat Galeri">
+          <img src="https://live.staticflickr.com/65535/54972518280_59f691e63e_b.jpg"
+               width="1600" height="1200"
+               alt="Yıldırım Nakliyat Galeri"
+               style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.22);" />
+        </a>
+        <p style="font-size:13px;color:#555;margin-top:8px;">
+          Albümdeki tüm fotoğrafları görmek için görsele tıklayabilirsiniz.
+        </p>
+      </div>
+    </section>
+
+    <!-- REFERANSLAR -->
+    <section class="section" id="referanslar">
+      <h3>Referanslar</h3>
+      <div class="referans-wrapper">
+        <div class="referans-row">
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/women/11.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Ayşe K.</div>
+                <div class="referans-tag">Ev Taşıma - İstanbul</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Randevu saatinde geldiler, eşyaları çok özenli paketlediler. Hiçbir eşyamda çizik bile yok. Gönül rahatlığıyla tavsiye ederim.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Mehmet D.</div>
+                <div class="referans-tag">Ofis Taşıma - Kağıthane</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Ofis taşımamızı bir gün içinde sorunsuz tamamladılar. Planlı, düzenli ve iletişimleri çok iyiydi.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Seda T.</div>
+                <div class="referans-tag">Şehirler Arası - İstanbul → Ankara</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Uzun yol olmasına rağmen hem zamanında teslim edildi hem de hiçbir hasar yaşanmadı. Paketleme ve montajdan çok memnun kaldık.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/men/14.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Hakan B.</div>
+                <div class="referans-tag">Parça Eşya - Beylikdüzü</div>
+                <div class="referans-stars">★★★★☆</div>
+              </div>
+            </div>
+            <div class="referans-text">Sadece birkaç parça eşyam vardı, kısa sürede ekonomik bir çözüm sundular. Tekrar ihtiyaç olursa yine tercih edeceğim.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/women/15.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Elif Ç.</div>
+                <div class="referans-tag">Asansörlü Taşıma - Avcılar</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Dar sokakta taşınmamıza rağmen asansörlü sistemle çok pratik bir şekilde taşıma yaptılar. Ekip gerçekten işini biliyor.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/men/16.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Onur Y.</div>
+                <div class="referans-tag">Ev Taşıma - Esenyurt</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Sabah geldiler, akşam yeni evde tüm eşyalarım kurulmuş haldeydi. Fiyat/performans olarak bugüne kadar çalıştığım en iyi nakliyecilerden.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Nurcan S.</div>
+                <div class="referans-tag">Ofis Taşıma - Şişli</div>
+                <div class="referans-stars">★★★★☆</div>
+              </div>
+            </div>
+            <div class="referans-text">Yoğun bir iş gününde ofis taşınmak zorunda kaldık, ekip o kadar hızlı ve düzenli çalıştı ki iş akışımız neredeyse hiç aksamadı.</div>
+          </div>
+
+          <div class="referans-card">
+            <div class="referans-top">
+              <div class="referans-avatar">
+                <img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Müşteri" />
+              </div>
+              <div>
+                <div class="referans-name">Kemal G.</div>
+                <div class="referans-tag">Şehirler Arası - İstanbul → Bursa</div>
+                <div class="referans-stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="referans-text">Telefonla görüştüğümüz fiyat ve şartlar aynen uygulandı. Sürpriz masraf çıkmadı, bu güven duygusu çok önemli.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FİYAT TEKLİF FORMU -->
+    <section class="section" id="teklif">
+      <h3>Fiyat Teklif Formu</h3>
+      <form id="teklif-form" action="https://wa.me/905424887651" method="GET" target="_blank">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="adsoyad">Ad Soyad*</label>
+            <input type="text" id="adsoyad" name="adsoyad" required />
+          </div>
+          <div class="form-row">
+            <label for="telefon">Telefon*</label>
+            <input type="tel" id="telefon" name="telefon" required />
+          </div>
+          <div class="form-row">
+            <label for="email">E-posta</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div class="form-row">
+            <label for="nereden">Nereden</label>
+            <input type="text" id="nereden" name="nereden" placeholder="İl / İlçe" />
+          </div>
+          <div class="form-row">
+            <label for="nereye">Nereye</label>
+            <input type="text" id="nereye" name="nereye" placeholder="İl / İlçe" />
+          </div>
+          <div class="form-row">
+            <label for="tarih">Taşınma Tarihi</label>
+            <input type="date" id="tarih" name="tarih" />
+          </div>
+          <div class="form-row">
+            <label for="kat">Kat Bilgisi</label>
+            <input type="text" id="kat" name="kat" placeholder="Örn: 3. kat" />
+          </div>
+          <div class="form-row">
+            <label for="asansor">Asansör Durumu</label>
+            <select id="asansor" name="asansor">
+              <option value="">Seçiniz</option>
+              <option value="Var">Asansör Var</option>
+              <option value="Yok">Asansör Yok</option>
+              <option value="Dış Cephe Asansör">Dış Cephe Asansör</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="esya">Eşya Türü</label>
+            <input type="text" id="esya" name="esya" placeholder="2+1 ev, ofis, parça eşya vb." />
+          </div>
+          <div class="form-row" style="grid-column:1/-1;">
+            <label for="mesaj">Ek Not / Açıklama</label>
+            <textarea id="mesaj" name="mesaj" placeholder="Özel isteğiniz, hassas eşyalar, kurulum vs."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit">Teklif İste</button>
+        </div>
+        <div class="form-note">
+          Gönder tuşuna bastığınızda, verdiğiniz bilgilerle WhatsApp üzerinden otomatik mesaj taslağı oluşturulur. Böylece tekrar yazmak zorunda kalmadan tek tıkla bize iletebilirsiniz.
+        </div>
+      </form>
+    </section>
+
+    <!-- İLETİŞİM + HARİTA -->
+    <section class="section" id="iletisim">
+      <h3>İletişim</h3>
+      <div class="iletisim-grid">
+        <div class="iletisim-card">
+          <h4>Ömer Yıldırım</h4>
+          <p>Telefon: 0542 488 76 51</p>
+          <p>Yıldırım Nakliyat - Operasyon ve Müşteri İletişimi</p>
+          <a class="whatsapp-contact-btn" href="https://wa.me/905424887651" target="_blank" rel="noopener">WhatsApp ile Mesaj Gönder</a>
+        </div>
+        <div class="iletisim-card">
+          <h4>Memiş Yıldırım</h4>
+          <p>Telefon: 0542 465 26 99</p>
+          <p>Yıldırım Nakliyat - Saha ve Araç Koordinasyonu</p>
+          <a class="whatsapp-contact-btn" href="https://wa.me/905424652699" target="_blank" rel="noopener">WhatsApp ile Mesaj Gönder</a>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-title">
+          <span>📍</span>
+          <span>Yıldırım Nakliyat Konum Bilgisi</span>
+        </div>
+        <div class="map-desc">
+          İşletme profilimizi Google üzerinden görüntüleyebilir, yol tarifi alabilir ve yorumları inceleyebilirsiniz.
+        </div>
+
+        <iframe
+          class="map-iframe"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=41.0129217,28.6908625&z=19&hl=tr&output=embed">
+        </iframe>
+
+        <a class="map-link-btn" href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1r%C4%B1m+Nakliyat/@41.0134003,28.6900833,19z" target="_blank" rel="noopener">
+          <span>🌐</span>
+          <span>Google Haritalar'da Aç</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SSS + HİZMET BÖLGELERİ -->
+    <section class="section" id="sss">
+      <h3>Sık Sorulan Sorular</h3>
+      <div class="faq-wrapper">
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Fiyatlarınızı neye göre belirliyorsunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Mesafe, eşya miktarı, kat sayıları, asansör durumu ve taşınma tarihi gibi kriterlere göre fiyatlandırma yapıyoruz. Formu doldurduğunuzda size özel net bir teklif WhatsApp üzerinden iletilir.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Paketleme hizmeti veriyor musunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Evet. Talebinize göre mutfak, kırılacak eşyalar, mobilya ve beyaz eşyalar için profesyonel paketleme hizmeti veriyoruz. Kendi kolilerinizle taşınmak isterseniz sadece taşıma hizmeti de alabilirsiniz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Şehirler arası taşımada teslimat süresi nedir?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Güzergah ve yoğunluğa göre değişmekle birlikte genellikle aynı gün veya ertesi gün teslimat yapıyoruz. Uzun mesafelerde planlamayı önceden birlikte netleştiriyoruz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Eşyalarım sigortalı mı taşınıyor?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Talebinize göre sigortalı taşıma yapıyoruz. Teklif alırken sigorta isteğinizi belirtirseniz, poliçe koşullarını da detaylı şekilde paylaşıyoruz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Taşınma günü kaç kişi geliyor?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Eşya durumuna göre genellikle 3–5 kişilik profesyonel ekiplerimizle hizmet veriyoruz. Gerekli gördüğümüz durumlarda ekip sayısını artırabiliyoruz.
+          </div>
+        </div>
+
+        <!-- HİZMET BÖLGELERİ SORUSU -->
+        <div class="faq-item" id="faq-bolgeler">
+          <div class="faq-header">
+            <span class="q">Nerelere hizmet veriyorsunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Yıldırım Nakliyat olarak İstanbul’un tüm ilçelerine evden eve, ofis ve parça eşya taşımacılığı hizmeti veriyoruz.
+            Aşağıda en çok çalıştığımız bölgelerin bir kısmını görebilirsiniz:
+            <ul class="bolge-list">
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bagcilar">Bağcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+            </ul>
+
+            <div id="bolgeler-extra" style="display:none;">
+              <ul class="bolge-list">
+                <li><button type="button" class="bolge-link" data-bolge="besiktas">Beşiktaş</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sisli">Şişli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kagithane">Kağıthane</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sariyer">Sarıyer</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="fatih">Fatih</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="beyoglu">Beyoğlu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="uskudar">Üsküdar</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kadikoy">Kadıköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="maltepe">Maltepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kartal">Kartal</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="pendik">Pendik</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="tuzla">Tuzla</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="umraniye">Ümraniye</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="cekmekoy">Çekmeköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sancaktepe">Sancaktepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultanbeyli">Sultanbeyli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="gaziosmanpasa">Gaziosmanpaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultangazi">Sultangazi</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="esenler">Esenler</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="bayrampasa">Bayrampaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="zeytinburnu">Zeytinburnu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="eyupsultan">Eyüpsultan</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="arnavutkoy">Arnavutköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="silivri">Silivri</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="catalca">Çatalca</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="buyukcekmece">Büyükçekmece</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sile">Şile</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="adalar">Adalar</button></li>
+              </ul>
+            </div>
+
+            <button type="button" id="bolgeler-toggle" class="bolge-toggle-btn">Tüm ilçeleri göster</button>
+
+            <!-- İlçe detay kutusu -->
+            <div id="bolge-detay-kutu" class="bolge-detay-kutu">
+              <h4 id="bolge-detay-baslik">İstanbul Evden Eve Nakliyat ve Ev Taşıma</h4>
+              <p id="bolge-detay-metin">
+                İstanbul’un tüm ilçelerinde evden eve nakliyat, ofis taşıma, parça eşya ve şehirler arası nakliyat
+                hizmeti veriyoruz. Asansörlü ev taşıma ve sigortalı nakliye seçenekleriyle taşınma sürecinizi güvenli ve
+                konforlu hale getiriyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KVKK -->
+    <section class="section" id="kvkk">
+      <h3>KVKK ve Gizlilik</h3>
+      <p>Yıldırım Nakliyat olarak, bizimle paylaştığınız ad, soyad, telefon, adres ve taşınma bilgileri yalnızca nakliyat hizmetinin planlanması, fiyatlandırılması ve sizinle iletişime geçilmesi amacıyla kullanılmaktadır.</p>
+      <p>Bilgileriniz üçüncü kişilerle pazarlama amacıyla paylaşılmaz; sadece yasal yükümlülükler kapsamında resmi mercilerin talebi halinde ilgili kurumlarla paylaşılabilir. WhatsApp, telefon ve web sitemiz üzerinden ilettiğiniz tüm bilgiler bu kapsamda korunur.</p>
+      <p>Kişisel verilerinizle ilgili bilgi almak, düzeltme yapmak veya silinmesini talep etmek için dilediğiniz zaman WhatsApp hattımız veya telefon numaramız üzerinden bizimle iletişime geçebilirsiniz.</p>
+    </section>
+  </div>
+
+  <!-- Eski lightbox -->
+  <div id="lightbox" class="lightbox" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999;">
+    <div class="lightbox-inner" style="position:relative;max-width:95vw;max-height:95vh;">
+      <button class="lightbox-close" style="position:absolute;top:-10px;right:-10px;width:32px;height:32px;border-radius:50%;border:none;background:#ffffff;color:#000;font-size:20px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4);">×</button>
+      <img id="lightbox-img" src="" alt="Büyük Görsel" style="max-width:95vw;max-height:95vh;display:block;border-radius:10px;" />
+    </div>
+  </div>
+
+  <!-- HİZMET BÖLGELERİ OVERLAY (mobil) -->
+  <div id="bolge-overlay"
+       style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9998;">
+    <div style="background:#ffffff;padding:16px 20px;border-radius:12px;max-width:280px;width:80%;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-size:14px;">
+      <div style="font-weight:600;margin-bottom:6px;">İstanbul Hizmet Bölgeleri</div>
+      <ul style="margin:0 0 8px 18px;padding:0;list-style:disc;font-size:13px;">
+        <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+      </ul>
+      <a href="#faq-bolgeler" class="bolge-shortcut"
+         style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
+        Tüm ilçeleri gör
+      </a>
+      <button type="button" id="bolge-overlay-close"
+              style="margin-top:4px;padding:6px 12px;border-radius:999px;border:none;background:#eeeeee;font-size:12px;cursor:pointer;width:100%;">Kapat</button>
+    </div>
+  </div>
+
+  <!-- Sabit alt butonlar -->
+  <div class="floating-cta">
+    <a class="floating-call" href="tel:05424887651">📞 Ara</a>
+    <a class="floating-wa" href="https://wa.me/905424887651" target="_blank" rel="noopener">💬 WhatsApp</a>
+  </div>
+
+  <footer>
+    © 2025 Yıldırım Nakliyat - Tüm Hakları Saklıdır | <a href="#kvkk">KVKK ve Gizlilik</a>
+  </footer>
+
+  <!-- Flickr embed script (ALBÜMÜN TAMAMINI GETİREN İLK KOD) -->
+  <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+</body>
+</html>

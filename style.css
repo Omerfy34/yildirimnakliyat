@@ -741,23 +741,47 @@ footer a { color: #ccc; text-decoration: none; }
 
 /* =========================================
    13. MOBİL DÜZENLEMELER (Responsive)
-   PC'DE ÇALIŞMAZ! SADECE MOBİL
-   - Menü yavaşça kaybolur
-   - Logo + slogan kalır
+   PC'DE ÇALIŞMAZ – SADECE MOBİL
+   Menü yumuşak animasyonla kaybolur
+   Logo + slogan kalır
    ========================================= */
 @media (max-width: 768px) {
+
   .main-header {
     padding: 10px 16px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .logo-area img { height: 80px; }
-  .logo-area span { font-size: 12px; }
+  /* -----------------
+     LOGO NORMAL HAL
+     ----------------- */
+  .logo-area img {
+    height: 80px;
+    transition: height 0.8s ease;
+  }
 
+  .logo-area span {
+    font-size: 12px;
+    transition: font-size 0.8s ease, opacity 0.8s ease;
+  }
+
+  /* -----------------
+     NAV NORMAL HAL
+     ----------------- */
   nav {
     margin-top: 8px;
     width: 100%;
+    overflow: hidden;
+
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 360px;
+
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s ease,
+      max-height 0.8s ease;
   }
 
   /* nav elemanlarını 2'li grid */
@@ -777,11 +801,47 @@ footer a { color: #ccc; text-decoration: none; }
     justify-content: center;
   }
 
-  /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
-  .nav-dropdown-menu { display: none !important; }
+  /* Mobilde dropdown menüyü gizle */
+  .nav-dropdown-menu {
+    display: none !important;
+  }
 
-  .hero { height: 380px; }
-  .hero-inner { padding: 0 20px; justify-content: center; }
+  /* -----------------
+     SHRINK OLUNCA
+     ----------------- */
+  .main-header.shrink nav {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+    pointer-events: none;
+  }
+
+  .main-header.shrink .logo-area {
+    opacity: 1 !important;
+    margin-bottom: 4px !important;
+    pointer-events: auto !important;
+  }
+
+  .main-header.shrink .logo-area img {
+    height: 76px !important;
+  }
+
+  .main-header.shrink .logo-area span {
+    font-size: 12px !important;
+    opacity: 1 !important;
+  }
+
+  /* -----------------
+     DİĞER MOBİL AYARLAR
+     ----------------- */
+  .hero {
+    height: 380px;
+  }
+
+  .hero-inner {
+    padding: 0 20px;
+    justify-content: center;
+  }
 
   .hero-content {
     margin: 0;
@@ -789,49 +849,26 @@ footer a { color: #ccc; text-decoration: none; }
     max-width: 100%;
   }
 
-  .section { padding: 40px 20px; }
-  .bolge-list { columns: 1; }
+  .section {
+    padding: 40px 20px;
+  }
 
-  .galeri-slider { max-width: 100%; border-radius: 10px; }
-  .galeri-slider img { max-height: 260px; border-radius: 10px; }
+  .bolge-list {
+    columns: 1;
+  }
+
+  .galeri-slider {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .galeri-slider img {
+    max-height: 260px;
+    border-radius: 10px;
+  }
 
   .referans-nav-left,
-  .referans-nav-right { display: none; }
-
-  /* ===============================
-     MOBİLDE YUMUŞAK KAPANMA (MENÜ)
-     =============================== */
-  .main-header nav {
-    opacity: 1;
-    transform: translateY(0);
-    max-height: 320px;
-    overflow: hidden;
-    transition:
-      opacity 0.9s ease,
-      transform 0.9s ease,
-      max-height 0.9s ease;
+  .referans-nav-right {
+    display: none;
   }
-
-  .main-header.shrink nav {
-    opacity: 0;
-    transform: translateY(-16px);
-    max-height: 0;
-    pointer-events: none;
-  }
-
-  /* ===============================
-     LOGO + SLOGAN KALSIN, YUMUŞAK KÜÇÜLSÜN
-     =============================== */
-  .logo-area img { transition: height 0.9s ease; }
-  .logo-area span { transition: font-size 0.9s ease, opacity 0.9s ease; }
-
-  .main-header.shrink .logo-area {
-    max-height: none !important;
-    opacity: 1 !important;
-    margin-bottom: 4px !important;
-    pointer-events: auto !important;
-  }
-
-  .main-header.shrink .logo-area img { height: 78px !important; }
-  .main-header.shrink .logo-area span { font-size: 12px !important; opacity: 1 !important; }
 }

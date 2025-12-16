@@ -840,10 +840,17 @@ footer a {
    13. MOBİL DÜZENLEMELER (Responsive)
    ========================================= */
 @media (max-width: 768px) {
+
   .main-header {
     padding: 10px 16px;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* LOGO */
+  .logo-area {
+    align-items: center;
+    text-align: center;
   }
 
   .logo-area img {
@@ -854,12 +861,14 @@ footer a {
     font-size: 12px;
   }
 
+  /* NAV NORMAL HAL (SCROLL YOKKEN) */
   nav {
     margin-top: 8px;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  /* tüm nav elemanlarını 2'li grid yap */
   nav a {
     margin: 4px 4px 4px 0;
     flex: 1 1 calc(50% - 8px);
@@ -876,22 +885,34 @@ footer a {
     justify-content: center;
   }
 
-  /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
+  /* Mobilde dropdown menüyü tamamen gizle */
   .nav-dropdown-menu {
     display: none !important;
   }
+
+  /* =====================================
+     MOBİL SCROLL DAVRANIŞI
+     LOGO KALSIN – MENÜ GİTSİN
+     ===================================== */
 
   .main-header.shrink {
     padding: 6px 10px;
   }
 
+  /* LOGO KALSIN */
   .main-header.shrink .logo-area {
-    max-height: 0;
-    opacity: 0;
+    max-height: 140px;
+    opacity: 1;
     margin-bottom: 0;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
+  /* MENÜ KAYBOLSUN */
+  .main-header.shrink nav {
+    display: none;
+  }
+
+  /* HERO */
   .hero {
     height: 380px;
   }
@@ -907,6 +928,7 @@ footer a {
     max-width: 100%;
   }
 
+  /* DİĞER MOBİL DÜZENLER */
   .section {
     padding: 40px 20px;
   }

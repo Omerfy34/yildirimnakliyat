@@ -28,11 +28,6 @@ body {
   min-height: 100vh;
 }
 
-/* Header Spacer (Sabit header'dan dolayı içeriğin kaymasını önler) */
-#headerSpacer {
-    display: none;
-}
-
 /* =========================================
    2. HEADER (ÜST MENÜ)
    ========================================= */
@@ -47,18 +42,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: padding 0.3s ease, box-shadow 0.3s ease, transform .25s ease, opacity .25s ease;
+  transition: padding 0.3s ease, box-shadow 0.3s ease; /* Mobilde bu devre dışı kalacak */
 }
 
 .main-header.shrink {
   padding: 8px 30px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-}
-
-.main-header.mobile-hidden { /* Bu sınıf artık kullanılmayacak, JS'te sadece nav için kullanılıyor */
-  transform: translateY(-120%);
-  opacity: 0;
-  pointer-events: none;
 }
 
 .logo-area {
@@ -91,6 +80,8 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+  /* Mobil için geçiş eklendi */
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 nav a {
@@ -854,38 +845,34 @@ footer a {
    13. MOBİL DÜZENLEMELER (Responsive)
    ========================================= */
 @media (max-width: 768px) {
-    /* Kırmızı Alan: LOGO + YAZI KISMINI SABİTLEME VE EKRANI KAPLAMA */
+    /* HEADER'I KOMPLE SABİTLE VE TAM GENİŞLİK YAP (KIRMIZI ALAN) */
     .main-header {
-        position: fixed; /* HER ZAMAN EKRANDA KALACAK (KIRMIZI ALAN) */
+        position: fixed; 
         width: 100%;
         padding: 10px 16px;
-        flex-direction: column; /* Alt alta dizilim için */
+        flex-direction: column;
         align-items: flex-start;
-        transition: none; /* Kaydırma efekti bu kısım için kapatıldı */
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        right: 0;
+        /* Kaydırma efekti bu kısım için kapatıldı */
+        transition: none; 
         border-bottom: none;
     }
-
-    /* Kırmızı Alanın Altındaki Navigasyon (Sarı Alan) */
-    #mobileNav {
-        width: 100%;
-        margin-top: 8px;
-        transition: transform 0.25s ease, opacity 0.25s ease;
-    }
     
-    /* Sarı Alan GİZLENSİN */
-    #mobileNav.mobile-hidden { 
-        transform: translateY(-100%);
-        opacity: 0;
-        pointer-events: none;
-        position: absolute; /* Kaybolma efekti için konum ayarı */
-        top: 100%; /* Header'ın hemen altında başlasın */
+    /* İÇERİĞİ AŞAĞI İTME (Header'ın yüksekliği) */
+    .page-wrapper {
+        /* Tahmini Header yüksekliği: Logo alanı (90px) + Navigasyon (50px) + Paddingler (~20px) = 160px */
+        padding-top: 160px; 
     }
 
-    /* Kırmızı Alanın İçindeki Logo Ayarları */
-    .logo-area {
-        margin-bottom: 0;
-    }
+    /* LOGO ALANI AYARLARI */
+    .logo-area {
+        width: 100%;
+        margin-bottom: 8px; /* Navigasyon ile logo arasına boşluk */
+        align-items: flex-start; /* Logoyu sola hizala */
+        text-align: left;
+    }
     .logo-area img {
         height: 80px;
     }
@@ -894,14 +881,36 @@ footer a {
         font-size: 12px;
     }
 
-    /* SARI ALAN: Butonları Yan Yana Dizme (İkişerli Grid) */
-    #mobileNav a,
-    #mobileNav .nav-dropdown {
+    /* NAVİGASYON (SARI ALAN) */
+    nav {
+        width: 100%;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+        
+        /* Butonları yan yana dizme */
+        justify-content: space-between;
+    }
+
+    /* NAVİGASYONUN KAYDIRINCA GİZLENMESİ */
+    nav.mobile-hidden {
+        transform: translateY(-100%); /* Yukarı kaydırarak gizle */
+        opacity: 0;
+        pointer-events: none;
+        position: absolute; /* Header'ın akışından çıkarıldı */
+        top: 100%; 
+        left: 0;
+        right: 0;
+        background: #ffffff; /* Gizlenme efekti sırasında header'ın altında kalır */
+        border-top: 1px solid var(--muted);
+    }
+    
+    /* SARI ALAN: Butonları Yan Yana Dizme (İkişerli) */
+    nav a,
+    nav .nav-dropdown {
         margin: 4px 4px 4px 0;
-        flex: 1 1 calc(50% - 8px); /* İkişerli hizalama */
+        flex: 1 1 calc(50% - 8px); /* İkişerli hizalama için */
         justify-content: center;
     }
-
+    
     .nav-dropdown-toggle {
         width: 100%;
         justify-content: center;
@@ -912,23 +921,19 @@ footer a {
         display: none !important;
     }
 
+    /* Header küçültme efektini mobilde devre dışı bırak */
     .main-header.shrink {
-        /* Sabit olduğu için küçülme stilini geçersiz kıl */
         padding: 10px 16px;
     }
-    
-    .main-header.shrink .logo-area {
+
+    .main-header.shrink .logo-area {
         /* Küçülme efekti logo için kapalı */
         max-height: 140px; 
         opacity: 1;
-        margin-bottom: 0;
+        margin-bottom: 8px;
         pointer-events: auto;
     }
 
-    /* Header'ın kapladığı alan kadar içeriği aşağı itme (KIRMIZI ALANIN TAM YÜKSEKLİĞİ) */
-    .page-wrapper {
-        padding-top: 170px; /* Tahmini toplam yükseklik: Logo (90px) + Nav (60px) + Paddingler (~20px) = 170px */
-    }
 
     .hero {
         height: 380px;

@@ -2,11 +2,11 @@
    1. GENEL AYARLAR VE DEĞİŞKENLER
    ========================================= */
 :root {
-  --primary: #f5b301;   /* Ana sarı */
-  --accent:  #c89b4a;   /* Logo ile uyumlu altın ton */
-  --dark:    #111111;   /* Koyu arka plan / footer */
-  --light:   #f7f7f7;   /* Sayfa zemini */
-  --muted:   #f2f2f2;   /* Menü kutuları */
+  --primary: #f5b301;
+  --accent:  #c89b4a;
+  --dark:    #111111;
+  --light:   #f7f7f7;
+  --muted:   #f2f2f2;
 }
 
 * { box-sizing: border-box; }
@@ -15,7 +15,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: var(--light);
-  scroll-behavior: auto; /* JS ile kontrol edildiği için auto */
+  scroll-behavior: auto;
   color: #222;
 }
 
@@ -174,7 +174,7 @@ nav a.active {
 
 .nav-bolge-list li { padding: 2px 0; }
 
-/* Dropdown içindeki linkler için güncelleme */
+/* Dropdown içindeki linkler */
 .nav-bolge-list li a {
   background: none !important;
   padding: 0 !important;
@@ -183,7 +183,6 @@ nav a.active {
   display: inline-block !important;
   font-weight: normal !important;
 }
-
 .nav-bolge-list li a:hover {
   text-decoration: underline !important;
   transform: none !important;
@@ -198,7 +197,6 @@ nav a.active {
   color: #0077ff;
   font-weight: 600;
 }
-
 .nav-bolge-more:hover { text-decoration: underline; }
 
 /* =========================================
@@ -264,8 +262,7 @@ nav a.active {
 }
 
 /* =========================================
-   4. YENİ EKLENEN: ALT SAYFA BAŞLIKLARI
-   (Hakkımızda, Hizmetler vb. sayfalar için)
+   4. ALT SAYFA BAŞLIKLARI
    ========================================= */
 .page-header-banner {
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png');
@@ -290,7 +287,6 @@ nav a.active {
   margin-top: 10px;
 }
 
-/* Alt Sayfa İçerik Kutusu */
 .content-wrapper {
   max-width: 1000px;
   margin: 0 auto 60px auto;
@@ -374,10 +370,7 @@ nav a.active {
   background: #ffffff;
 }
 
-.galeri-track {
-  display: flex;
-  transition: transform 0.5s ease;
-}
+.galeri-track { display: flex; transition: transform 0.5s ease; }
 
 .galeri-slide {
   min-width: 100%;
@@ -430,11 +423,7 @@ nav a.active {
 /* =========================================
    8. REFERANSLAR
    ========================================= */
-.referans-wrapper {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+.referans-wrapper { position: relative; max-width: 1000px; margin: 0 auto; }
 
 .referans-row {
   display: flex;
@@ -460,11 +449,7 @@ nav a.active {
   flex-shrink: 0;
 }
 
-.referans-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.referans-top { display: flex; align-items: center; gap: 10px; }
 
 .referans-avatar {
   width: 44px;
@@ -474,11 +459,7 @@ nav a.active {
   flex-shrink: 0;
 }
 
-.referans-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.referans-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 .referans-name { font-weight: 600; font-size: 14px; }
 .referans-tag { font-size: 12px; color: #777; }
@@ -488,10 +469,7 @@ nav a.active {
 /* =========================================
    9. SIK SORULAN SORULAR (SSS)
    ========================================= */
-.faq-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-}
+.faq-wrapper { max-width: 900px; margin: 0 auto; }
 
 .faq-item {
   background: #fff;
@@ -522,11 +500,7 @@ nav a.active {
   transition: max-height 0.3s ease, padding-bottom 0.3s ease;
 }
 
-.faq-item.active .faq-content {
-  max-height: 400px;
-  padding-bottom: 12px;
-}
-
+.faq-item.active .faq-content { max-height: 400px; padding-bottom: 12px; }
 .faq-item.active .faq-header { background: var(--muted); }
 
 .bolge-list {
@@ -550,10 +524,7 @@ nav a.active {
   text-align: left;
 }
 
-.bolge-link:hover {
-  text-decoration: underline;
-  color: #0077ff;
-}
+.bolge-link:hover { text-decoration: underline; color: #0077ff; }
 
 .bolge-toggle-btn {
   margin-top: 8px;
@@ -576,12 +547,7 @@ nav a.active {
   gap: 14px 20px;
 }
 
-.form-row {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-}
-
+.form-row { display: flex; flex-direction: column; font-size: 14px; }
 .form-row label { margin-bottom: 4px; font-weight: 600; }
 
 .form-row input,
@@ -683,7 +649,6 @@ nav a.active {
 }
 
 .iletisim-card h4 { margin: 0 0 4px 0; font-size: 16px; }
-
 .iletisim-card p { margin: 2px 0; font-size: 14px; }
 
 .iletisim-card a.whatsapp-contact-btn {
@@ -776,6 +741,9 @@ footer a { color: #ccc; text-decoration: none; }
 
 /* =========================================
    13. MOBİL DÜZENLEMELER (Responsive)
+   PC'DE ÇALIŞMAZ! SADECE MOBİL
+   - Menü yavaşça kaybolur
+   - Logo + slogan kalır
    ========================================= */
 @media (max-width: 768px) {
   .main-header {
@@ -785,7 +753,6 @@ footer a { color: #ccc; text-decoration: none; }
   }
 
   .logo-area img { height: 80px; }
-
   .logo-area span { font-size: 12px; }
 
   nav {
@@ -793,7 +760,7 @@ footer a { color: #ccc; text-decoration: none; }
     width: 100%;
   }
 
-  /* tüm nav elemanlarını 2'li grid yap */
+  /* nav elemanlarını 2'li grid */
   nav a {
     margin: 4px 4px 4px 0;
     flex: 1 1 calc(50% - 8px);
@@ -813,48 +780,8 @@ footer a { color: #ccc; text-decoration: none; }
   /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
   .nav-dropdown-menu { display: none !important; }
 
-  .main-header.shrink { padding: 6px 10px; }
-
-  /* =====================================================
-     MOBİLDE SHRINK OLUNCA: SADECE LOGO + SLOGAN KALSIN
-     MENÜ TAMAMEN GİTSİN (PC'YE DOKUNMAZ)
-     ===================================================== */
-  .main-header.shrink {
-    justify-content: center !important;
-    align-items: center !important;
-  }
-
-  .main-header.shrink nav {
-    display: none !important;
-  }
-
-  /* LOGO SAKIN KAYBOLMASIN */
-  .main-header.shrink .logo-area {
-    max-height: none !important;
-    opacity: 1 !important;
-    margin-bottom: 4px !important;
-    pointer-events: auto !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .main-header.shrink .logo-area img {
-    height: 78px !important;
-  }
-
-  .main-header.shrink .logo-area span {
-    font-size: 12px !important;
-    display: block !important;
-  }
-
-  /* ===================================================== */
-
   .hero { height: 380px; }
-
-  .hero-inner {
-    padding: 0 20px;
-    justify-content: center;
-  }
+  .hero-inner { padding: 0 20px; justify-content: center; }
 
   .hero-content {
     margin: 0;
@@ -863,19 +790,48 @@ footer a { color: #ccc; text-decoration: none; }
   }
 
   .section { padding: 40px 20px; }
-
   .bolge-list { columns: 1; }
 
-  .galeri-slider {
-    max-width: 100%;
-    border-radius: 10px;
-  }
-
-  .galeri-slider img {
-    max-height: 260px;
-    border-radius: 10px;
-  }
+  .galeri-slider { max-width: 100%; border-radius: 10px; }
+  .galeri-slider img { max-height: 260px; border-radius: 10px; }
 
   .referans-nav-left,
   .referans-nav-right { display: none; }
+
+  /* ===============================
+     MOBİLDE YUMUŞAK KAPANMA (MENÜ)
+     =============================== */
+  .main-header nav {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 320px;
+    overflow: hidden;
+    transition:
+      opacity 0.9s ease,
+      transform 0.9s ease,
+      max-height 0.9s ease;
+  }
+
+  .main-header.shrink nav {
+    opacity: 0;
+    transform: translateY(-16px);
+    max-height: 0;
+    pointer-events: none;
+  }
+
+  /* ===============================
+     LOGO + SLOGAN KALSIN, YUMUŞAK KÜÇÜLSÜN
+     =============================== */
+  .logo-area img { transition: height 0.9s ease; }
+  .logo-area span { transition: font-size 0.9s ease, opacity 0.9s ease; }
+
+  .main-header.shrink .logo-area {
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-bottom: 4px !important;
+    pointer-events: auto !important;
+  }
+
+  .main-header.shrink .logo-area img { height: 78px !important; }
+  .main-header.shrink .logo-area span { font-size: 12px !important; opacity: 1 !important; }
 }

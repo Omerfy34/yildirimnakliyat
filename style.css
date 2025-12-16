@@ -1,851 +1,837 @@
 /* =========================================
-   1. GENEL AYARLAR VE DEĞİŞKENLER
-   ========================================= */
+   1. GENEL AYARLAR VE DEĞİŞKENLER
+   ========================================= */
 :root {
-  --primary: #f5b301;    /* Ana sarı */
-  --accent:  #c89b4a;    /* Logo ile uyumlu altın ton */
-  --dark:    #111111;    /* Koyu arka plan / footer */
-  --light:   #f7f7f7;    /* Sayfa zemini */
-  --muted:   #f2f2f2;    /* Menü kutuları */
+  --primary: #f5b301;    /* Ana sarı */
+  --accent:  #c89b4a;    /* Logo ile uyumlu altın ton */
+  --dark:    #111111;    /* Koyu arka plan / footer */
+  --light:   #f7f7f7;    /* Sayfa zemini */
+  --muted:   #f2f2f2;    /* Menü kutuları */
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: var(--light);
-  scroll-behavior: auto; /* JS ile kontrol edildiği için auto */
-  color: #222;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--light);
+  scroll-behavior: auto; /* JS ile kontrol edildiği için auto */
+  color: #222;
 }
 
 .page-wrapper {
-  max-width: 1300px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  min-height: 100vh;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  min-height: 100vh;
 }
 
-/* Mini logo bar için stil (Mobilde padding-top ayarlaması için) */
+/* Mini logo bar için stil (KALDIRILDI/GİZLENDİ) */
 #miniLogo {
-  display: none; /* Desktop'ta gizli */
+  display: none; /* Desktop'ta gizli */
 }
 @media (max-width: 768px) {
-  /* Mini logo bar */
-  #miniLogo {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 10px;
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: .3px;
-    background: rgba(255, 255, 255, .92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(0, 0, 0, .06);
-    cursor: pointer;
-    color: #222;
-  }
-  body {
-    padding-top: 32px; /* Header mini logonun altında başlasın */
-  }
-  .main-header {
-    top: 32px;
-  }
+  /* Mini logo bar komple gizlendi */
+  #miniLogo {
+    display: none !important;
+  }
+  
+  /* DÜZELTME: Body padding ve header konumu düzeltildi */
+  body {
+    padding-top: 0 !important; /* Mini logo kalktığı için padding kaldırıldı */
+  }
+  .main-header {
+    top: 0; /* Header ekranın en üstünden başlar */
+  }
 }
 @media (min-width: 769px) {
-  body {
-    padding-top: 0 !important;
-  }
-  .main-header {
-    top: 0;
-  }
+  body {
+    padding-top: 0 !important;
+  }
+  .main-header {
+    top: 0;
+  }
 }
 
 /* =========================================
-   2. HEADER (ÜST MENÜ)
-   ========================================= */
+   2. HEADER (ÜST MENÜ)
+   ========================================= */
 .main-header {
-  background: #ffffff;
-  color: #000;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #000;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: padding 0.3s ease, box-shadow 0.3s ease, transform .25s ease, opacity .25s ease; /* Mobile hidden geçişi için eklendi */
+  background: #ffffff;
+  color: #000;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: padding 0.3s ease, box-shadow 0.3s ease, transform .25s ease, opacity .25s ease; /* Mobile hidden geçişi için eklendi */
 }
 
 .main-header.shrink {
-  padding: 8px 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  padding: 8px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .main-header.mobile-hidden { /* Mobil kaydırma ile gizleme */
-  transform: translateY(-120%);
-  opacity: 0;
-  pointer-events: none;
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  max-height: 140px;
-  opacity: 1;
-  margin-bottom: 4px;
-  transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  max-height: 140px;
+  opacity: 1;
+  margin-bottom: 4px;
+  transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
 }
 
 .logo-area img {
-  height: 110px;
-  object-fit: contain;
-  display: block;
+  height: 110px;
+  object-fit: contain;
+  display: block;
 }
 
 .logo-area span {
-  font-size: 14px;
-  margin-top: 1px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  color: var(--accent);
+  font-size: 14px;
+  margin-top: 1px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: var(--accent);
 }
 
 nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 nav a {
-  color: #000;
-  margin-left: 18px;
-  text-decoration: none;
-  font-weight: bold;
-  background: var(--muted);
-  padding: 10px 16px;
-  border-radius: 6px;
-  transition: 0.35s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  color: #000;
+  margin-left: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  background: var(--muted);
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: 0.35s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
 }
 
 nav a span.icon {
-  font-size: 16px;
+  font-size: 16px;
 }
 
 nav a:hover {
-  background: #d4d4d4;
-  transform: scale(1.08);
+  background: #d4d4d4;
+  transform: scale(1.08);
 }
 
 nav a.active {
-  background: var(--primary);
-  color: #fff;
+  background: var(--primary);
+  color: #fff;
 }
 
 /* Dropdown Menü */
 .nav-dropdown {
-  position: relative;
-  margin-left: 18px;
+  position: relative;
+  margin-left: 18px;
 }
 
 .nav-dropdown-toggle {
-  background: var(--muted);
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.35s ease;
-  color: #000;
+  background: var(--muted);
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.35s ease;
+  color: #000;
 }
 
 .nav-dropdown-toggle .icon {
-  font-size: 16px;
+  font-size: 16px;
 }
 
 .nav-dropdown-toggle:hover {
-  background: #d4d4d4;
-  transform: scale(1.08);
+  background: #d4d4d4;
+  transform: scale(1.08);
 }
 
 .nav-dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 6px);
-  background: #ffffff;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  border-radius: 10px;
-  padding: 10px 14px;
-  min-width: 220px;
-  max-width: 280px;
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 200;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 220px;
+  max-width: 280px;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown.open .nav-dropdown-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .nav-bolge-title {
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
 }
 
 .nav-bolge-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 6px 0;
-  font-size: 13px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 6px 0;
+  font-size: 13px;
 }
 
 .nav-bolge-list li {
-  padding: 2px 0;
+  padding: 2px 0;
 }
 
 /* Dropdown içindeki linkler için güncelleme */
 .nav-bolge-list li button {
-  background: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  color: #222 !important;
-  display: inline-block !important;
-  font-weight: normal !important;
-  border: none; /* button için border kaldırıldı */
-  cursor: pointer;
-  font: inherit;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #222 !important;
+  display: inline-block !important;
+  font-weight: normal !important;
+  border: none; /* button için border kaldırıldı */
+  cursor: pointer;
+  font: inherit;
 }
 .nav-bolge-list li button:hover {
-  text-decoration: underline !important;
-  transform: none !important;
-  color: #0077ff !important;
+  text-decoration: underline !important;
+  transform: none !important;
+  color: #0077ff !important;
 }
 
 .nav-bolge-more {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 12px;
-  text-decoration: none;
-  color: #0077ff;
-  font-weight: 600;
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #0077ff;
+  font-weight: 600;
 }
 
 .nav-bolge-more:hover {
-  text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* =========================================
-   3. HERO (ANA SAYFA KAPAK)
-   ========================================= */
+   3. HERO (ANA SAYFA KAPAK)
+   ========================================= */
 .hero {
-  position: relative;
-  height: 500px;
-  /* GÜNCEL HERO GÖRSELİ */
-  background: url('https://i.imgur.com/PErASFo.png') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 500px;
+  /* GÜNCEL HERO GÖRSELİ */
+  background: url('https://i.imgur.com/PErASFo.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to left, rgba(0,0,0,0.85), rgba(0,0,0,0.45), rgba(0,0,0,0.05));
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(0,0,0,0.85), rgba(0,0,0,0.45), rgba(0,0,0,0.05));
 }
 
 .hero-inner {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 40px;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 40px;
 }
 
 .hero-content {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 34px 40px;
-  border-radius: 10px;
-  color: #fff;
-  max-width: 420px;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 34px 40px;
+  border-radius: 10px;
+  color: #fff;
+  max-width: 420px;
 }
 
 .hero-content h2 {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  line-height: 1.25;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.25;
 }
 
 .hero-content p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0 0 18px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 18px 0;
 }
 
 .hero-content a.hero-btn {
-  display: inline-block;
-  background: var(--primary);
-  padding: 12px 26px;
-  border-radius: 999px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  font-size: 14px;
+  display: inline-block;
+  background: var(--primary);
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 /* =========================================
-   4. YENİ EKLENEN: ALT SAYFA BAŞLIKLARI
-   (Hakkımızda, Hizmetler vb. sayfalar için)
-   ========================================= */
+   4. YENİ EKLENEN: ALT SAYFA BAŞLIKLARI
+   (Hakkımızda, Hizmetler vb. sayfalar için)
+   ========================================= */
 .page-header-banner {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png'); /* Aynı görsel kullanıldı */
-    background-position: center;
-    background-size: cover;
-    padding: 80px 20px;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 40px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png'); /* Aynı görsel kullanıldı */
+    background-position: center;
+    background-size: cover;
+    padding: 80px 20px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 40px;
 }
 
 .page-header-banner h1 {
-    font-size: 36px;
-    font-weight: 800;
-    margin: 0;
-    color: var(--primary);
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+    color: var(--primary);
 }
 
 .page-header-banner p {
-    font-size: 16px;
-    opacity: 0.9;
-    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+    margin-top: 10px;
 }
 
 /* Alt Sayfa İçerik Kutusu */
 .content-wrapper {
-    max-width: 1000px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-    line-height: 1.8;
-    font-size: 16px;
-    color: #333;
+    max-width: 1000px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
 }
 .content-wrapper h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--primary);
-    display: inline-block;
-    padding-bottom: 5px;
+    font-size: 28px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+    padding-bottom: 5px;
 }
 .content-wrapper h3 {
-    font-size: 22px;
-    margin-top: 25px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 /* =========================================
-   5. GENEL BÖLÜM STİLLERİ
-   ========================================= */
+   5. GENEL BÖLÜM STİLLERİ
+   ========================================= */
 .section {
-  padding: 50px 40px;
+  padding: 50px 40px;
 }
 
 .section h3 {
-  font-size: 26px;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .section p,
 .section ul {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .section ul {
-  list-style: disc;
-  padding-left: 20px;
+  list-style: disc;
+  padding-left: 20px;
 }
 
 /* =========================================
-   6. HİZMETLER KARTLARI
-   ========================================= */
+   6. HİZMETLER KARTLARI
+   ========================================= */
 .hizmetler-grid {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
 }
 
 .hizmet-kart {
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px 16px 20px 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 16px 20px 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .hizmet-ikon {
-  font-size: 26px;
-  margin-bottom: 4px;
+  font-size: 26px;
+  margin-bottom: 4px;
 }
 
 .hizmet-baslik {
-  font-weight: 700;
-  margin-bottom: 4px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .hizmet-aciklama {
-  font-size: 14px;
-  color: #555;
+  font-size: 14px;
+  color: #555;
 }
 
 /* =========================================
-   7. GALERİ & SLIDER
-   ========================================= */
+   7. GALERİ & SLIDER
+   ========================================= */
 .galeri-slider {
-  position: relative;
-  max-width: 920px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  background: #ffffff;
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
 }
 
 .galeri-track {
-  display: flex;
-  transition: transform 0.5s ease;
+  display: flex;
+  transition: transform 0.5s ease;
 }
 
 .galeri-slide {
-  min-width: 100%;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
+  min-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
 }
 
 .galeri-slider img {
-  width: 100%;
-  height: auto;
-  max-height: 460px;
-  display: block;
-  border-radius: 14px;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 460px;
+  display: block;
+  border-radius: 14px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  object-fit: cover;
 }
 
 .galeri-slider img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  transform: scale(1.02);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
 }
 
 .galeri-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 2;
 }
 
 .galeri-prev { left: 10px; }
 .galeri-next { right: 10px; }
 
 /* =========================================
-   8. REFERANSLAR
-   ========================================= */
+   8. REFERANSLAR
+   ========================================= */
 .referans-wrapper {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .referans-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 4px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 4px;
 }
 
 .referans-row::-webkit-scrollbar { height: 6px; }
 .referans-row::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 
 .referans-card {
-  min-width: 260px;
-  max-width: 300px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  padding: 18px 18px 20px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex-shrink: 0;
+  min-width: 260px;
+  max-width: 300px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 18px 18px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .referans-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .referans-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .referans-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .referans-name {
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .referans-tag {
-  font-size: 12px;
-  color: #777;
+  font-size: 12px;
+  color: #777;
 }
 
 .referans-stars {
-  color: var(--primary);
-  font-size: 13px;
+  color: var(--primary);
+  font-size: 13px;
 }
 
 .referans-text {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
 }
 
 /* =========================================
-   9. SIK SORULAN SORULAR (SSS)
-   ========================================= */
+   9. SIK SORULAN SORULAR (SSS)
+   ========================================= */
 .faq-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .faq-item {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-  margin-bottom: 10px;
-  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .faq-header {
-  padding: 12px 16px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
 }
 
 .faq-header span.q { flex: 1; padding-right: 10px; }
 .faq-header span.toggle { font-size: 20px; }
 
 .faq-content {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 16px;
-  font-size: 14px;
-  color: #444;
-  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  font-size: 14px;
+  color: #444;
+  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
 }
 
 .faq-item.active .faq-content {
-  max-height: 400px;
-  padding-bottom: 12px;
+  max-height: 400px;
+  padding-bottom: 12px;
 }
 
 .faq-item.active .faq-header {
-  background: var(--muted);
+  background: var(--muted);
 }
 
 .bolge-list {
-  columns: 2;
-  column-gap: 20px;
-  padding-left: 18px;
-  margin-top: 6px;
-  font-size: 13px;
+  columns: 2;
+  column-gap: 20px;
+  padding-left: 18px;
+  margin-top: 6px;
+  font-size: 13px;
 }
 
 .bolge-list li {
-  break-inside: avoid;
-  margin-bottom: 2px;
+  break-inside: avoid;
+  margin-bottom: 2px;
 }
 
 .bolge-link {
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  cursor: pointer;
-  color: #222;
-  text-align: left;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  color: #222;
+  text-align: left;
 }
 
 .bolge-link:hover {
-  text-decoration: underline;
-  color: #0077ff;
+  text-decoration: underline;
+  color: #0077ff;
 }
 
 .bolge-toggle-btn {
-  margin-top: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
-  font-size: 12px;
-  cursor: pointer;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 /* =========================================
-   10. FORMLAR
-   ========================================= */
+   10. FORMLAR
+   ========================================= */
 .form-grid {
-  max-width: 700px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 20px;
 }
 
 .form-row {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 }
 
 .form-row label {
-  margin-bottom: 4px;
-  font-weight: 600;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .form-row input,
 .form-row select,
 .form-row textarea {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 14px;
 }
 
 .form-row textarea {
-  min-height: 80px;
-  resize: vertical;
-  grid-column: 1 / -1;
+  min-height: 80px;
+  resize: vertical;
+  grid-column: 1 / -1;
 }
 
 .form-actions {
-  margin-top: 15px;
-  text-align: center;
+  margin-top: 15px;
+  text-align: center;
 }
 
 .form-actions button {
-  background: var(--primary);
-  border: none;
-  padding: 10px 26px;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
+  background: var(--primary);
+  border: none;
+  padding: 10px 26px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .form-note {
-  font-size: 12px;
-  color: #666;
-  max-width: 700px;
-  margin: 10px auto 0 auto;
+  font-size: 12px;
+  color: #666;
+  max-width: 700px;
+  margin: 10px auto 0 auto;
 }
 
 /* =========================================
-   11. İLETİŞİM & MAPS
-   ========================================= */
+   11. İLETİŞİM & MAPS
+   ========================================= */
 .map-card {
-  max-width: 700px;
-  margin: 0 auto 30px auto;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .map-title {
-  font-weight: 600;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .map-desc {
-  font-size: 13px;
-  color: #555;
+  font-size: 13px;
+  color: #555;
 }
 
 .map-iframe {
-  width: 100%;
-  height: 320px;
-  border: 0;
-  border-radius: 10px;
+  width: 100%;
+  height: 320px;
+  border: 0;
+  border-radius: 10px;
 }
 
 .map-link-btn {
-  align-self: flex-start;
-  margin-top: 6px;
-  background: #0077ff;
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  align-self: flex-start;
+  margin-top: 6px;
+  background: #0077ff;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .iletisim-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto 20px auto;
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+  justify-content: center;
 }
 
 .iletisim-card {
-  flex: 1 1 260px;
-  max-width: 360px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
+  flex: 1 1 260px;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 18px 20px;
 }
 
 .iletisim-card h4 {
-  margin: 0 0 4px 0;
-  font-size: 16px;
+  margin: 0 0 4px 0;
+  font-size: 16px;
 }
 
 .iletisim-card p {
-  margin: 2px 0;
-  font-size: 14px;
+  margin: 2px 0;
+  font-size: 14px;
 }
 
 .iletisim-card a.whatsapp-contact-btn {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 14px;
-  background: #25d366;
-  color: #fff;
-  border-radius: 999px;
-  font-size: 13px;
-  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 14px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 13px;
+  text-decoration: none;
 }
 
 .iletisim-card a.whatsapp-contact-btn:hover {
-  filter: brightness(0.95);
+  filter: brightness(0.95);
 }
 
 /* =========================================
-   12. FOOTER & SABİT BUTONLAR
-   ========================================= */
+   12. FOOTER & SABİT BUTONLAR
+   ========================================= */
 footer {
-  background: var(--dark);
-  color: #ccc;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 13px;
+  background: var(--dark);
+  color: #ccc;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 13px;
 }
 
 footer a {
-  color: #ccc;
-  text-decoration: none;
+  color: #ccc;
+  text-decoration: none;
 }
 
 .floating-cta {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 250;
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 250;
 }
 
 .floating-cta a {
-  text-decoration: none;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .floating-call { background: #007bff; }
@@ -853,131 +839,131 @@ footer a {
 
 /* Lightbox stilleri */
 .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
 .lightbox-inner {
-    position: relative;
-    max-width: 95vw;
-    max-height: 95vh;
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
 }
 .lightbox-close {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: none;
-    background: #ffffff;
-    color: #000;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #ffffff;
+    color: #000;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 #lightbox-img {
-    max-width: 95vw;
-    max-height: 95vh;
-    display: block;
-    border-radius: 10px;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: block;
+    border-radius: 10px;
 }
 
 /* =========================================
-   13. MOBİL DÜZENLEMELER (Responsive)
-   ========================================= */
+   13. MOBİL DÜZENLEMELER (Responsive)
+   ========================================= */
 @media (max-width: 768px) {
-  .main-header {
-    padding: 10px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  .main-header {
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-  .logo-area img {
-    height: 80px;
-  }
+  .logo-area img {
+    height: 80px;
+  }
 
-  .logo-area span {
-    font-size: 12px;
-  }
+  .logo-area span {
+    font-size: 12px;
+  }
 
-  nav {
-    margin-top: 8px;
-    width: 100%;
-  }
+  nav {
+    margin-top: 8px;
+    width: 100%;
+  }
 
-  /* tüm nav elemanlarını 2'li grid yap */
-  nav a {
-    margin: 4px 4px 4px 0;
-    flex: 1 1 calc(50% - 8px);
-    justify-content: center;
-  }
+  /* tüm nav elemanlarını 2'li grid yap */
+  nav a {
+    margin: 4px 4px 4px 0;
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
 
-  .nav-dropdown {
-    flex: 1 1 calc(50% - 8px);
-    margin: 4px 4px 4px 0;
-  }
+  .nav-dropdown {
+    flex: 1 1 calc(50% - 8px);
+    margin: 4px 4px 4px 0;
+  }
 
-  .nav-dropdown-toggle {
-    width: 100%;
-    justify-content: center;
-  }
+  .nav-dropdown-toggle {
+    width: 100%;
+    justify-content: center;
+  }
 
-  /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
-  .nav-dropdown-menu {
-    display: none !important;
-  }
+  /* Mobilde dropdown menüyü gizle (overlay kullanılacak) */
+  .nav-dropdown-menu {
+    display: none !important;
+  }
 
-  .main-header.shrink {
-    padding: 6px 10px;
-  }
+  .main-header.shrink {
+    padding: 6px 10px;
+  }
 
-  .main-header.shrink .logo-area {
-    max-height: 0;
-    opacity: 0;
-    margin-bottom: 0;
-    pointer-events: none;
-  }
+  .main-header.shrink .logo-area {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+  }
 
-  .hero {
-    height: 380px;
-  }
+  .hero {
+    height: 380px;
+  }
 
-  .hero-inner {
-    padding: 0 20px;
-    justify-content: center;
-  }
+  .hero-inner {
+    padding: 0 20px;
+    justify-content: center;
+  }
 
-  .hero-content {
-    margin: 0;
-    padding: 24px 22px;
-    max-width: 100%;
-  }
+  .hero-content {
+    margin: 0;
+    padding: 24px 22px;
+    max-width: 100%;
+  }
 
-  .section {
-    padding: 40px 20px;
-  }
+  .section {
+    padding: 40px 20px;
+  }
 
-  .bolge-list {
-    columns: 1;
-  }
+  .bolge-list {
+    columns: 1;
+  }
 
-  .galeri-slider {
-    max-width: 100%;
-    border-radius: 10px;
-  }
+  .galeri-slider {
+    max-width: 100%;
+    border-radius: 10px;
+  }
 
-  .galeri-slider img {
-    max-height: 260px;
-    border-radius: 10px;
-  }
+  .galeri-slider img {
+    max-height: 260px;
+    border-radius: 10px;
+  }
 
-  .referans-nav-left,
-  .referans-nav-right {
-    display: none;
-  }
+  .referans-nav-left,
+  .referans-nav-right {
+    display: none;
+  }
 }

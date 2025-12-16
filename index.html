@@ -24,15 +24,12 @@
   <link rel="stylesheet" href="style.css">
 
   <script>
-    // Header elementini seçme
-    const header = document.querySelector('.main-header');
-    // Mobil navigasyonu seçme (Navigasyonun gizlenmesini istediğimiz kısım)
-    const mobileNav = document.getElementById('mobileNav'); 
-
     document.addEventListener('DOMContentLoaded', function () {
 
+      // Header elementini seçme
+      const header = document.querySelector('.main-header');
       
-      // Sticky küçülen Header (Desktop için kalabilir)
+      // Sticky küçülen Header (Desktop için)
       if (header) {
         window.addEventListener('scroll', () => {
           if (window.scrollY > 50) {
@@ -52,32 +49,37 @@
         });
       }
 
+      // Mini logo kaldırıldı (index.html'de de silindi).
 
-      // ===== MOBİLDE: Navigasyonu sadece en üstte göster (SARI ALAN GİZLENMESİ) =====
-      // Bu fonksiyon artık mobileNav'ı kontrol edecek.
-      function updateMobileNavVisibility() {
-        if (!mobileNav) return;
-        if (window.innerWidth > 768) {
-          mobileNav.classList.remove('mobile-hidden');
-          return;
+      // ===== MOBİLDE: header sadece en üstte görünür (SARI ALAN KONTROLÜ) =====
+      // Not: Bu fonksiyon artık nav kısmının tamamını gizleyip gösterecek.
+      function updateMobileHeader() {
+        if (!header) return;
+        
+        // Mobil görünümde çalışsın
+        if (window.innerWidth <= 768) {
+             // Sadece header'ın altındaki navigasyon (nav) kısmını kontrol ediyoruz
+             const navElement = header.querySelector('nav'); 
+             if (!navElement) return;
+
+          if (window.scrollY <= 5) {
+            navElement.classList.remove('mobile-hidden');
+          } else {
+            navElement.classList.add('mobile-hidden');
+          }
         }
-        // scrollY <= 5 iken navigasyon görünür
-        if (window.scrollY <= 5) { 
-          mobileNav.classList.remove('mobile-hidden');
-        } else {
-          // Aşağı kaydırıldığında gizlenir
-          mobileNav.classList.add('mobile-hidden');
-        }
+        // Masaüstü için mobile-hidden kaldırılır
+        if (window.innerWidth > 768) {
+            const navElement = header.querySelector('nav'); 
+            if (navElement) navElement.classList.remove('mobile-hidden');
+        }
       }
 
-      window.addEventListener('scroll', updateMobileNavVisibility, { passive: true });
-      window.addEventListener('resize', updateMobileNavVisibility, { passive: true });
-      updateMobileNavVisibility();
+      window.addEventListener('scroll', updateMobileHeader, { passive: true });
+      window.addEventListener('resize', updateMobileHeader, { passive: true });
+      updateMobileHeader();
 
-
-      // Diğer script kodları (Galeri, FAQ, Form vb.) KORUNDU
-      
-      // Galeri slider (Bu sayfada slider yoksa sorun olmaz)
+      // Galeri slider (KOD KORUNDU)
       const slider = document.querySelector('.galeri-slider');
       const track = document.querySelector('.galeri-track');
       const slides = document.querySelectorAll('.galeri-slide');
@@ -105,7 +107,7 @@
         if (prevBtn) prevBtn.addEventListener('click', goPrev);
       }
 
-      // Galeri tıklama → lightbox
+      // Galeri tıklama → lightbox (KOD KORUNDU)
       const galeriImages = document.querySelectorAll('.galeri-slider img, .referans-avatar img');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -142,7 +144,7 @@
         });
       }
 
-      // FAQ akordeon
+      // FAQ akordeon (KOD KORUNDU)
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach((item) => {
         const headerEl = item.querySelector('.faq-header');
@@ -162,7 +164,7 @@
         });
       });
 
-      // Hizmet bölgeleri "daha fazla göster" butonu
+      // Hizmet bölgeleri "daha fazla göster" butonu (KOD KORUNDU)
       const bolgelerToggle = document.getElementById('bolgeler-toggle');
       const bolgelerExtra = document.getElementById('bolgeler-extra');
 
@@ -197,7 +199,7 @@
         });
       }
 
-      // İlçe yönlendirme
+      // İlçe yönlendirme (KOD KORUNDU)
       const bolgeLinks = document.querySelectorAll('.bolge-link');
       if (bolgeLinks.length) {
         bolgeLinks.forEach((btn) => {
@@ -214,7 +216,7 @@
         });
       }
 
-      // Fiyat Teklif Formu → WhatsApp
+      // Fiyat Teklif Formu → WhatsApp (KOD KORUNDU)
       const teklifForm = document.getElementById('teklif-form');
       if (teklifForm) {
         teklifForm.addEventListener('submit', (e) => {
@@ -255,7 +257,7 @@
         });
       }
 
-      // HEADER HİZMET BÖLGELERİ DROPDOWN + OVERLAY
+      // HEADER HİZMET BÖLGELERİ DROPDOWN + OVERLAY (KOD KORUNDU)
       const navDropdown = document.querySelector('.nav-dropdown');
       const navDropdownToggle = document.querySelector('.nav-dropdown-toggle');
       const bolgeOverlay = document.getElementById('bolge-overlay');
@@ -280,7 +282,7 @@
         });
       }
 
-      // Hizmet bölgeleri overlay kapatma
+      // Hizmet bölgeleri overlay kapatma (KOD KORUNDU)
       if (bolgeOverlay && bolgeOverlayClose) {
         bolgeOverlayClose.addEventListener('click', function () {
           bolgeOverlay.style.display = 'none';
@@ -293,7 +295,7 @@
         });
       }
 
-      // "Tüm ilçeleri gör" kısayolları
+      // "Tüm ilçeleri gör" kısayolları (KOD KORUNDU)
       const bolgeShortcuts = document.querySelectorAll('.bolge-shortcut');
       if (bolgeShortcuts.length) {
         bolgeShortcuts.forEach((link) => {
@@ -318,13 +320,14 @@
 
 <body>
 
-    <div class="page-wrapper">
-        <header class="main-header fixed-mobile">
-              <div class="logo-area">
+  <div class="page-wrapper">
+    <header class="main-header">
+      <div class="logo-area">
         <img src="https://i.imgur.com/Zlnujsc.png" alt="Yıldırım Nakliyat Logo" />
         <span>Bir kamyon dolusu deneyimimiz var.</span>
       </div>
-              <nav id="mobileNav">
+
+      <nav>
         <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
         <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
         <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
@@ -353,7 +356,6 @@
         </div>
       </nav>
     </header>
-    <div id="headerSpacer"></div>
 
     <section class="hero" id="ust">
       <div class="hero-inner">
@@ -364,8 +366,8 @@
         </div>
       </div>
     </section>
-    
-        <section class="section" id="hakkimizda">
+
+    <section class="section" id="hakkimizda">
       <h3>Hakkımızda</h3>
       <p>
         <strong>Yıldırım Nakliyat</strong>, kurucusu <strong>Mehmet Yıldırım</strong> olan, yılların deneyimini modern nakliye
@@ -609,7 +611,7 @@
         </div>
         <div class="form-actions">
           <button type="submit">Teklif İste</button>
-        </div>
+          </div>
         <div class="form-note">
           Gönder tuşuna bastığınızda, verdiğiniz bilgilerle WhatsApp üzerinden otomatik mesaj taslağı oluşturulur. Böylece tekrar yazmak zorunda kalmadan tek tıkla bize iletebilirsiniz.
         </div>
@@ -780,7 +782,7 @@
       <button class="lightbox-close">×</button>
       <img id="lightbox-img" src="" alt="Büyük Görsel" />
     </div>
-      </div>
+  </div>
 
   <div id="bolge-overlay"
         style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9998;">

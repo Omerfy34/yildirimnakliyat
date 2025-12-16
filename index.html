@@ -14,859 +14,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" href="logo.jpg" type="image/jpeg">
-   
+  
   <title>Yıldırım Nakliyat - İstanbul Evden Eve Nakliyat</title>
-   
+    
   <meta name="description" content="Yıldırım Nakliyat; İstanbul şehir içi ve şehirler arası evden eve nakliyat, ofis taşıma ve parça eşya taşımacılığı hizmetleri sunar. Sigortalı, asansörlü ve profesyonel taşıma için teklif alın." />
   
   <meta name="keywords" content="yıldırım nakliyat, istanbul evden eve nakliyat, İstanbul yük taşıma, şehirler arası nakliyat, asansörlü taşıma, ofis taşıma, sigortalı nakliyat, parça eşya taşıma, istanbul nakliye firmaları" />
 
-  <style>
-    :root {
-      --primary: #f5b301;   /* ana sarı */
-      --accent:  #c89b4a;   /* logo ile uyumlu altın ton */
-      --dark:    #111111;   /* koyu arka plan / footer */
-      --light:   #f7f7f7;   /* sayfa zemini */
-      --muted:   #f2f2f2;   /* menü kutuları, arka planlar */
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--light);
-      scroll-behavior: auto;
-      color: #222;
-    }
-
-    .page-wrapper {
-      max-width: 1300px;
-      margin: 0 auto;
-      background-color: #ffffff;
-    }
-
-    /* HEADER */
-    .main-header {
-      background: #ffffff;
-      color: #000;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #000;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: padding 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .main-header.shrink {
-      padding: 8px 30px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-    }
-
-    .logo-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      max-height: 140px;
-      opacity: 1;
-      margin-bottom: 4px;
-      transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
-    }
-
-    .logo-area img {
-      height: 110px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .logo-area span {
-      font-size: 14px;
-      margin-top: 1px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      color: var(--accent);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    nav a {
-      color: #000;
-      margin-left: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      background: var(--muted);
-      padding: 10px 16px;
-      border-radius: 6px;
-      transition: 0.35s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-    }
-
-    nav a span.icon {
-      font-size: 16px;
-    }
-
-    nav a:hover {
-      background: #d4d4d4;
-      transform: scale(1.08);
-    }
-
-    nav a.active {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    /* HİZMET BÖLGELERİ DROPDOWN (HEADER) */
-    .nav-dropdown {
-      position: relative;
-      margin-left: 18px;
-    }
-
-    .nav-dropdown-toggle {
-      background: var(--muted);
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: none;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.35s ease;
-      color: #000;
-    }
-
-    .nav-dropdown-toggle .icon {
-      font-size: 16px;
-    }
-
-    .nav-dropdown-toggle:hover {
-      background: #d4d4d4;
-      transform: scale(1.08);
-    }
-
-    .nav-dropdown-menu {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 6px);
-      background: #ffffff;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      border-radius: 10px;
-      padding: 10px 14px;
-      min-width: 220px;
-      max-width: 280px;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 200;
-    }
-
-    .nav-dropdown:hover .nav-dropdown-menu {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .nav-dropdown.open .nav-dropdown-menu {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .nav-bolge-title {
-      font-weight: 600;
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
-
-    .nav-bolge-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 6px 0;
-      font-size: 13px;
-    }
-
-    .nav-bolge-list li {
-      padding: 2px 0;
-    }
-
-    .nav-bolge-more {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 12px;
-      text-decoration: none;
-      color: #0077ff;
-      font-weight: 600;
-    }
-
-    .nav-bolge-more:hover {
-      text-decoration: underline;
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      height: 500px;
-      background: url('https://i.hizliresim.com/j9iwhln.png') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to left,
-        rgba(0,0,0,0.85),
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.05)
-      );
-    }
-
-    .hero-inner {
-      position: relative;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 40px;
-    }
-
-    .hero-content {
-      background: rgba(0, 0, 0, 0.55);
-      padding: 34px 40px;
-      border-radius: 10px;
-      color: #fff;
-      max-width: 420px;
-    }
-
-    .hero-content h2 {
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      line-height: 1.25;
-    }
-
-    .hero-content p {
-      font-size: 16px;
-      line-height: 1.5;
-      margin: 0 0 18px 0;
-    }
-
-    .hero-content a.hero-btn {
-      display: inline-block;
-      background: var(--primary);
-      padding: 12px 26px;
-      border-radius: 999px;
-      font-weight: bold;
-      color: #000;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .section {
-      padding: 50px 40px;
-    }
-
-    .section h3 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .section p,
-    .section ul {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section ul {
-      list-style: disc;
-      padding-left: 20px;
-    }
-
-    /* HİZMETLER KARTLARI */
-    .hizmetler-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
-    }
-
-    .hizmet-kart {
-      background: #fff;
-      border-radius: 12px;
-      padding: 18px 16px 20px 16px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .hizmet-ikon {
-      font-size: 26px;
-      margin-bottom: 4px;
-    }
-
-    .hizmet-baslik {
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .hizmet-aciklama {
-      font-size: 14px;
-      color: #555;
-    }
-
-    /* GALERİ SLIDER */
-    .galeri-slider {
-      position: relative;
-      max-width: 920px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-      background: #ffffff;
-    }
-
-    .galeri-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .galeri-slide {
-      min-width: 100%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-    }
-
-    .galeri-slider img {
-      width: 100%;
-      height: auto;
-      max-height: 460px;
-      display: block;
-      border-radius: 14px;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      object-fit: cover;
-    }
-
-    .galeri-slider img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
-    }
-
-    .galeri-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 2;
-    }
-
-    .galeri-prev {
-      left: 10px;
-    }
-
-    .galeri-next {
-      right: 10px;
-    }
-
-    /* Referans kartları */
-    .referans-wrapper {
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .referans-row {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding-bottom: 4px;
-    }
-
-    .referans-row::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .referans-row::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 3px;
-    }
-
-    .referans-card {
-      min-width: 260px;
-      max-width: 300px;
-      background: #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      padding: 18px 18px 20px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .referans-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .referans-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .referans-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .referans-name {
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .referans-tag {
-      font-size: 12px;
-      color: #777;
-    }
-
-    .referans-stars {
-      color: var(--primary);
-      font-size: 13px;
-    }
-
-    .referans-text {
-      font-size: 14px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    /* FAQ */
-    .faq-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
-
-    .faq-header {
-      padding: 12px 16px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-    }
-
-    .faq-header span.q {
-      flex: 1;
-      padding-right: 10px;
-    }
-
-    .faq-header span.toggle {
-      font-size: 20px;
-    }
-
-    .faq-content {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 16px;
-      font-size: 14px;
-      color: #444;
-      transition: max-height 0.3s ease, padding-bottom 0.3s ease;
-    }
-
-    .faq-item.active .faq-content {
-      max-height: 400px;
-      padding-bottom: 12px;
-    }
-
-    .faq-item.active .faq-header {
-      background: var(--muted);
-    }
-
-    /* Hizmet bölgeleri listesi (SSS içinde) */
-    .bolge-list {
-      columns: 2;
-      column-gap: 20px;
-      padding-left: 18px;
-      margin-top: 6px;
-      font-size: 13px;
-    }
-
-    .bolge-list li {
-      break-inside: avoid;
-      margin-bottom: 2px;
-    }
-
-    .bolge-link {
-      border: none;
-      background: none;
-      padding: 0;
-      margin: 0;
-      font: inherit;
-      cursor: pointer;
-      color: #222;
-      text-align: left;
-    }
-
-    .bolge-link:hover {
-      text-decoration: underline;
-      color: #0077ff;
-    }
-
-    .bolge-toggle-btn {
-      margin-top: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid #ddd;
-      background: #f5f5f5;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    /* Teklif formu */
-    .form-grid {
-      max-width: 700px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px 20px;
-    }
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      font-size: 14px;
-    }
-
-    .form-row label {
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
-
-    .form-row input,
-    .form-row select,
-    .form-row textarea {
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-family: inherit;
-      font-size: 14px;
-    }
-
-    .form-row textarea {
-      min-height: 80px;
-      resize: vertical;
-      grid-column: 1 / -1;
-    }
-
-    .form-actions {
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    .form-actions button {
-      background: var(--primary);
-      border: none;
-      padding: 10px 26px;
-      border-radius: 6px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .form-note {
-      font-size: 12px;
-      color: #666;
-      max-width: 700px;
-      margin: 10px auto 0 auto;
-    }
-
-    /* Maps kartı */
-    .map-card {
-      max-width: 700px;
-      margin: 0 auto 30px auto;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .map-title {
-      font-weight: 600;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .map-desc {
-      font-size: 13px;
-      color: #555;
-    }
-
-    .map-iframe {
-      width: 100%;
-      height: 320px;
-      border: 0;
-      border-radius: 10px;
-    }
-
-    .map-link-btn {
-      align-self: flex-start;
-      margin-top: 6px;
-      background: #0077ff;
-      color: #fff;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* İletişim kartları */
-    .iletisim-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto 20px auto;
-      justify-content: center;
-    }
-
-    .iletisim-card {
-      flex: 1 1 260px;
-      max-width: 360px;
-      background: #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      padding: 18px 20px;
-    }
-
-    .iletisim-card h4 {
-      margin: 0 0 4px 0;
-      font-size: 16px;
-    }
-
-    .iletisim-card p {
-      margin: 2px 0;
-      font-size: 14px;
-    }
-
-    .iletisim-card a.whatsapp-contact-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 14px;
-      background: #25d366;
-      color: #fff;
-      border-radius: 999px;
-      font-size: 13px;
-      text-decoration: none;
-    }
-
-    .iletisim-card a.whatsapp-contact-btn:hover {
-      filter: brightness(0.95);
-    }
-
-    footer {
-      background: var(--dark);
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      font-size: 13px;
-    }
-
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    /* Sabit alt butonlar */
-    .floating-cta {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      z-index: 250;
-    }
-
-    .floating-cta a {
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .floating-call {
-      background: #007bff;
-    }
-
-    .floating-wa {
-      background: #25d366;
-    }
-
-    /* MOBİL DÜZENLEMELER */
-    @media (max-width: 768px) {
-      .main-header {
-        padding: 10px 16px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .logo-area img {
-        height: 80px;
-      }
-
-      .logo-area span {
-        font-size: 12px;
-      }
-
-      nav {
-        margin-top: 8px;
-        width: 100%;
-      }
-
-      /* tüm nav elemanlarını 2'li grid yap */
-      nav a {
-        margin: 4px 4px 4px 0;
-        flex: 1 1 calc(50% - 8px);
-        justify-content: center;
-      }
-
-      .nav-dropdown {
-        flex: 1 1 calc(50% - 8px);
-        margin: 4px 4px 4px 0;
-      }
-
-      .nav-dropdown-toggle {
-        width: 100%;
-        justify-content: center;
-      }
-
-      /* Mobilde dropdown menüyü gizle (beyaz blok kalksın) */
-      .nav-dropdown-menu {
-        display: none !important;
-      }
-
-      .main-header.shrink {
-        padding: 6px 10px;
-      }
-
-      .main-header.shrink .logo-area {
-        max-height: 0;
-        opacity: 0;
-        margin-bottom: 0;
-        pointer-events: none;
-      }
-
-      .hero {
-        height: 380px;
-      }
-
-      .hero-inner {
-        padding: 0 20px;
-        justify-content: center;
-      }
-
-      .hero-content {
-        margin: 0;
-        padding: 24px 22px;
-        max-width: 100%;
-      }
-
-      .section {
-        padding: 40px 20px;
-      }
-
-      .bolge-list {
-        columns: 1;
-      }
-
-      .galeri-slider {
-        max-width: 100%;
-        border-radius: 10px;
-      }
-
-      .galeri-slider img {
-        max-height: 260px;
-        border-radius: 10px;
-      }
-
-      .referans-nav-left,
-      .referans-nav-right {
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-       
-      // Header linkleri artık sayfa açacak şekilde düzenlendiği için smooth scroll kodu kaldırıldı.
 
       // Sticky küçülen Header
       const header = document.querySelector('.main-header');
@@ -877,19 +35,45 @@
           } else {
             header.classList.remove('shrink');
           }
-        });
+        }, { passive: true });
       }
 
-      // Logo'ya tıklayınca en üste dön
+      // Logo'ya tıklayınca index'e git
       const logoArea = document.querySelector('.logo-area');
       if (logoArea) {
         logoArea.addEventListener('click', (e) => {
           e.preventDefault();
-          window.location.href = 'index.html'; // Logo tıklayınca da index'e gitsin
+          window.location.href = 'index.html';
         });
       }
 
-      // Galeri slider (Eski yapı korundu)
+      // Mini logo'ya tıklayınca index'e git
+      const miniLogo = document.getElementById('miniLogo');
+      if (miniLogo) {
+        miniLogo.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+
+      // ===== MOBİLDE: header sadece en üstte görünür =====
+      function updateMobileHeader() {
+        if (!header) return;
+        if (window.innerWidth > 768) {
+          header.classList.remove('mobile-hidden');
+          return;
+        }
+        if (window.scrollY <= 5) {
+          header.classList.remove('mobile-hidden');
+        } else {
+          header.classList.add('mobile-hidden');
+        }
+      }
+
+      window.addEventListener('scroll', updateMobileHeader, { passive: true });
+      window.addEventListener('resize', updateMobileHeader, { passive: true });
+      updateMobileHeader();
+
+      // Galeri slider (Bu sayfada slider yoksa sorun olmaz)
       const slider = document.querySelector('.galeri-slider');
       const track = document.querySelector('.galeri-track');
       const slides = document.querySelectorAll('.galeri-slide');
@@ -954,21 +138,6 @@
         });
       }
 
-      // Referans yatay scroll
-      const refRow = document.querySelector('.referans-row');
-      const refLeft = document.querySelector('.referans-nav-left');
-      const refRight = document.querySelector('.referans-nav-right');
-      const scrollAmount = 300;
-
-      if (refRow && refLeft && refRight) {
-        refLeft.addEventListener('click', () => {
-          refRow.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-        refRight.addEventListener('click', () => {
-          refRow.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-      }
-
       // FAQ akordeon
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach((item) => {
@@ -1024,25 +193,18 @@
         });
       }
 
-      // === İLÇE YÖNLENDİRME (GÜNCELLENDİ) ===
-      // Hizmet bölgeleri sayfasına yönlendirme yapar
+      // İlçe yönlendirme
       const bolgeLinks = document.querySelectorAll('.bolge-link');
-
       if (bolgeLinks.length) {
         bolgeLinks.forEach((btn) => {
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            // Butondaki data-bolge verisini al (örnek: "avcilar")
             const ilceAdi = btn.getAttribute('data-bolge');
-
-            // Eğer bir ilçe adı tanımlıysa dinamik sayfaya parametre ile git
             if (ilceAdi) {
-                // Not: Diğer dosyanın adının "hizmet-bolgeleri.html" olduğunu varsayıyoruz.
-                window.location.href = "hizmet-bolgeleri.html?ilce=" + ilceAdi; 
+              window.location.href = "hizmet-bolgeleri.html?ilce=" + ilceAdi;
             } else {
-                window.location.href = "hizmet-bolgeleri.html";
+              window.location.href = "hizmet-bolgeleri.html";
             }
           });
         });
@@ -1127,14 +289,13 @@
         });
       }
 
-      // Header + overlay içindeki "Tüm ilçeleri gör" kısayolları
+      // "Tüm ilçeleri gör" kısayolları
       const bolgeShortcuts = document.querySelectorAll('.bolge-shortcut');
       if (bolgeShortcuts.length) {
         bolgeShortcuts.forEach((link) => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
-            // Tüm ilçeleri gör dediğinde de ana listeye gitsin
-            window.location.href = "hizmet-bolgeleri.html"; 
+            window.location.href = "hizmet-bolgeleri.html";
           });
         });
       }
@@ -1146,15 +307,19 @@
           }
         }
       });
+
     });
   </script>
 </head>
 
 <body>
+
+  <div id="miniLogo">Yıldırım Nakliyat</div>
+
   <div class="page-wrapper">
     <header class="main-header">
       <div class="logo-area">
-        <img src="https://i.hizliresim.com/h50zh5q.png" alt="Yıldırım Nakliyat Logo" />
+        <img src="https://i.imgur.com/Zlnujsc.png" alt="Yıldırım Nakliyat Logo" />
         <span>Bir kamyon dolusu deneyimimiz var.</span>
       </div>
 
@@ -1258,12 +423,12 @@
       <h3>Galeri</h3>
       <div style="max-width:1000px;margin:0 auto;text-align:center;">
         <a data-flickr-embed="true"
-           href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
-           title="Yıldırım Nakliyat Galeri">
+            href="https://www.flickr.com/photos/203946730@N04/albums/72177720330820254"
+            title="Yıldırım Nakliyat Galeri">
           <img src="https://live.staticflickr.com/65535/54972518280_59f691e63e_b.jpg"
-               width="1600" height="1200"
-               alt="Yıldırım Nakliyat Galeri"
-               style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.22);" />
+              width="1600" height="1200"
+              alt="Yıldırım Nakliyat Galeri"
+              style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.22);" />
         </a>
         <p style="font-size:13px;color:#555;margin-top:8px;">
           Albümdeki tüm fotoğrafları görmek için görsele tıklayabilirsiniz.
@@ -1608,15 +773,15 @@
     </section>
   </div>
 
-  <div id="lightbox" class="lightbox" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999;">
-    <div class="lightbox-inner" style="position:relative;max-width:95vw;max-height:95vh;">
-      <button class="lightbox-close" style="position:absolute;top:-10px;right:-10px;width:32px;height:32px;border-radius:50%;border:none;background:#ffffff;color:#000;font-size:20px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.4);">×</button>
-      <img id="lightbox-img" src="" alt="Büyük Görsel" style="max-width:95vw;max-height:95vh;display:block;border-radius:10px;" />
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close">×</button>
+      <img id="lightbox-img" src="" alt="Büyük Görsel" />
     </div>
   </div>
 
   <div id="bolge-overlay"
-       style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9998;">
+        style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9998;">
     <div style="background:#ffffff;padding:16px 20px;border-radius:12px;max-width:280px;width:80%;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-size:14px;">
       <div style="font-weight:600;margin-bottom:6px;">İstanbul Hizmet Bölgeleri</div>
       <ul style="margin:0 0 8px 18px;padding:0;list-style:disc;font-size:13px;">
@@ -1629,7 +794,7 @@
         <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
       </ul>
       <a href="hizmet-bolgeleri.html" class="bolge-shortcut"
-         style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
+          style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
         Tüm ilçeleri gör
       </a>
       <button type="button" id="bolge-overlay-close"

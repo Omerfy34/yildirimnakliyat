@@ -12,14 +12,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="icon" href="logo.jpg" type="image/jpeg">
-   
-  <title>Yıldırım Nakliyat - İstanbul Evden Eve Nakliyat</title>
-   
-  <meta name="description" content="Yıldırım Nakliyat; İstanbul şehir içi ve şehirler arası evden eve nakliyat, ofis taşıma ve parça eşya taşımacılığı hizmetleri sunar. Sigortalı, asansörlü ve profesyonel taşıma için teklif alın." />
   
-  <meta name="keywords" content="yıldırım nakliyat, istanbul evden eve nakliyat, İstanbul yük taşıma, şehirler arası nakliyat, asansörlü taşıma, ofis taşıma, sigortalı nakliyat, parça eşya taşıma, istanbul nakliye firmaları" />
+  <title>Yıldırım Nakliyat</title>
+  
+  <meta name="description" content="Yıldırım Nakliyat, Ömer Yıldırım liderliğinde şehir içi ve şehirler arası ev, ofis ve parça eşya taşımacılığı sunar. Asansörlü, sigortalı ve profesyonel nakliye hizmetleri için hemen teklif alın." />
+  <meta name="keywords" content="yıldırım nakliyat, ömer yıldırım, evden eve nakliyat, şehirler arası nakliyat, asansörlü taşıma, istanbul nakliye" />
 
   <style>
     :root {
@@ -865,8 +862,37 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-       
-      // Header linkleri artık sayfa açacak şekilde düzenlendiği için smooth scroll kodu kaldırıldı.
+      // ----- Slow Smooth Scroll -----
+      function slowScrollTo(target, duration = 400) {
+        const start = window.pageYOffset;
+        const end = target.offsetTop - 90;
+        const distance = end - start;
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const time = currentTime - startTime;
+          const progress = Math.min(time / duration, 1);
+          window.scrollTo(0, start + distance * progress);
+          if (time < duration) requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+      }
+
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      // bolge-shortcut'lar için özel işlem yapacağımızdan smooth scroll'dan hariç tuttuk
+      const scrollLinks = document.querySelectorAll('a[href^="#"]:not(.bolge-shortcut)');
+
+      scrollLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            slowScrollTo(target, 400);
+          }
+        });
+      });
 
       // Sticky küçülen Header
       const header = document.querySelector('.main-header');
@@ -885,11 +911,24 @@
       if (logoArea) {
         logoArea.addEventListener('click', (e) => {
           e.preventDefault();
-          window.location.href = 'index.html'; // Logo tıklayınca da index'e gitsin
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
 
-      // Galeri slider (Eski yapı korundu)
+      // Aktif menü vurgusu
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + 120;
+        sections.forEach((sec) => {
+          if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+            navLinks.forEach((l) => l.classList.remove('active'));
+            const activeLink = document.querySelector('nav a[href="#' + sec.id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      });
+
+      // Galeri slider
       const slider = document.querySelector('.galeri-slider');
       const track = document.querySelector('.galeri-track');
       const slides = document.querySelectorAll('.galeri-slide');
@@ -1024,8 +1063,7 @@
         });
       }
 
-      // === İLÇE YÖNLENDİRME (GÜNCELLENDİ) ===
-      // Hizmet bölgeleri sayfasına yönlendirme yapar
+      // === İLÇE YÖNLENDİRME (KUTU KALDIRILDI) ===
       const bolgeLinks = document.querySelectorAll('.bolge-link');
 
       if (bolgeLinks.length) {
@@ -1033,16 +1071,12 @@
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            // Butondaki data-bolge verisini al (örnek: "avcilar")
-            const ilceAdi = btn.getAttribute('data-bolge');
 
-            // Eğer bir ilçe adı tanımlıysa dinamik sayfaya parametre ile git
-            if (ilceAdi) {
-                // Not: Diğer dosyanın adının "hizmet-bolgeleri.html" olduğunu varsayıyoruz.
-                window.location.href = "hizmet-bolgeleri.html?ilce=" + ilceAdi; 
-            } else {
-                window.location.href = "hizmet-bolgeleri.html";
+            const key = this.dataset.bolge;
+
+            // İlgili ilçe için hizmet-bolgeleri.html sayfasına git
+            if (key) {
+              window.location.href = "hizmet-bolgeleri.html?ilce=" + key;
             }
           });
         });
@@ -1055,7 +1089,7 @@
           e.preventDefault();
           const formData = new FormData(teklifForm);
 
-          const adsoyad = formData.get('adsoyad') || '';
+          const adSoyad = formData.get('adsoyad') || '';
           const telefon = formData.get('telefon') || '';
           const email = formData.get('email') || '';
           const nereden = formData.get('nereden') || '';
@@ -1069,7 +1103,7 @@
           const bodyLines = [
             '*Yıldırım Nakliyat Fiyat Teklif Talebi*',
             '',
-            `Ad Soyad: ${adsoyad}`,
+            `Ad Soyad: ${adSoyad}`,
             `Telefon: ${telefon}`,
             email ? `E-posta: ${email}` : '',
             `Nereden: ${nereden}`,
@@ -1133,8 +1167,15 @@
         bolgeShortcuts.forEach((link) => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
-            // Tüm ilçeleri gör dediğinde de ana listeye gitsin
-            window.location.href = "hizmet-bolgeleri.html"; 
+            const target = document.getElementById('faq-bolgeler');
+            if (target) {
+              slowScrollTo(target, 400);
+
+              if (bolgeOverlay) bolgeOverlay.style.display = 'none';
+              if (navDropdown) navDropdown.classList.remove('open');
+
+              setTimeout(openBolgelerFaq, 450);
+            }
           });
         });
       }
@@ -1159,12 +1200,11 @@
       </div>
 
       <nav>
-        <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
-        <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
-        <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
-        <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
-        <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
-        <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
+        <a href="#hakkimizda"><span class="icon">🏠</span> <span>Hakkımızda</span></a>
+        <a href="#hizmetler"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+        <a href="#galeri"><span class="icon">🖼️</span> <span>Galeri</span></a>
+        <a href="#referanslar"><span class="icon">⭐</span> <span>Referanslar</span></a>
+        <a href="#iletisim"><span class="icon">📞</span> <span>İletişim</span></a>
 
         <div class="nav-dropdown">
           <button type="button" class="nav-dropdown-toggle">
@@ -1182,7 +1222,7 @@
               <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
               <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
             </ul>
-            <a href="hizmet-bolgeleri.html" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
+            <a href="#faq-bolgeler" class="nav-bolge-more bolge-shortcut">Tüm ilçeleri gör</a>
           </div>
         </div>
       </nav>
@@ -1193,7 +1233,7 @@
         <div class="hero-content">
           <h2>Profesyonel Nakliyat — Güvenli ve Hızlı</h2>
           <p>Şehir içi ve şehirler arası nakliyede uzman kadromuzla güvenilir hizmet sunuyoruz.</p>
-          <a href="iletisim.html" class="hero-btn">Hemen Teklif Al</a>
+          <a href="#teklif" class="hero-btn">Hemen Teklif Al</a>
         </div>
       </div>
     </section>
@@ -1628,7 +1668,7 @@
         <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
         <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
       </ul>
-      <a href="hizmet-bolgeleri.html" class="bolge-shortcut"
+      <a href="#faq-bolgeler" class="bolge-shortcut"
          style="display:inline-block;font-size:12px;color:#0077ff;text-decoration:none;margin-bottom:10px;">
         Tüm ilçeleri gör
       </a>

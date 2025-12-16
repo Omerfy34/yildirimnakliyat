@@ -49,182 +49,160 @@
     }
 
     /* =========================================
-       2. HEADER
-       ========================================= */
-    .main-header {
-      background: #ffffff;
-      color: #000;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #000;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: padding 0.3s ease, box-shadow 0.3s ease;
-    }
+   2. HEADER (PC MENÜ DÜZELTME)
+   ========================================= */
+.main-header{
+  background:#ffffff;
+  color:#000;
+  padding: 12px 28px;             /* daha dar padding = daha çok alan */
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 16px;                       /* logo ile menü arası kontrollü */
+  border-bottom:2px solid #000;
+  position:sticky;
+  top:0;
+  z-index:100;
+  transition: padding .3s ease, box-shadow .3s ease;
+}
 
-    .main-header.shrink {
-      padding: 8px 30px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-    }
+.main-header.shrink{
+  padding: 8px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
 
-    .logo-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      max-height: 140px;
-      opacity: 1;
-      margin-bottom: 4px;
-      transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
-    }
+/* Logo alanı biraz daha kompakt */
+.logo-area{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;          /* sola hizala = menü daha sola gelir */
+  text-align:left;
+  cursor:pointer;
+  max-height:140px;
+  opacity:1;
+  margin-bottom:0;
+  flex: 0 0 auto;
+}
 
-    .logo-area img {
-      height: 110px;
-      object-fit: contain;
-      display: block;
-    }
+.logo-area img{
+  height: 98px;                    /* küçült */
+  object-fit:contain;
+  display:block;
+}
 
-    .logo-area span {
-      font-size: 14px;
-      margin-top: 1px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      color: var(--accent);
-    }
+.logo-area span{
+  font-size: 13px;                 /* küçült */
+  margin-top: 2px;
+  font-weight: bold;
+  letter-spacing:.3px;
+  color: var(--accent);
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-items: center;
-    }
+/* Menü tek satır + boşluklarla (margin yerine gap) */
+nav{
+  display:flex;
+  flex-wrap: nowrap;               /* ALTA DÜŞMESİN */
+  gap: 10px;                       /* tüm kutular arası mesafe */
+  justify-content:flex-end;
+  align-items:center;              /* hepsi aynı hizada */
+  min-width: 0;
+}
 
-    nav a {
-      color: #000;
-      margin-left: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      background: var(--muted);
-      padding: 10px 16px;
-      border-radius: 6px;
-      transition: 0.35s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-    }
+/* Link butonları küçült */
+nav a{
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  background: var(--muted);
+  padding: 8px 12px;               /* küçült */
+  border-radius: 6px;
+  transition: .25s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size: 13px;                 /* küçült */
+  margin-left: 0;                  /* artık gap kullanıyoruz */
+  white-space: nowrap;             /* yazı bölünmesin */
+}
 
-    nav a span.icon { font-size: 16px; }
+nav a span.icon{ font-size: 15px; }
 
-    nav a:hover {
-      background: #d4d4d4;
-      transform: scale(1.08);
-    }
+nav a:hover{
+  background:#d4d4d4;
+  transform: scale(1.04);          /* daha az büyüsün (taşırmasın) */
+}
 
-    nav a.active {
-      background: var(--primary);
-      color: #fff;
-    }
+nav a.active{
+  background: var(--primary);
+  color:#fff;
+}
 
-    /* Dropdown */
-    .nav-dropdown {
-      position: relative;
-      margin-left: 18px;
-      display: inline-flex;
-      align-items: center;
-    }
+/* Dropdown */
+.nav-dropdown{
+  position:relative;
+  margin-left:0;                   /* gap kullanıyoruz */
+  display:inline-flex;
+  align-items:center;
+}
 
-    .nav-dropdown-toggle {
-      background: var(--muted);
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: none;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.35s ease;
-      color: #000;
-    }
+.nav-dropdown-toggle{
+  background: var(--muted);
+  padding: 8px 12px;               /* linklerle aynı */
+  border-radius:6px;
+  border:none;
+  font-weight:bold;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size: 13px;
+  cursor:pointer;
+  transition: .25s ease;
+  color:#000;
+  white-space: nowrap;
+}
 
-    .nav-dropdown-toggle .icon { font-size: 16px; }
+.nav-dropdown-toggle .icon{ font-size: 15px; }
 
-    .nav-dropdown-toggle:hover {
-      background: #d4d4d4;
-      transform: scale(1.08);
-    }
+.nav-dropdown-toggle:hover{
+  background:#d4d4d4;
+  transform: scale(1.04);
+}
 
-    .nav-dropdown-menu {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 6px);
-      background: #ffffff;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      border-radius: 10px;
-      padding: 10px 14px;
-      min-width: 220px;
-      max-width: 280px;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 200;
-    }
+/* Dropdown menü aynı kalsın */
+.nav-dropdown-menu{
+  position:absolute;
+  right:0;
+  top: calc(100% + 6px);
+  background:#fff;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+  border-radius:10px;
+  padding:10px 14px;
+  min-width:220px;
+  max-width:280px;
+  opacity:0;
+  transform: translateY(-6px);
+  pointer-events:none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index:200;
+}
 
-    .nav-dropdown:hover .nav-dropdown-menu,
-    .nav-dropdown.open .nav-dropdown-menu {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events:auto;
+}
 
-    .nav-bolge-title {
-      font-weight: 600;
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
-
-    .nav-bolge-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 6px 0;
-      font-size: 13px;
-    }
-
-    .nav-bolge-list li { padding: 2px 0; }
-
-    .nav-bolge-more {
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 12px;
-      text-decoration: none;
-      color: #0077ff;
-      font-weight: 600;
-    }
-
-    .nav-bolge-more:hover { text-decoration: underline; }
-
-    /* Dropdown içindeki button link görünümü */
-    .nav-bolge-list .bolge-link{
-      border: none;
-      background: none;
-      padding: 0;
-      margin: 0;
-      font: inherit;
-      cursor: pointer;
-      color: #222;
-      text-align: left;
-    }
-    .nav-bolge-list .bolge-link:hover{
-      text-decoration: underline;
-      color: #0077ff;
-    }
+/* 1200px altına düşünce biraz daha sıkıştır (PC küçük ekranlar için) */
+@media (max-width: 1200px){
+  .main-header{ padding: 10px 18px; gap: 12px; }
+  .logo-area img{ height: 88px; }
+  nav{ gap: 8px; }
+  nav a, .nav-dropdown-toggle{
+    padding: 7px 10px;
+    font-size: 12.5px;
+  }
+}
 
     /* =========================================
        3. HERO

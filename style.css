@@ -2,11 +2,11 @@
    1. GENEL AYARLAR VE DEĞİŞKENLER
    ========================================= */
 :root {
-  --primary: #f5b301;    /* Ana sarı */
-  --accent:  #c89b4a;    /* Logo ile uyumlu altın ton */
-  --dark:    #111111;    /* Koyu arka plan / footer */
-  --light:   #f7f7f7;    /* Sayfa zemini */
-  --muted:   #f2f2f2;    /* Menü kutuları */
+  --primary: #f5b301;   /* Ana sarı */
+  --accent:  #c89b4a;   /* Logo ile uyumlu altın ton */
+  --dark:    #111111;   /* Koyu arka plan / footer */
+  --light:   #f7f7f7;   /* Sayfa zemini */
+  --muted:   #f2f2f2;   /* Menü kutuları */
 }
 
 * {
@@ -28,47 +28,6 @@ body {
   min-height: 100vh;
 }
 
-/* Mini logo bar için stil (Mobilde padding-top ayarlaması için) */
-#miniLogo {
-  display: none; /* Desktop'ta gizli */
-}
-@media (max-width: 768px) {
-  /* Mini logo bar */
-  #miniLogo {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 10px;
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: .3px;
-    background: rgba(255, 255, 255, .92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(0, 0, 0, .06);
-    cursor: pointer;
-    color: #222;
-  }
-  body {
-    padding-top: 32px; /* Header mini logonun altında başlasın */
-  }
-  .main-header {
-    top: 32px;
-  }
-}
-@media (min-width: 769px) {
-  body {
-    padding-top: 0 !important;
-  }
-  .main-header {
-    top: 0;
-  }
-}
-
 /* =========================================
    2. HEADER (ÜST MENÜ)
    ========================================= */
@@ -83,18 +42,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: padding 0.3s ease, box-shadow 0.3s ease, transform .25s ease, opacity .25s ease; /* Mobile hidden geçişi için eklendi */
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
 }
 
 .main-header.shrink {
   padding: 8px 30px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-}
-
-.main-header.mobile-hidden { /* Mobil kaydırma ile gizleme */
-  transform: translateY(-120%);
-  opacity: 0;
-  pointer-events: none;
 }
 
 .logo-area {
@@ -230,21 +183,18 @@ nav a.active {
 }
 
 /* Dropdown içindeki linkler için güncelleme */
-.nav-bolge-list li button {
-  background: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  color: #222 !important;
-  display: inline-block !important;
-  font-weight: normal !important;
-  border: none; /* button için border kaldırıldı */
-  cursor: pointer;
-  font: inherit;
+.nav-bolge-list li a {
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #222 !important;
+    display: inline-block !important;
+    font-weight: normal !important;
 }
-.nav-bolge-list li button:hover {
-  text-decoration: underline !important;
-  transform: none !important;
-  color: #0077ff !important;
+.nav-bolge-list li a:hover {
+    text-decoration: underline !important;
+    transform: none !important;
+    color: #0077ff !important;
 }
 
 .nav-bolge-more {
@@ -266,8 +216,7 @@ nav a.active {
 .hero {
   position: relative;
   height: 500px;
-  /* GÜNCEL HERO GÖRSELİ */
-  background: url('https://i.imgur.com/PErASFo.png') center/cover no-repeat;
+  background: url('https://i.hizliresim.com/j9iwhln.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,7 +277,7 @@ nav a.active {
    (Hakkımızda, Hizmetler vb. sayfalar için)
    ========================================= */
 .page-header-banner {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.imgur.com/PErASFo.png'); /* Aynı görsel kullanıldı */
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.hizliresim.com/j9iwhln.png');
     background-position: center;
     background-size: cover;
     padding: 80px 20px;
@@ -878,7 +827,7 @@ footer a {
     color: #000;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 #lightbox-img {
     max-width: 95vw;

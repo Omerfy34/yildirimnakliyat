@@ -228,6 +228,20 @@
       color: #0077ff;
     }
 
+    /* ✅ Mobil hamburger butonu (PC’de görünmez) */
+    .menu-toggle{
+      display:none;
+      border:none;
+      background: var(--primary);
+      color:#000;
+      font-weight: 900;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor:pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      user-select:none;
+    }
+
     /* =========================================
        3. HERO (✅ LCP için IMG ile)
        ========================================= */
@@ -691,13 +705,34 @@
         transition: font-size 0.8s ease, opacity 0.8s ease;
       }
 
+      /* ✅ hamburger mobilde görünür */
+      .menu-toggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        width:100%;
+        margin: 6px 0 4px 0;
+      }
+
+      /* ✅ MOBİL: Menü varsayılan kapalı (bu kısım barı kapatır) */
       nav{
         margin-top: 6px;
         width: 100%;
         overflow: hidden;
-        max-height: 360px;
-        opacity: 1;
-        transform: translateY(0);
+        max-height: 0 !important;
+        opacity: 0 !important;
+        transform: translateY(-10px) !important;
+        pointer-events: none !important;
+        transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
+      }
+
+      /* ✅ Açılınca */
+      .main-header.nav-open nav{
+        max-height: 420px !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
       }
 
       nav a{
@@ -718,22 +753,10 @@
 
       .nav-dropdown-menu{ display: none !important; }
 
-      .main-header.shrink nav{
-        animation: navClose 0.8s ease forwards;
-        pointer-events: none;
-      }
+      /* ❌ Eski shrink animasyonlarını etkisiz bırak (hamburger kontrol ediyor) */
+      .main-header.shrink nav,
       .main-header:not(.shrink) nav{
-        animation: navOpen 0.55s ease forwards;
-        pointer-events: auto;
-      }
-
-      @keyframes navClose{
-        from{ opacity: 1; transform: translateY(0); max-height: 360px; }
-        to  { opacity: 0; transform: translateY(-20px); max-height: 0; }
-      }
-      @keyframes navOpen{
-        from{ opacity: 0; transform: translateY(-20px); max-height: 0; }
-        to  { opacity: 1; transform: translateY(0); max-height: 360px; }
+        animation: none !important;
       }
 
       .main-header.shrink{ padding: 6px 10px; }
@@ -757,6 +780,58 @@
         window.addEventListener('scroll', () => {
           if (window.scrollY > 50) header.classList.add('shrink');
           else header.classList.remove('shrink');
+        });
+      }
+
+      // ✅ MOBİL hamburger menü (sadece mobilde çalışır)
+      const menuToggle = document.getElementById('menu-toggle');
+      const nav = document.querySelector('.main-header nav');
+
+      function setMenu(open){
+        if (!header || !menuToggle) return;
+        header.classList.toggle('nav-open', open);
+        menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuToggle.innerHTML = open ? '✕ Kapat' : '☰ Menü';
+      }
+
+      // mobilde başlangıçta kapalı
+      if (menuToggle && header) {
+        if (window.innerWidth <= 768) setMenu(false);
+        menuToggle.addEventListener('click', function(){
+          if (window.innerWidth > 768) return; // PC’de çalışmasın
+          const isOpen = header.classList.contains('nav-open');
+          setMenu(!isOpen);
+        });
+
+        // mobilde linke tıklayınca menü kapansın
+        if (nav) {
+          nav.addEventListener('click', function(e){
+            if (window.innerWidth <= 768) {
+              const clicked = e.target.closest('a, button');
+              if (clicked) setMenu(false);
+            }
+          });
+        }
+
+        // mobilde dışarı tıklayınca kapat
+        document.addEventListener('click', function(e){
+          if (window.innerWidth <= 768 && header.classList.contains('nav-open')) {
+            if (!header.contains(e.target)) setMenu(false);
+          }
+        });
+
+        // ekran döner/resize olursa PC’de açık kalmasın
+        window.addEventListener('resize', function(){
+          if (window.innerWidth > 768) {
+            header.classList.remove('nav-open');
+            if (menuToggle) {
+              menuToggle.setAttribute('aria-expanded', 'false');
+              menuToggle.innerHTML = '☰ Menü';
+            }
+          } else {
+            // mobile dönünce de kapalı başlasın
+            setMenu(false);
+          }
         });
       }
 
@@ -1015,6 +1090,11 @@
         <img src="img/banner.webp" width="220" height="70" alt="Yıldırım Nakliyat" decoding="async" />
         <span>Bir kamyon dolusu deneyimimiz var.</span>
       </div>
+
+      <!-- ✅ Sadece mobil için hamburger -->
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
+        ☰ Menü
+      </button>
 
       <nav>
         <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>

@@ -1,187 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Ana Sayfalar -->
   <url>
     <loc>https://nakliyatyildirim.online/</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://nakliyatyildirim.online/index.html</loc>
-    <lastmod>2025-12-12</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://nakliyatyildirim.online/hakkimizda.html</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://nakliyatyildirim.online/hizmetler.html</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://nakliyatyildirim.online/galeri.html</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>0.60</priority>
   </url>
   <url>
     <loc>https://nakliyatyildirim.online/referanslar.html</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>0.60</priority>
   </url>
   <url>
     <loc>https://nakliyatyildirim.online/iletisim.html</loc>
-    <lastmod>2025-12-12</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html</loc>
-    <lastmod>2025-12-12</lastmod>
-    <priority>0.80</priority>
+    <priority>0.90</priority>
   </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=avcilar</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=beylikduzu</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=esenyurt</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=bagcilar</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=bahcelievler</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=bakirkoy</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=kucukcekmece</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=basaksehir</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=besiktas</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sisli</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=kagithane</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sariyer</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=fatih</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=beyoglu</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=uskudar</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=kadikoy</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=maltepe</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=kartal</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=pendik</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=tuzla</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=umraniye</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=cekmekoy</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sancaktepe</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sultanbeyli</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=gaziosmanpasa</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sultangazi</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=esenler</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=bayrampasa</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=zeytinburnu</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=eyupsultan</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=arnavutkoy</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=silivri</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=catalca</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=buyukcekmece</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=sile</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://nakliyatyildirim.online/hizmet-bolgeleri.html?ilce=adalar</loc>
-    <priority>0.70</priority>
-  </url>
+
+  <!-- İlçe Sayfaları -->
+  <url><loc>https://nakliyatyildirim.online/avcilar-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/beylikduzu-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/esenyurt-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/bagcilar-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/bahcelievler-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/bakirkoy-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/kucukcekmece-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/basaksehir-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/besiktas-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sisli-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/kagithane-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sariyer-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/fatih-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/beyoglu-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/uskudar-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/kadikoy-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/maltepe-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/kartal-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/pendik-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/tuzla-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/umraniye-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/cekmekoy-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sancaktepe-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sultanbeyli-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/gaziosmanpasa-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sultangazi-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/esenler-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/bayrampasa-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/zeytinburnu-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/eyupsultan-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/arnavutkoy-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/silivri-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/catalca-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/buyukcekmece-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/sile-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+  <url><loc>https://nakliyatyildirim.online/adalar-evden-eve-nakliyat.html</loc><priority>0.70</priority></url>
+
 </urlset>

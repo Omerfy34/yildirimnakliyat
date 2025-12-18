@@ -855,19 +855,66 @@
         });
       }
 
-      // İlçe yönlendirme
-      const bolgeLinks = document.querySelectorAll('.bolge-link');
-      if (bolgeLinks.length) {
-        bolgeLinks.forEach((btn) => {
-          btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const ilceAdi = btn.getAttribute('data-bolge');
-            if (ilceAdi) window.location.href = "hizmet-bolgeleri.html?ilce=" + ilceAdi;
-            else window.location.href = "hizmet-bolgeleri.html";
-          });
-        });
+// İlçe yönlendirme (SEO sayfalarına)
+const bolgeLinks = document.querySelectorAll('.bolge-link');
+
+const ILCE_URL_MAP = {
+  avcilar: "avcilar-evden-eve-nakliyat.html",
+  beylikduzu: "beylikduzu-evden-eve-nakliyat.html",
+  esenyurt: "esenyurt-evden-eve-nakliyat.html",
+  kucukcekmece: "kucukcekmece-evden-eve-nakliyat.html",
+  bahcelievler: "bahcelievler-evden-eve-nakliyat.html",
+  bakirkoy: "bakirkoy-evden-eve-nakliyat.html",
+  basaksehir: "basaksehir-evden-eve-nakliyat.html",
+  bagcilar: "bagcilar-evden-eve-nakliyat.html",
+  besiktas: "besiktas-evden-eve-nakliyat.html",
+  sisli: "sisli-evden-eve-nakliyat.html",
+  kagithane: "kagithane-evden-eve-nakliyat.html",
+  sariyer: "sariyer-evden-eve-nakliyat.html",
+  fatih: "fatih-evden-eve-nakliyat.html",
+  beyoglu: "beyoglu-evden-eve-nakliyat.html",
+  uskudar: "uskudar-evden-eve-nakliyat.html",
+  kadikoy: "kadikoy-evden-eve-nakliyat.html",
+  maltepe: "maltepe-evden-eve-nakliyat.html",
+  kartal: "kartal-evden-eve-nakliyat.html",
+  pendik: "pendik-evden-eve-nakliyat.html",
+  tuzla: "tuzla-evden-eve-nakliyat.html",
+  umraniye: "umraniye-evden-eve-nakliyat.html",
+  cekmekoy: "cekmekoy-evden-eve-nakliyat.html",
+  sancaktepe: "sancaktepe-evden-eve-nakliyat.html",
+  sultanbeyli: "sultanbeyli-evden-eve-nakliyat.html",
+  gaziosmanpasa: "gaziosmanpasa-evden-eve-nakliyat.html",
+  sultangazi: "sultangazi-evden-eve-nakliyat.html",
+  esenler: "esenler-evden-eve-nakliyat.html",
+  bayrampasa: "bayrampasa-evden-eve-nakliyat.html",
+  zeytinburnu: "zeytinburnu-evden-eve-nakliyat.html",
+  eyupsultan: "eyupsultan-evden-eve-nakliyat.html",
+  arnavutkoy: "arnavutkoy-evden-eve-nakliyat.html",
+  silivri: "silivri-evden-eve-nakliyat.html",
+  catalca: "catalca-evden-eve-nakliyat.html",
+  buyukcekmece: "buyukcekmece-evden-eve-nakliyat.html",
+  sile: "sile-evden-eve-nakliyat.html",
+  adalar: "adalar-evden-eve-nakliyat.html",
+};
+
+if (bolgeLinks.length) {
+  bolgeLinks.forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const ilceAdi = (btn.getAttribute('data-bolge') || "").toLowerCase().trim();
+      const target = ILCE_URL_MAP[ilceAdi];
+
+      if (target) {
+        window.location.href = target;
+      } else {
+        // eşleşmeyen olursa yine liste sayfasına düşsün
+        window.location.href = "hizmet-bolgeleri.html";
       }
+    });
+  });
+}
 
       // Form → WhatsApp
       const teklifForm = document.getElementById('teklif-form');

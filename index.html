@@ -226,6 +226,49 @@
       color: #0077ff;
     }
 
+/* ✅ ANA BUTON RENGİNDE HAMBURGER */
+.hamburger{
+  display:none;
+  width: 50px;
+  height: 46px;
+  background: #f5b301;          /* 🟨 Hemen Teklif Al rengi */
+  border-radius: 999px;         /* buton gibi */
+  border: 0;
+  cursor: pointer;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.20);
+}
+
+/* beyaz çizgiler */
+.hamburger span{
+  display:block;
+  width: 26px;
+  height: 2.4px;
+  background:#ffffff;
+  border-radius: 999px;
+}
+
+/* ortadaki çizgi biraz kısa → estetik */
+.hamburger span:nth-child(2){
+  width: 20px;
+  opacity: 0.95;
+}
+
+.hamburger span{
+  display:block;
+  width: 28px;      /* uzun çizgi */
+  height: 3px;
+  background:#111;
+  border-radius: 99px;
+}
+
+
     /* =========================================
        3. HERO
        ========================================= */
@@ -236,7 +279,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-}
+    }
 
     .hero::before {
       content: "";
@@ -650,9 +693,8 @@
     }
 
     /* =========================================
-       13. MOBİL (PC'DE ÇALIŞMAZ)
-       - Menü yavaşça kaybolur
-       - Logo + slogan kalır
+       13. MOBİL
+       - Hamburger ile aç/kapa
        ========================================= */
     @media (max-width: 768px) {
       .main-header {
@@ -680,16 +722,33 @@
         transition: font-size 0.8s ease, opacity 0.8s ease;
       }
 
-      /* Nav 2'li grid */
-      nav{
-        margin-top: 6px;
-        width: 100%;
-        overflow: hidden;
-        max-height: 360px;
-        opacity: 1;
-        transform: translateY(0);
+      /* ✅ Hamburger mobilde görünür */
+      .hamburger{
+        display:flex;
+        margin-top: 8px;
       }
 
+      /* ✅ Menü kapalı başlasın */
+      nav{
+        margin-top: 10px;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: max-height .35s ease, opacity .25s ease, transform .25s ease;
+      }
+
+      /* ✅ Menü açılınca görünür */
+      .main-header.menu-open nav{
+        max-height: 520px;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* Nav 2'li grid */
       nav a{
         margin: 4px 4px 4px 0;
         flex: 1 1 calc(50% - 8px);
@@ -708,25 +767,6 @@
 
       /* mobil dropdown menu gizli (overlay var) */
       .nav-dropdown-menu{ display: none !important; }
-
-      /* Menü kapanma animasyonu (JS YOK) */
-      .main-header.shrink nav{
-        animation: navClose 0.8s ease forwards;
-        pointer-events: none;
-      }
-      .main-header:not(.shrink) nav{
-        animation: navOpen 0.55s ease forwards;
-        pointer-events: auto;
-      }
-
-      @keyframes navClose{
-        from{ opacity: 1; transform: translateY(0); max-height: 360px; }
-        to  { opacity: 0; transform: translateY(-20px); max-height: 0; }
-      }
-      @keyframes navOpen{
-        from{ opacity: 0; transform: translateY(-20px); max-height: 0; }
-        to  { opacity: 1; transform: translateY(0); max-height: 360px; }
-      }
 
       /* shrink olunca sadece logo küçülsün */
       .main-header.shrink{ padding: 6px 10px; }
@@ -759,6 +799,29 @@
         logoArea.addEventListener('click', (e) => {
           e.preventDefault();
           window.location.href = 'index.html';
+        });
+      }
+
+      // ✅ Mobil Hamburger Toggle
+      const burger = document.getElementById('hamburger');
+      const headerEl = document.querySelector('.main-header');
+      const navEl = document.getElementById('main-nav');
+
+      if (burger && headerEl) {
+        burger.addEventListener('click', () => {
+          const open = headerEl.classList.toggle('menu-open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // Menüden bir linke tıklayınca mobilde kapansın
+      if (navEl && headerEl && burger) {
+        navEl.addEventListener('click', (e) => {
+          const isLink = e.target.closest('a, button.bolge-link');
+          if (isLink && window.innerWidth <= 768) {
+            headerEl.classList.remove('menu-open');
+            burger.setAttribute('aria-expanded', 'false');
+          }
         });
       }
 
@@ -802,11 +865,11 @@
       // FAQ akordeon
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach((item) => {
-        const headerEl = item.querySelector('.faq-header');
+        const headerEl2 = item.querySelector('.faq-header');
         const toggleEl = item.querySelector('.faq-header .toggle');
-        if (!headerEl) return;
+        if (!headerEl2) return;
 
-        headerEl.addEventListener('click', () => {
+        headerEl2.addEventListener('click', () => {
           const isActive = item.classList.contains('active');
           faqItems.forEach((i) => {
             i.classList.remove('active');
@@ -1008,36 +1071,39 @@
         <span>Bir kamyon dolusu deneyimimiz var.</span>
       </div>
 
-    <nav>
-  <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
-  <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
-  <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
-  <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
-  <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
-  <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
+      <!-- ✅ MOBİL HAMBURGER -->
+      <button class="hamburger" id="hamburger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-  <!-- ✅ TEK VE DOĞRU HİZMET BÖLGELERİ -->
-  <div class="nav-dropdown">
-    <button type="button" class="nav-dropdown-toggle">
-      <span class="icon">📍</span>
-      <span>Hizmet Bölgeleri</span>
-    </button>
+      <nav id="main-nav">
+        <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
+        <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
+        <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+        <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
+        <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
+        <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
 
-    <div class="nav-dropdown-menu">
-      <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
-      <ul class="nav-bolge-list">
-        <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
-        <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        <!-- ✅ TEK VE DOĞRU HİZMET BÖLGELERİ -->
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle">
+            <span class="icon">📍</span>
+            <span>Hizmet Bölgeleri</span>
+          </button>
 
+          <div class="nav-dropdown-menu">
+            <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
+            <ul class="nav-bolge-list">
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
 

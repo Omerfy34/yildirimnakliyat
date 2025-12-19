@@ -82,10 +82,8 @@
       transition: max-height 0.25s ease, opacity 0.25s ease, margin-bottom 0.25s ease;
     }
 
-    /* ✅ Banner logo (img/banner.webp) */
     .logo-area img {
-      width: 220px;
-      height: auto;
+      height: 110px;
       object-fit: contain;
       display: block;
     }
@@ -228,39 +226,16 @@
       color: #0077ff;
     }
 
-    /* ✅ Mobil hamburger butonu (PC’de görünmez) */
-    .menu-toggle{
-      display:none;
-      border:none;
-      background: var(--primary);
-      color:#000;
-      font-weight: 900;
-      padding: 10px 14px;
-      border-radius: 10px;
-      cursor:pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-      user-select:none;
-    }
-
     /* =========================================
-       3. HERO (✅ LCP için IMG ile)
+       3. HERO
        ========================================= */
-    .hero{
+    .hero {
       position: relative;
       height: 500px;
+      background: url('https://i.imgur.com/PErASFo.png') center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-img{
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .hero::before {
@@ -273,12 +248,10 @@
         rgba(0,0,0,0.45),
         rgba(0,0,0,0.05)
       );
-      z-index: 1;
     }
 
     .hero-inner {
       position: relative;
-      z-index: 2;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
@@ -678,6 +651,8 @@
 
     /* =========================================
        13. MOBİL (PC'DE ÇALIŞMAZ)
+       - Menü yavaşça kaybolur
+       - Logo + slogan kalır
        ========================================= */
     @media (max-width: 768px) {
       .main-header {
@@ -686,6 +661,7 @@
         align-items: center;
       }
 
+      /* Logo kalsın */
       .logo-area{
         opacity: 1 !important;
         max-height: none !important;
@@ -695,7 +671,6 @@
 
       .logo-area img{
         height: 80px;
-        width: auto;
         transition: height 0.8s ease;
       }
 
@@ -705,34 +680,14 @@
         transition: font-size 0.8s ease, opacity 0.8s ease;
       }
 
-      /* ✅ hamburger mobilde görünür */
-      .menu-toggle{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
-        width:100%;
-        margin: 6px 0 4px 0;
-      }
-
-      /* ✅ MOBİL: Menü varsayılan kapalı (bu kısım barı kapatır) */
+      /* Nav 2'li grid */
       nav{
         margin-top: 6px;
         width: 100%;
         overflow: hidden;
-        max-height: 0 !important;
-        opacity: 0 !important;
-        transform: translateY(-10px) !important;
-        pointer-events: none !important;
-        transition: max-height .25s ease, opacity .2s ease, transform .2s ease;
-      }
-
-      /* ✅ Açılınca */
-      .main-header.nav-open nav{
-        max-height: 420px !important;
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        pointer-events: auto !important;
+        max-height: 360px;
+        opacity: 1;
+        transform: translateY(0);
       }
 
       nav a{
@@ -751,16 +706,31 @@
         justify-content: center;
       }
 
+      /* mobil dropdown menu gizli (overlay var) */
       .nav-dropdown-menu{ display: none !important; }
 
-      /* ❌ Eski shrink animasyonlarını etkisiz bırak (hamburger kontrol ediyor) */
-      .main-header.shrink nav,
+      /* Menü kapanma animasyonu (JS YOK) */
+      .main-header.shrink nav{
+        animation: navClose 0.8s ease forwards;
+        pointer-events: none;
+      }
       .main-header:not(.shrink) nav{
-        animation: none !important;
+        animation: navOpen 0.55s ease forwards;
+        pointer-events: auto;
       }
 
+      @keyframes navClose{
+        from{ opacity: 1; transform: translateY(0); max-height: 360px; }
+        to  { opacity: 0; transform: translateY(-20px); max-height: 0; }
+      }
+      @keyframes navOpen{
+        from{ opacity: 0; transform: translateY(-20px); max-height: 0; }
+        to  { opacity: 1; transform: translateY(0); max-height: 360px; }
+      }
+
+      /* shrink olunca sadece logo küçülsün */
       .main-header.shrink{ padding: 6px 10px; }
-      .main-header.shrink .logo-area img{ height: 76px !important; width:auto; }
+      .main-header.shrink .logo-area img{ height: 76px !important; }
 
       .hero{ height: 380px; }
       .hero-inner{ padding: 0 20px; justify-content: center; }
@@ -780,58 +750,6 @@
         window.addEventListener('scroll', () => {
           if (window.scrollY > 50) header.classList.add('shrink');
           else header.classList.remove('shrink');
-        });
-      }
-
-      // ✅ MOBİL hamburger menü (sadece mobilde çalışır)
-      const menuToggle = document.getElementById('menu-toggle');
-      const nav = document.querySelector('.main-header nav');
-
-      function setMenu(open){
-        if (!header || !menuToggle) return;
-        header.classList.toggle('nav-open', open);
-        menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        menuToggle.innerHTML = open ? '✕ Kapat' : '☰ Menü';
-      }
-
-      // mobilde başlangıçta kapalı
-      if (menuToggle && header) {
-        if (window.innerWidth <= 768) setMenu(false);
-        menuToggle.addEventListener('click', function(){
-          if (window.innerWidth > 768) return; // PC’de çalışmasın
-          const isOpen = header.classList.contains('nav-open');
-          setMenu(!isOpen);
-        });
-
-        // mobilde linke tıklayınca menü kapansın
-        if (nav) {
-          nav.addEventListener('click', function(e){
-            if (window.innerWidth <= 768) {
-              const clicked = e.target.closest('a, button');
-              if (clicked) setMenu(false);
-            }
-          });
-        }
-
-        // mobilde dışarı tıklayınca kapat
-        document.addEventListener('click', function(e){
-          if (window.innerWidth <= 768 && header.classList.contains('nav-open')) {
-            if (!header.contains(e.target)) setMenu(false);
-          }
-        });
-
-        // ekran döner/resize olursa PC’de açık kalmasın
-        window.addEventListener('resize', function(){
-          if (window.innerWidth > 768) {
-            header.classList.remove('nav-open');
-            if (menuToggle) {
-              menuToggle.setAttribute('aria-expanded', 'false');
-              menuToggle.innerHTML = '☰ Menü';
-            }
-          } else {
-            // mobile dönünce de kapalı başlasın
-            setMenu(false);
-          }
         });
       }
 
@@ -1086,59 +1004,44 @@
 
     <header class="main-header">
       <div class="logo-area">
-        <!-- ✅ banner.webp -->
-        <img src="img/banner.webp" width="220" height="70" alt="Yıldırım Nakliyat" decoding="async" />
+        <img src="https://i.imgur.com/Zlnujsc.png" alt="Yıldırım Nakliyat Logo" />
         <span>Bir kamyon dolusu deneyimimiz var.</span>
       </div>
 
-      <!-- ✅ Sadece mobil için hamburger -->
-      <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
-        ☰ Menü
-      </button>
+    <nav>
+  <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
+  <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
+  <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
+  <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
+  <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
+  <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
 
-      <nav>
-        <a href="index.html" class="active"><span class="icon">🏠</span> <span>Ana Sayfa</span></a>
-        <a href="hakkimizda.html"><span class="icon">🏢</span> <span>Hakkımızda</span></a>
-        <a href="hizmetler.html"><span class="icon">🧰</span> <span>Hizmetler</span></a>
-        <a href="galeri.html"><span class="icon">🖼️</span> <span>Galeri</span></a>
-        <a href="referanslar.html"><span class="icon">⭐</span> <span>Referanslar</span></a>
-        <a href="iletisim.html"><span class="icon">📞</span> <span>İletişim</span></a>
+  <!-- ✅ TEK VE DOĞRU HİZMET BÖLGELERİ -->
+  <div class="nav-dropdown">
+    <button type="button" class="nav-dropdown-toggle">
+      <span class="icon">📍</span>
+      <span>Hizmet Bölgeleri</span>
+    </button>
 
-        <div class="nav-dropdown">
-          <button type="button" class="nav-dropdown-toggle">
-            <span class="icon">📍</span>
-            <span>Hizmet Bölgeleri</span>
-          </button>
+    <div class="nav-dropdown-menu">
+      <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
+      <ul class="nav-bolge-list">
+        <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+        <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-          <div class="nav-dropdown-menu">
-            <div class="nav-bolge-title">İstanbul Hizmet Bölgeleri (Öne Çıkanlar)</div>
-            <ul class="nav-bolge-list">
-              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
-              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
-            </ul>
-          </div>
-        </div>
       </nav>
     </header>
 
     <section class="hero" id="ust">
-      <!-- ✅ hero.webp (LCP için doğru) -->
-      <img
-        class="hero-img"
-        src="img/hero.webp"
-        width="1200"
-        height="650"
-        fetchpriority="high"
-        loading="eager"
-        decoding="async"
-        alt="Yıldırım Nakliyat Profesyonel Nakliyat"
-      />
-
       <div class="hero-inner">
         <div class="hero-content">
           <h2>Profesyonel Nakliyat — Güvenli ve Hızlı</h2>
@@ -1210,7 +1113,6 @@
            title="Yıldırım Nakliyat Galeri">
           <img src="https://live.staticflickr.com/65535/54972518280_59f691e63e_b.jpg"
                width="1600" height="1200"
-               loading="lazy" decoding="async"
                alt="Yıldırım Nakliyat Galeri"
                style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.22);" />
         </a>
@@ -1227,7 +1129,7 @@
           <div class="referans-card">
             <div class="referans-top">
               <div class="referans-avatar">
-                <img src="https://randomuser.me/api/portraits/women/11.jpg" alt="Müşteri" loading="lazy" decoding="async" width="44" height="44" />
+                <img src="https://randomuser.me/api/portraits/women/11.jpg" alt="Müşteri" />
               </div>
               <div>
                 <div class="referans-name">Ayşe K.</div>
@@ -1241,7 +1143,7 @@
           <div class="referans-card">
             <div class="referans-top">
               <div class="referans-avatar">
-                <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Müşteri" loading="lazy" decoding="async" width="44" height="44" />
+                <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Müşteri" />
               </div>
               <div>
                 <div class="referans-name">Mehmet D.</div>
@@ -1255,7 +1157,7 @@
           <div class="referans-card">
             <div class="referans-top">
               <div class="referans-avatar">
-                <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Müşteri" loading="lazy" decoding="async" width="44" height="44" />
+                <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Müşteri" />
               </div>
               <div>
                 <div class="referans-name">Seda T.</div>
@@ -1376,8 +1278,134 @@
       </div>
     </section>
 
-    <!-- SSS ve devamı (senin kodun aynı) -->
-    <!-- ... -->
+    <!-- ✅ SSS ENTegre -->
+    <section class="section" id="sss">
+      <h3>Sık Sorulan Sorular</h3>
+      <div class="faq-wrapper">
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Fiyatlarınızı neye göre belirliyorsunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Mesafe, eşya miktarı, kat sayıları, asansör durumu ve taşınma tarihi gibi kriterlere göre fiyatlandırma yapıyoruz.
+            Formu doldurduğunuzda size özel net bir teklif WhatsApp üzerinden iletilir.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Paketleme hizmeti veriyor musunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Evet. Talebinize göre mutfak, kırılacak eşyalar, mobilya ve beyaz eşyalar için profesyonel paketleme hizmeti veriyoruz.
+            Kendi kolilerinizle taşınmak isterseniz sadece taşıma hizmeti de alabilirsiniz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Şehirler arası taşımada teslimat süresi nedir?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Güzergah ve yoğunluğa göre değişmekle birlikte genellikle aynı gün veya ertesi gün teslimat yapıyoruz.
+            Uzun mesafelerde planlamayı önceden birlikte netleştiriyoruz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Eşyalarım sigortalı mı taşınıyor?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Talebinize göre sigortalı taşıma yapıyoruz. Teklif alırken sigorta isteğinizi belirtirseniz,
+            poliçe koşullarını da detaylı şekilde paylaşıyoruz.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header">
+            <span class="q">Taşınma günü kaç kişi geliyor?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Eşya durumuna göre genellikle 3–5 kişilik profesyonel ekiplerimizle hizmet veriyoruz.
+            Gerekli gördüğümüz durumlarda ekip sayısını artırabiliyoruz.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-bolgeler">
+          <div class="faq-header">
+            <span class="q">Nerelere hizmet veriyorsunuz?</span>
+            <span class="toggle">+</span>
+          </div>
+          <div class="faq-content">
+            Yıldırım Nakliyat olarak İstanbul’un tüm ilçelerine evden eve, ofis ve parça eşya taşımacılığı hizmeti veriyoruz.
+            Aşağıda en çok çalıştığımız bölgelerin bir kısmını görebilirsiniz:
+
+            <ul class="bolge-list">
+              <li><button type="button" class="bolge-link" data-bolge="avcilar">Avcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="beylikduzu">Beylikdüzü</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="esenyurt">Esenyurt</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bagcilar">Bağcılar</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bahcelievler">Bahçelievler</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="bakirkoy">Bakırköy</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="kucukcekmece">Küçükçekmece</button></li>
+              <li><button type="button" class="bolge-link" data-bolge="basaksehir">Başakşehir</button></li>
+            </ul>
+
+            <div id="bolgeler-extra" style="display:none;">
+              <ul class="bolge-list">
+                <li><button type="button" class="bolge-link" data-bolge="besiktas">Beşiktaş</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sisli">Şişli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kagithane">Kağıthane</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sariyer">Sarıyer</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="fatih">Fatih</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="beyoglu">Beyoğlu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="uskudar">Üsküdar</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kadikoy">Kadıköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="maltepe">Maltepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="kartal">Kartal</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="pendik">Pendik</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="tuzla">Tuzla</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="umraniye">Ümraniye</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="cekmekoy">Çekmeköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sancaktepe">Sancaktepe</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultanbeyli">Sultanbeyli</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="gaziosmanpasa">Gaziosmanpaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sultangazi">Sultangazi</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="esenler">Esenler</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="bayrampasa">Bayrampaşa</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="zeytinburnu">Zeytinburnu</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="eyupsultan">Eyüpsultan</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="arnavutkoy">Arnavutköy</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="silivri">Silivri</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="catalca">Çatalca</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="buyukcekmece">Büyükçekmece</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="sile">Şile</button></li>
+                <li><button type="button" class="bolge-link" data-bolge="adalar">Adalar</button></li>
+              </ul>
+            </div>
+
+            <button type="button" id="bolgeler-toggle" class="bolge-toggle-btn">Tüm ilçeleri göster</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ✅ KVKK ENTegre -->
+    <section class="section" id="kvkk">
+      <h3>KVKK ve Gizlilik</h3>
+      <p>Yıldırım Nakliyat olarak, bizimle paylaştığınız bilgiler yalnızca nakliyat hizmetinin planlanması ve iletişim amacıyla kullanılır.</p>
+      <p>Bilgileriniz üçüncü kişilerle pazarlama amacıyla paylaşılmaz; sadece yasal zorunluluk halinde resmi mercilerle paylaşılabilir.</p>
+      <p>Kişisel verilerinizle ilgili talepleriniz için WhatsApp hattımızdan bizimle iletişime geçebilirsiniz.</p>
+    </section>
+
   </div>
 
   <!-- Lightbox -->
